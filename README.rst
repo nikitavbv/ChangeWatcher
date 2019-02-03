@@ -33,10 +33,10 @@ Alternatively, you can use individual container (this requires linking to databa
 (Database URL and credentials are passed via environmental variables)
 
 .. |Build Status| image:: https://img.shields.io/travis/nikitavbv/ChangeWatcher/master.svg?label=Build%20status
-:target: https://travis-ci.org/nikitavbv/ChangeWatcher
+   :target: https://travis-ci.org/nikitavbv/ChangeWatcher
 .. |Docker Build| image:: https://img.shields.io/docker/build/nikitavbv/changewatcher.svg
-:target: https://hub.docker.com/r/nikitavbv/changewatcher
+   :target: https://hub.docker.com/r/nikitavbv/changewatcher
 .. |codecov.io| image:: https://img.shields.io/codecov/c/github/nikitavbv/ChangeWatcher/master.svg?label=coverage
-:target: https://codecov.io/github/nikitavbv/ChangeWatcher?branch=master
+   :target: https://codecov.io/github/nikitavbv/ChangeWatcher?branch=master
 .. |license-mit| image:: https://img.shields.io/badge/License-MIT-yellow.svg
-:target: https://opensource.org/licenses/MIT
+   :target: https://opensource.org/licenses/MIT
