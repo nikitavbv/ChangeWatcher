@@ -1,0 +1,4 @@
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:postgresql://localhost:3306/changewatcher
+spring.datasource.username=devuser
+spring.datasource.password=devpassword
