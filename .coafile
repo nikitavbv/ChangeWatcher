@@ -1,0 +1,25 @@
+[frontend]
+files = frontend/src/**/*.ts
+bears = TSLintBear
+max_line_length = 80
+use_spaces = True
+language = typescript
+
+[commit]
+bears = GitCommitBear
+shortlog_trailing_period = False
+shortlog_regex = (?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)
+shortlog_length = 80
+
+[LineCounting]
+bears = LineCountBear
+max_lines_per_file = 1000
+
+[css]
+bears = CSSLintBear
+files = frontend/src/css/*.css
+
+[stylelint]
+bears = StyleLintBear
+files = frontend/src/**/*.(less|css)
+indentation = 4
