@@ -1,5 +1,5 @@
 [frontend]
-files = frontend/src/**/*.ts
+files = src/**/*.ts
 bears = TSLintBear
 max_line_length = 80
 use_spaces = True
@@ -17,9 +17,9 @@ max_lines_per_file = 1000
 
 [css]
 bears = CSSLintBear
-files = frontend/src/css/*.css
+files = src/css/*.css
 
 [stylelint]
 bears = StyleLintBear
-files = frontend/src/**/*.(less|css)
+files = src/**/*.(less|css)
 indentation = 4

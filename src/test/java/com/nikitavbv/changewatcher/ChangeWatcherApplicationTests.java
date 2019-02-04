@@ -7,11 +7,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ChangewatcherApplicationTests {
+public class ChangeWatcherApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+  @Test
+  public void contextLoads() {
+  }
 
 }
 
