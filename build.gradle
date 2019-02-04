@@ -16,6 +16,7 @@ buildscript {
 
 plugins {
 	id "com.github.spotbugs" version "1.6.9"
+	id 'checkstyle'
 }
 
 apply plugin: 'java'
@@ -71,3 +72,7 @@ task checkFindBugsReport << {
 }
 
 spotbugsMain.finalizedBy checkFindBugsReport
+
+checkstyle {
+	toolVersion '8.17'
+}
