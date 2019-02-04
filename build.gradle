@@ -76,3 +76,9 @@ spotbugsMain.finalizedBy checkFindBugsReport
 checkstyle {
 	toolVersion '8.17'
 }
+
+spotbugs {
+	effort = "max"
+	reportLevel = "high"
+	ignoreFailures = false
+}
