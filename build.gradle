@@ -91,7 +91,6 @@ pmd {
 			"java-braces",
 			"java-codesize",
 			"java-comments",
-			"java-coupling",
 			"java-design",
 			"java-empty",
 			"java-finalizers",
