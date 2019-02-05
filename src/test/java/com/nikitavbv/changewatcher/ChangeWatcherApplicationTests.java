@@ -16,6 +16,7 @@ public class ChangeWatcherApplicationTests {
    * Check if context is loaded.
    */
   @Test
+  @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
   public void contextLoads() {
     // No exceptions == context loaded
   }

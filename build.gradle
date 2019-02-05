@@ -55,20 +55,22 @@ jacocoTestReport {
 }
 
 //noinspection GroovyAssignabilityCheck
-task checkFindBugsReport << {
-	def xmlReport = spotbugsMain.reports.xml
-	if (!xmlReport.destination.exists()) return
-	def slurped = new XmlSlurper().parse(xmlReport.destination)
-	def report = ""
-	slurped['BugInstance'].eachWithIndex { bug, index ->
-		report += "${index + 1}. Spotted bug risk ${bug.@'type'} of category ${bug.@'category'} "
-		report += "in the following places"
-		bug['SourceLine'].each { place ->
-			report += "\n       ${place.@'classname'} at lines ${place.@'start'}:${place.@'end'}"
+task checkFindBugsReport{
+	doLast {
+		def xmlReport = spotbugsMain.reports.xml
+		if (!xmlReport.destination.exists()) return
+		def slurped = new XmlSlurper().parse(xmlReport.destination)
+		def report = ""
+		slurped['BugInstance'].eachWithIndex { bug, index ->
+			report += "${index + 1}. Spotted bug risk ${bug.@'type'} of category ${bug.@'category'} "
+			report += "in the following places"
+			bug['SourceLine'].each { place ->
+				report += "\n       ${place.@'classname'} at lines ${place.@'start'}:${place.@'end'}"
+			}
 		}
-	}
-	if (report.length() > 1) {
-		logger.error "[SPOTBUGS]\n ${report}"
+		if (report.length() > 1) {
+			logger.error "[SPOTBUGS]\n ${report}"
+		}
 	}
 }
 
