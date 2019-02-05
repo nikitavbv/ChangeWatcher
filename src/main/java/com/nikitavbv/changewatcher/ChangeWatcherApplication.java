@@ -2,11 +2,15 @@ package com.nikitavbv.changewatcher;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * Main Application class.
  */
 @SpringBootApplication
+@EnableConfigurationProperties(SecurityProperties.class)
 @SuppressWarnings("PMD.UseUtilityClass")
 public class ChangeWatcherApplication {
 
@@ -15,6 +19,11 @@ public class ChangeWatcherApplication {
    */
   public static void main(final String[] args) {
     SpringApplication.run(ChangeWatcherApplication.class, args);
+  }
+
+  @Bean
+  public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    return new BCryptPasswordEncoder();
   }
 
 }
