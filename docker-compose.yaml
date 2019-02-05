@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: postgres:11.1-alpine
+    container_name: changewatcher_pgsql
+    environment:
+      - POSTGRES_DB=changewatcher
+      - POSTGRES_USER=changewatcher
+      - POSTGRES_PASSWORD=changewatcherpassword
+    volumes:
+      - "./data-dev/db/postgres:/var/lib/postgresql/data"
+  app:
+    image: nikitavbv/servicemonitor:latest
+    environment:
+      - DB_URL=jdbc:mysql://db:5432/servicemonitor
+      - DB_USERNAME=changewatcher
+      - DB_PASSWORD=changewatcherpassword
+    ports:
+      - "80:8080"
+    depends_on:
+      - db

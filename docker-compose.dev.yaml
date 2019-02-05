@@ -1,0 +1,39 @@
+version: '3'
+services:
+  database:
+    image: postgres:11.1-alpine
+    container_name: changewatcher_pgsql
+    environment:
+      - POSTGRES_DB=changewatcher
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=devpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./data-dev/db/postgres:/var/lib/postgresql/data"
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend.dev
+    container_name: changewatcher_frontend
+    volumes:
+      - "./frontend:/app"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      - DB_URL=jdbc:mysql://changewatcher_pgsql:5432/changewatcher
+      - DB_USERNAME=devuser
+      - DB_PASSWORD=devpassword
+    depends_on:
+      - database
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx.dev
+    ports:
+      - "8080:80"
+    depends_on:
+      - frontend
+      - app
