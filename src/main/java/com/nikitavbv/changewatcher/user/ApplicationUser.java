@@ -13,6 +13,7 @@ public class ApplicationUser {
   private long id;
   private String username;
   private String password;
+  private boolean isAdmin = false;
 
   public long getId() {
     return id;
@@ -32,6 +33,14 @@ public class ApplicationUser {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public boolean getIsAdmin() {
+    return isAdmin;
+  }
+
+  public void setIsAdmin(boolean isAdmin) {
+    this.isAdmin = isAdmin;
   }
 
 }

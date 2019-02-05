@@ -1,17 +1,22 @@
 package com.nikitavbv.changewatcher.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nikitavbv.changewatcher.RouteConstants;
 import com.nikitavbv.changewatcher.SecurityProperties;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
@@ -24,13 +29,14 @@ import java.util.Date;
 
 import static com.nikitavbv.changewatcher.security.SecurityConstants.*;
 
-public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
   private AuthenticationManager authenticationManager;
   private SecurityProperties securityProperties;
 
   public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
                                  SecurityProperties securityProperties) {
+    super(new AntPathRequestMatcher(RouteConstants.LOGIN_API, "POST"));
     this.authenticationManager = authenticationManager;
     this.securityProperties = securityProperties;
   }

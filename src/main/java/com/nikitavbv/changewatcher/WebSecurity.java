@@ -1,17 +1,14 @@
-package com.nikitavbv.changewatcher.security;
+package com.nikitavbv.changewatcher;
 
-import com.nikitavbv.changewatcher.RouteConstants;
-import com.nikitavbv.changewatcher.SecurityProperties;
-import org.springframework.context.annotation.Bean;
+import com.nikitavbv.changewatcher.security.JWTAuthenticationFilter;
+import com.nikitavbv.changewatcher.security.JWTAuthorizationFilter;
+import com.nikitavbv.changewatcher.security.UserDetailsServiceImpl;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
@@ -29,25 +26,19 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable().authorizeRequests()
-          .antMatchers(HttpMethod.POST, RouteConstants.USERS_API_ENDPOINT).permitAll()
-          .anyRequest().authenticated()
+    http.csrf().disable().authorizeRequests()
+          .antMatchers(HttpMethod.POST, RouteConstants.USERS_API).permitAll()
+          .antMatchers(HttpMethod.POST, RouteConstants.LOGIN_API).permitAll()
+          .antMatchers(RouteConstants.API_PATH_PATTERN).authenticated()
           .and()
           .addFilter(new JWTAuthenticationFilter(authenticationManager(), securityProperties))
-          .addFilter(new JWTAuthorizationFilter(authenticationManager(), securityProperties))
-          .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+          .addFilterBefore(new JWTAuthorizationFilter(authenticationManager(), securityProperties),
+              UsernamePasswordAuthenticationFilter.class);
   }
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
-  }
-
-  @Bean
-  CorsConfigurationSource corsConfigurationSource() {
-    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-    return source;
   }
 
 }
