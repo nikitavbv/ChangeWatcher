@@ -1,6 +1,7 @@
 package com.nikitavbv.changewatcher;
 
 import com.nikitavbv.changewatcher.api.ErrorResponse;
+import com.nikitavbv.changewatcher.security.AuthRequiredException;
 import com.nikitavbv.changewatcher.security.PermissionDeniedException;
 import com.nikitavbv.changewatcher.jobs.ScreenshotNotFoundException;
 import com.nikitavbv.changewatcher.jobs.WatchingJobNotFoundException;
@@ -17,6 +18,11 @@ public class CustomControllerAdvice {
   public ResponseEntity<ErrorResponse> handlePermissionDeniedException(PermissionDeniedException exception) {
     ErrorResponse response = new ErrorResponse("permission_denied", exception.getMessage());
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+  }
+
+  @ExceptionHandler(AuthRequiredException.class)
+  public ResponseEntity<ErrorResponse> handleAuthRequiredException() {
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponse("auth_required"));
   }
 
   @ExceptionHandler(PreviewNotFoundException.class)

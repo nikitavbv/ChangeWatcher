@@ -1,6 +1,7 @@
 package com.nikitavbv.changewatcher.api;
 
 import com.nikitavbv.changewatcher.RouteConstants;
+import com.nikitavbv.changewatcher.security.AuthRequiredException;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
