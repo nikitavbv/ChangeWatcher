@@ -1,9 +1,10 @@
 package com.nikitavbv.changewatcher.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.nikitavbv.changewatcher.jobs.WatchingJob;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class ApplicationUser {
@@ -14,6 +15,22 @@ public class ApplicationUser {
   private String username;
   private String password;
   private boolean isAdmin = false;
+
+  @OneToMany
+  @JoinTable(
+      name = "user_jobs",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "job_id")
+  )
+  private List<WatchingJob> jobs = new ArrayList<>();
+
+  public void addJob(WatchingJob job) {
+    this.jobs.add(job);
+  }
+
+  public void removeJob(WatchingJob job) {
+    this.jobs.remove(job);
+  }
 
   public long getId() {
     return id;
@@ -41,6 +58,10 @@ public class ApplicationUser {
 
   public void setIsAdmin(boolean isAdmin) {
     this.isAdmin = isAdmin;
+  }
+
+  public List<WatchingJob> getJobs() {
+    return this.jobs;
   }
 
 }
