@@ -1,1 +1,25 @@
 @import "../variables.less";
+
+div {
+    font-weight: 300px;
+    font-size: 34pt;
+    color: @textPrimaryColor;
+    text-align: center;
+    margin-top: 40px;
+    user-select: none;
+}
+
+input, button {
+    margin: 6pt auto;
+}
+
+.login-error {
+    display: block;
+    width: 300px;
+    padding: 8px;
+    margin: 6pt auto;
+    background-color: @errorColor;
+    color: contrast(@errorColor, @lightTextColor, @darkTextColor);
+    font-size: 13pt;
+    font-weight: 500;
+}
