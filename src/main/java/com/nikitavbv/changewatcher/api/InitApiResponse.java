@@ -12,4 +12,8 @@ public class InitApiResponse {
     this.jobs = jobs;
   }
 
+  public List<WatchingJob> getJobs() {
+    return jobs;
+  }
+
 }
