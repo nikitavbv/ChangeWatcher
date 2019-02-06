@@ -51,6 +51,8 @@ dependencies {
     implementation('io.jsonwebtoken:jjwt-api:0.10.5')
     implementation('io.jsonwebtoken:jjwt-impl:0.10.5')
     implementation('io.jsonwebtoken:jjwt-jackson:0.10.5')
+    implementation('org.seleniumhq.selenium:selenium-java:2.41.0')
+    implementation('org.seleniumhq.selenium:firefox-driver:3.141.59')
 }
 
 jacocoTestReport {

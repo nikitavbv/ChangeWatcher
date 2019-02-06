@@ -10,4 +10,8 @@ public class ErrorResponse {
     this.message = message;
   }
 
+  public ErrorResponse(String error) {
+    this.error = error;
+  }
+
 }

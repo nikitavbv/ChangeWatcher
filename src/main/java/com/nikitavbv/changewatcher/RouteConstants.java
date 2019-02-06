@@ -6,6 +6,7 @@ public class RouteConstants {
   public static final String API_PATH_PATTERN = API_ROOT + "/*";
 
   public static final String LOGIN_API = API_ROOT + "/login";
-  public static final String USERS_API = "/users";
+  public static final String USERS_API = API_ROOT + "/users";
+  public static final String PREVIEW_API = API_ROOT + "/preview";
 
 }

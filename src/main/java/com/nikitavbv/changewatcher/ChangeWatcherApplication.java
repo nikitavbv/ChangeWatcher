@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * Main Application class.
  */
 @SpringBootApplication
-@EnableConfigurationProperties(SecurityProperties.class)
+@EnableConfigurationProperties({SecurityProperties.class, ApplicationProperties.class})
 @SuppressWarnings("PMD.UseUtilityClass")
 public class ChangeWatcherApplication {
 
