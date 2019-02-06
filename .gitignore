@@ -26,3 +26,5 @@
 /.nb-gradle/
 
 src/main/resources/application.properties
+data
+data-dev
