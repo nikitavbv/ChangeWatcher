@@ -23,7 +23,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     environment:
-      - DB_URL=jdbc:mysql://changewatcher_pgsql:5432/changewatcher
+      - DB_URL=jdbc:postgresql://changewatcher_pgsql:5432/changewatcher
       - DB_USERNAME=devuser
       - DB_PASSWORD=devpassword
     depends_on:
