@@ -1,4 +1,4 @@
-package com.nikitavbv.changewatcher.exceptions;
+package com.nikitavbv.changewatcher.security;
 
 public class PermissionDeniedException extends RuntimeException {
 

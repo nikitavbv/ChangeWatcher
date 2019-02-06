@@ -1,7 +1,7 @@
 package com.nikitavbv.changewatcher;
 
 import com.nikitavbv.changewatcher.api.ErrorResponse;
-import com.nikitavbv.changewatcher.exceptions.PermissionDeniedException;
+import com.nikitavbv.changewatcher.security.PermissionDeniedException;
 import com.nikitavbv.changewatcher.jobs.ScreenshotNotFoundException;
 import com.nikitavbv.changewatcher.jobs.WatchingJobNotFoundException;
 import com.nikitavbv.changewatcher.preview.PreviewNotFoundException;

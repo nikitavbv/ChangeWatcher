@@ -22,6 +22,9 @@ public class InitApiController {
   @GetMapping
   public InitApiResponse doInit(HttpServletRequest request) {
     ApplicationUser user = applicationUserRepository.findByUsername(request.getRemoteUser());
+    if (user == null) {
+      throw new AuthRequiredException();
+    }
     return new InitApiResponse(user.getJobs());
   }
 

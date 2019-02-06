@@ -3,7 +3,7 @@ package com.nikitavbv.changewatcher.jobs;
 import com.nikitavbv.changewatcher.ApplicationProperties;
 import com.nikitavbv.changewatcher.RouteConstants;
 import com.nikitavbv.changewatcher.api.StatusOKResponse;
-import com.nikitavbv.changewatcher.exceptions.PermissionDeniedException;
+import com.nikitavbv.changewatcher.security.PermissionDeniedException;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
 import org.apache.commons.io.IOUtils;
