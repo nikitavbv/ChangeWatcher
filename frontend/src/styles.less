@@ -1,4 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'app/variables.less';
+
 * {
     box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans';
+}
+
+input {
+    display: block;
+    width: 300px;
+    background-color: @backgroundLight;
+    border-radius: 2px;
+    padding: 8px;
+    border: 1px solid @primaryColor;
+    font-weight: 100;
+    font-size: 14pt;
+    transition: border 0.4s ease-out;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    display: block;
+    transition: background-color 0.4s ease-out, color 0.4s ease-out;
+    width: 300px;
+    padding: 8px;
+    font-size: 13pt;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid @primaryColor;
+    outline: none;
+    background-color: @primaryColor;
+}
+
+button:hover {
+    color: @primaryColor;
+    background-color: @lightElementColor; 
+}
+
+.is-invalid {
+    border: 1px solid @errorColor;
 }

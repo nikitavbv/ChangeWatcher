@@ -38,12 +38,12 @@ export class LoginComponent implements OnInit {
         this.authenticationService.initRequest()
             .pipe(first())
             .subscribe(
-                data => {
-                    if (data.status === 'setup_required') {
+                data => {},
+                ({ error }) => {
+                    if (error.error === 'setup_required') {
                         this.router.navigate([ '/setup' ]);
                     }
-                },
-                console.error
+                }
             );
     }
 

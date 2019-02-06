@@ -1,6 +1,6 @@
 <div>
     Setup - create user
-    <form [formGroup]="createUserForm" (ngSumit)="onSubmit()">
+    <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
         <div *ngIf="error" class="setup-error">{{ error }}</div>
         <input formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Username" type="text" />
         <input formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password" type="password" />
