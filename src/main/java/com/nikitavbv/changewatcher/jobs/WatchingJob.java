@@ -3,9 +3,12 @@ package com.nikitavbv.changewatcher.jobs;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 
 import javax.persistence.*;
+import java.io.File;
 
 @Entity
 public class WatchingJob {
+
+  private static final String SCREENSHOT_IMAGE_FORMAT = "png";
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +31,14 @@ public class WatchingJob {
 
   Thread makeRunThread(String screenshotsDir) {
     return new WatchingJobThread(this, screenshotsDir);
+  }
+
+  File getWebsiteScreenshotFile(String screenshotsDir) {
+    return new File(screenshotsDir + "/" + getID() + "." + SCREENSHOT_IMAGE_FORMAT);
+  }
+
+  File getPrevWebsiteScreenshotFile(String screenshotsDir) {
+    return new File(screenshotsDir + "/" + getID() + "_prev1" + "." + SCREENSHOT_IMAGE_FORMAT);
   }
 
   boolean isTimeToRun() {

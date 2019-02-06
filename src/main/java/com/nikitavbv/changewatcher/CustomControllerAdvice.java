@@ -2,6 +2,7 @@ package com.nikitavbv.changewatcher;
 
 import com.nikitavbv.changewatcher.api.ErrorResponse;
 import com.nikitavbv.changewatcher.exceptions.PermissionDeniedException;
+import com.nikitavbv.changewatcher.jobs.ScreenshotNotFoundException;
 import com.nikitavbv.changewatcher.jobs.WatchingJobNotFoundException;
 import com.nikitavbv.changewatcher.preview.PreviewNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,11 @@ public class CustomControllerAdvice {
   @ExceptionHandler(WatchingJobNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleWatchingJobNotFoundException() {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("watching_job_not_found"));
+  }
+
+  @ExceptionHandler(ScreenshotNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleScreenshotNotFoundException() {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("screenshot_not_found"));
   }
 
 }

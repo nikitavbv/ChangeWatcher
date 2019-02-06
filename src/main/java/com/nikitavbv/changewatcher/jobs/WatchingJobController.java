@@ -6,10 +6,14 @@ import com.nikitavbv.changewatcher.api.StatusOKResponse;
 import com.nikitavbv.changewatcher.exceptions.PermissionDeniedException;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
+import org.apache.commons.io.IOUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -38,11 +42,10 @@ public class WatchingJobController {
 
   @Scheduled(fixedRate = WATCHING_RATE)
   public void runJobs() {
-    String screenshotsDir = applicationProperties.getDataDir() + SCREENSHOTS_DIR;
     watchingJobRepository.findAll().stream()
         .filter(WatchingJob::isTimeToRun)
         .forEach(job -> {
-          executorService.submit(job.makeRunThread(screenshotsDir));
+          executorService.submit(job.makeRunThread(getScreenshotsDir()));
           watchingJobRepository.save(job);
         });
   }
@@ -84,6 +87,30 @@ public class WatchingJobController {
     applicationUserRepository.save(user);
     watchingJobRepository.delete(job);
     return new StatusOKResponse();
+  }
+
+  @GetMapping("/{jobID}/screenshot")
+  public @ResponseBody byte[] getScreenshot(HttpServletRequest req, @PathVariable long jobID) {
+    ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
+    WatchingJob job = watchingJobRepository.findById(jobID).orElseThrow(WatchingJobNotFoundException::new);
+    if (job.getUser().getId() != user.getId()) {
+      throw new PermissionDeniedException("Cannot get screenshot of jobs owned by other users");
+    }
+
+    File screenshotFile = job.getWebsiteScreenshotFile(getScreenshotsDir());
+    if (!screenshotFile.exists()) {
+      throw new ScreenshotNotFoundException();
+    }
+
+    try {
+      return IOUtils.toByteArray(new FileInputStream(screenshotFile));
+    } catch(IOException e) {
+      throw new ScreenshotNotFoundException();
+    }
+  }
+
+  private String getScreenshotsDir() {
+    return applicationProperties.getDataDir() + SCREENSHOTS_DIR;
   }
 
 }

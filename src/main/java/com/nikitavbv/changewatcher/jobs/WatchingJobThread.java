@@ -19,7 +19,6 @@ public class WatchingJobThread extends Thread {
   private static final int DISPLAY_NUMBER = 98;
   private static final String XVFB_PATH = "/usr/bin/Xvfb";
   private static final String XVFB_COMMAND = XVFB_PATH + ":" + DISPLAY_NUMBER;
-  private static final String SCREENSHOT_IMAGE_FORMAT = "png";
 
   private WatchingJob job;
   private String screenshotsDir;
@@ -32,7 +31,7 @@ public class WatchingJobThread extends Thread {
   public void run() {
     try {
       File imageFile = websiteScreenshot();
-      File prevImageFile = getPrevWebsiteScreenshotFile();
+      File prevImageFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
       long differentPixels = compareImages(imageFile, prevImageFile);
       job.setLastRunDifferentPixels(differentPixels);
     } catch(IOException e) {
@@ -42,8 +41,8 @@ public class WatchingJobThread extends Thread {
   }
 
   private File websiteScreenshot() throws IOException {
-    final File targetFile = getWebsiteScreenshotFile();
-    final File prevFile = getPrevWebsiteScreenshotFile();
+    final File targetFile = job.getWebsiteScreenshotFile(screenshotsDir);
+    final File prevFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
     FileUtils.copyFile(targetFile, prevFile);
 
     final Process xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);
@@ -61,14 +60,6 @@ public class WatchingJobThread extends Thread {
     driver.close();
     xvfbProcess.destroy();
     return targetFile;
-  }
-
-  private File getWebsiteScreenshotFile() {
-    return new File(screenshotsDir + "/" + job.getID() + "." + SCREENSHOT_IMAGE_FORMAT);
-  }
-
-  private File getPrevWebsiteScreenshotFile() {
-    return new File(screenshotsDir + "/" + job.getID() + "_prev1" + "." + SCREENSHOT_IMAGE_FORMAT);
   }
 
   private long compareImages(File first, File second) throws IOException {
