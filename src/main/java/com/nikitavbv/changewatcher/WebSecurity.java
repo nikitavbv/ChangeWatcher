@@ -3,13 +3,17 @@ package com.nikitavbv.changewatcher;
 import com.nikitavbv.changewatcher.security.JWTAuthenticationFilter;
 import com.nikitavbv.changewatcher.security.JWTAuthorizationFilter;
 import com.nikitavbv.changewatcher.security.UserDetailsServiceImpl;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Configuration
+@EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   private UserDetailsServiceImpl userDetailsService;
@@ -34,8 +38,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
           .antMatchers(RouteConstants.JOBS_API).permitAll()
           .antMatchers(RouteConstants.API_PATH_PATTERN).authenticated()
           .and()
-          .addFilter(new JWTAuthenticationFilter(authenticationManager(), securityProperties))
-          .addFilterBefore(new JWTAuthorizationFilter(authenticationManager(), securityProperties),
+          .addFilter(new JWTAuthorizationFilter(authenticationManager(), securityProperties))
+          .addFilterBefore(new JWTAuthenticationFilter(authenticationManager(), securityProperties),
               UsernamePasswordAuthenticationFilter.class);
   }
 
