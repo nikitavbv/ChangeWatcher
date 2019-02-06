@@ -1,1 +1,31 @@
-@import "../../variables.less";
+@import '../../variables.less';
+
+:host {
+    border-bottom: 1px solid @elementBorderColor;
+    padding: 6px;
+}
+
+.app-name {
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 36px;
+    user-select: none;
+    display: inline;
+}
+
+.settings-btn {
+    float: right;
+    line-height: 36px;
+    padding-right: 6px;
+    transition: opacity 0.4s ease-out;
+    opacity: 0;
+    cursor: pointer;
+    text-decoration: none;
+    color: @primaryColor;
+}
+
+:host:hover {
+    .settings-btn {
+        opacity: 1;
+    }
+}

@@ -6,6 +6,8 @@
 
 body {
     font-family: 'Open Sans';
+    padding: 0;
+    margin: 0;
 }
 
 input {
@@ -21,7 +23,7 @@ input {
     outline: none;
 }
 
-button {
+button, .button {
     cursor: pointer;
     display: block;
     transition: background-color 0.4s ease-out, color 0.4s ease-out;
@@ -36,9 +38,10 @@ button {
     border: 1px solid @primaryColor;
     outline: none;
     background-color: @primaryColor;
+    font-family: 'Open Sans';
 }
 
-button:hover {
+button:hover, .button:hover {
     color: @primaryColor;
     background-color: @lightElementColor; 
 }
