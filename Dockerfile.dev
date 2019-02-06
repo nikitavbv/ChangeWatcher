@@ -1,4 +1,4 @@
-ROM alpine:3.9
+FROM alpine:3.9
 
 LABEL maintainer="nikitavbv@gmail.com"
 
