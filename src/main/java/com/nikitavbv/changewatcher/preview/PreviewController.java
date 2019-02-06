@@ -3,6 +3,7 @@ package com.nikitavbv.changewatcher.preview;
 import com.nikitavbv.changewatcher.ApplicationProperties;
 import com.nikitavbv.changewatcher.RouteConstants;
 import org.apache.commons.io.IOUtils;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -35,7 +36,7 @@ public class PreviewController {
     return new WebpagePreviewResponse(screenshotID);
   }
 
-  @GetMapping("/{previewID}")
+  @GetMapping("/{previewID}", produces = MediaType.IMAGE_PNG_VALUE)
   public @ResponseBody byte[] getPreview(@PathVariable String previewID) {
     final File previewFile = new File(getPreviewsDirPath() + previewID + "." + PREVIEW_IMAGE_FORMAT);
     if (!previewFile.exists()) {
