@@ -1,6 +1,7 @@
 package com.nikitavbv.changewatcher.api;
 
 import com.nikitavbv.changewatcher.RouteConstants;
+import com.nikitavbv.changewatcher.SetupRequiredException;
 import com.nikitavbv.changewatcher.security.AuthRequiredException;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
@@ -22,11 +23,19 @@ public class InitApiController {
 
   @GetMapping
   public InitApiResponse doInit(HttpServletRequest request) {
+    if (!checkIfSetupIsDone()) {
+      throw new SetupRequiredException();
+    }
+
     ApplicationUser user = applicationUserRepository.findByUsername(request.getRemoteUser());
     if (user == null) {
       throw new AuthRequiredException();
     }
     return new InitApiResponse(user.getJobs());
+  }
+
+  private boolean checkIfSetupIsDone() {
+    return applicationUserRepository.count() > 0;
   }
 
 }

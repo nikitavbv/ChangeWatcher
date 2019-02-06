@@ -25,6 +25,11 @@ public class CustomControllerAdvice {
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponse("auth_required"));
   }
 
+  @ExceptionHandler(SetupRequiredException.class)
+  public ResponseEntity<ErrorResponse> handleSetupRequiredException() {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("setup_required"));
+  }
+
   @ExceptionHandler(PreviewNotFoundException.class)
   public ResponseEntity<ErrorResponse> handlePreviewNotFoundException() {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("preview_not_found"));
