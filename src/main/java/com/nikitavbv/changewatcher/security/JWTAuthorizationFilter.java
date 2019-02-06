@@ -50,7 +50,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     if (token != null) {
       String secret = securityProperties.getSecret();
       if (secret == null) {
-        securityProperties.setSecret(securityProperties.getSecret());
+        securityProperties.setSecret(securityProperties.generateSecret());
         secret = securityProperties.getSecret();
       }
 
