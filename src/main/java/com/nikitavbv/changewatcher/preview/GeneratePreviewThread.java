@@ -41,12 +41,12 @@ public class GeneratePreviewThread extends Thread {
       final WebDriver driver = new FirefoxDriver(service);
       driver.get(url);
       final File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-      final File targetFile =  new File(previewsDir + "/" + previewID + "." + PreviewController.PREVIEW_IMAGE_FORMAT);
+      final File targetFile = new File(previewsDir + "/" + previewID + "." + PreviewController.PREVIEW_IMAGE_FORMAT);
       FileUtils.copyFile(scrFile, targetFile);
       driver.close();
       xvfbProcess.destroy();
     } catch(IOException e) {
-      System.out.println("Failed to generate url preview");
+      System.err.println("Failed to generate url preview");
       e.printStackTrace();
     }
   }

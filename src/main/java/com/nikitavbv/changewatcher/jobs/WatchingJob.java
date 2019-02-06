@@ -16,6 +16,7 @@ public class WatchingJob {
 
   private long watchingInterval;
   private long lastCheckTime;
+  private long lastRunDifferentPixels;
 
   @ManyToOne
   @JoinTable(
@@ -24,6 +25,18 @@ public class WatchingJob {
       inverseJoinColumns = @JoinColumn(name = "user_id")
   )
   private ApplicationUser user;
+
+  Thread makeRunThread(String screenshotsDir) {
+    return new WatchingJobThread(this, screenshotsDir);
+  }
+
+  boolean isTimeToRun() {
+    return lastCheckTime + watchingInterval < System.currentTimeMillis();
+  }
+
+  long getID() {
+    return id;
+  }
 
   public void setUser(ApplicationUser user) {
     this.user = user;
@@ -55,6 +68,10 @@ public class WatchingJob {
 
   ApplicationUser getUser() {
     return user;
+  }
+
+  public void setLastRunDifferentPixels(long differentPixels) {
+    this.lastRunDifferentPixels = differentPixels;
   }
 
 }

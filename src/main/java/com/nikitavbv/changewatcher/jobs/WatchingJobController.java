@@ -1,25 +1,50 @@
 package com.nikitavbv.changewatcher.jobs;
 
+import com.nikitavbv.changewatcher.ApplicationProperties;
 import com.nikitavbv.changewatcher.RouteConstants;
 import com.nikitavbv.changewatcher.api.StatusOKResponse;
 import com.nikitavbv.changewatcher.exceptions.PermissionDeniedException;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RestController
 @RequestMapping(RouteConstants.JOBS_API)
 public class WatchingJobController {
 
+  private static final int WATCHING_RATE = 1000 * 60 * 10; // every 10 minutes
+  private static final int MAX_CHECKS_THREADS = 10;
+
+  private static final String SCREENSHOTS_DIR = "screenshots/";
+
   private ApplicationUserRepository applicationUserRepository;
   private WatchingJobRepository watchingJobRepository;
+  private ApplicationProperties applicationProperties;
+
+  private ExecutorService executorService = Executors.newFixedThreadPool(MAX_CHECKS_THREADS);
 
   public WatchingJobController(ApplicationUserRepository applicationUserRepository,
-                               WatchingJobRepository watchingJobRepository) {
+                               WatchingJobRepository watchingJobRepository,
+                               ApplicationProperties applicationProperties) {
     this.applicationUserRepository = applicationUserRepository;
     this.watchingJobRepository = watchingJobRepository;
+    this.applicationProperties = applicationProperties;
+  }
+
+  @Scheduled(fixedRate = WATCHING_RATE)
+  public void runJobs() {
+    String screenshotsDir = applicationProperties.getDataDir() + SCREENSHOTS_DIR;
+    watchingJobRepository.findAll().stream()
+        .filter(WatchingJob::isTimeToRun)
+        .forEach(job -> {
+          executorService.submit(job.makeRunThread(screenshotsDir));
+          watchingJobRepository.save(job);
+        });
   }
 
   @PostMapping
