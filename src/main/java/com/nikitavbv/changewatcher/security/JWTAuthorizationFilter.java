@@ -2,6 +2,7 @@ package com.nikitavbv.changewatcher.security;
 
 import com.nikitavbv.changewatcher.SecurityProperties;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -54,14 +55,18 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         secret = securityProperties.getSecret();
       }
 
-      String user = Jwts.parser()
-          .setSigningKey(secret)
-          .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-          .getBody()
-          .getSubject();
+      try {
+        String user = Jwts.parser()
+            .setSigningKey(secret)
+            .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+            .getBody()
+            .getSubject();
 
-      if (user != null) {
-        return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+        if (user != null) {
+          return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+        }
+      } catch(SignatureException e) {
+        // ignore (token is invalid)
       }
       return null;
     }
