@@ -8,4 +8,8 @@ public class SignUpResult {
     this.userID = userID;
   }
 
+  public long getUserID() {
+    return userID;
+  }
+
 }
