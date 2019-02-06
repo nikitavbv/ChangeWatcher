@@ -1,0 +1,10 @@
+<div>
+    Setup - create user
+    <form [formGroup]="createUserForm" (ngSumit)="onSubmit()">
+        <div *ngIf="error" class="setup-error">{{ error }}</div>
+        <input formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Username" type="text" />
+        <input formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password" type="password" />
+        <input formControlName="passwordRepeat" [ngClass]="{ 'is-invalid': (submitted && f.passwordRepeat.errors) || (f.passwordRepeat.value !== '' && f.passwordRepeat.value != f.password.value) }" placeholder="Password confirmation" type="password" />
+        <button [disabled]="loading || (f.passwordRepeat.value != f.password.value)">Create User</button>
+    </form>
+</div>

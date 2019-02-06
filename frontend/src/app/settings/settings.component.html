@@ -1,0 +1,8 @@
+<h1>Add user</h1>
+<input [(ngModel)]="newUserName" placeholder="New user name..." />
+<input [(ngModel)]="newUserPassword" type="password" placeholder="New user password..." />
+<input [(ngModel)]="newUserPasswordRepeat" [ngClass]="{'password-mismatch': this.newUserPasswordRepeat !== this.newUserPassword && this.newUserPasswordRepeat !== ''}" type="password" placeholder="New user password repeat..." />
+<button (click)="addUser()">Add user</button>
+
+<h1>Logout</h1>
+<button (click)="logout()" class="logout-btn">Logout</button>

@@ -1,0 +1,9 @@
+<div>
+    Authentication
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="error" class="login-error">{{ error }}</div>
+        <input formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Username" type="text" />
+        <input formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password" type="password" />
+        <button [disabled]="loading">Log In</button>
+    </form>
+</div>

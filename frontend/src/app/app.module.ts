@@ -1,18 +1,48 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { routing } from './app.routing';
+
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './_shared';
+import { HomeComponent } from './home';
+import { SettingsComponent } from './settings';
+import { LoginComponent } from './login';
+import { SetupComponent } from './setup';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AuthGuard } from './_guards';
+import { AuthenticationService, UserDataService, PageTitleService } from './_services';
+import { JwtInterceptor } from './_helpers';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+
+    HomeComponent,
+    SettingsComponent,
+    SetupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    routing,
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService,
+    UserDataService,
+    PageTitleService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
