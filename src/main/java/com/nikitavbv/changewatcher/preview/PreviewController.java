@@ -36,7 +36,7 @@ public class PreviewController {
     return new WebpagePreviewResponse(screenshotID);
   }
 
-  @GetMapping("/{previewID}", produces = MediaType.IMAGE_PNG_VALUE)
+  @GetMapping(value = "/{previewID}", produces = MediaType.IMAGE_PNG_VALUE)
   public @ResponseBody byte[] getPreview(@PathVariable String previewID) {
     final File previewFile = new File(getPreviewsDirPath() + previewID + "." + PREVIEW_IMAGE_FORMAT);
     if (!previewFile.exists()) {
