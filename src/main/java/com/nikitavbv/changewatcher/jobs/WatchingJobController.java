@@ -72,6 +72,8 @@ public class WatchingJobController {
     job.setTitle(newJob.getTitle());
     job.setUrl(newJob.getUrl());
     job.setWatchingInterval(newJob.getWatchingInterval());
+    job.setWebhook(newJob.getWebhook());
+    job.setPixelDifferenceToTrigger(newJob.getPixelDifferenceToTrigger());
     watchingJobRepository.save(job);
     return new StatusOKResponse();
   }

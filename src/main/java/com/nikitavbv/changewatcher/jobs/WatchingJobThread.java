@@ -34,6 +34,13 @@ public class WatchingJobThread extends Thread {
       File prevImageFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
       long differentPixels = compareImages(imageFile, prevImageFile);
       job.setLastRunDifferentPixels(differentPixels);
+
+      if (differentPixels >= job.getPixelDifferenceToTrigger()) {
+        System.out.println("Job triggered: " + job.getID());
+        job.runWebhook();
+      } else {
+        System.out.println("Job is not triggered: " + job.getID());
+      }
     } catch(IOException e) {
       System.err.println("Watching job failed");
       e.printStackTrace();

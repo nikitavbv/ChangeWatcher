@@ -1,9 +1,13 @@
 package com.nikitavbv.changewatcher.jobs;
 
 import com.nikitavbv.changewatcher.user.ApplicationUser;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import javax.persistence.*;
 import java.io.File;
+import java.io.IOException;
 
 @Entity
 public class WatchingJob {
@@ -16,6 +20,8 @@ public class WatchingJob {
 
   private String title;
   private String url;
+  private String webhook; // for notifications
+  private long pixelDifferenceToTrigger;
 
   private long watchingInterval;
   private long lastCheckTime;
@@ -39,6 +45,13 @@ public class WatchingJob {
 
   File getPrevWebsiteScreenshotFile(String screenshotsDir) {
     return new File(screenshotsDir + "/" + getID() + "_prev1" + "." + SCREENSHOT_IMAGE_FORMAT);
+  }
+
+  void runWebhook() throws IOException {
+    CloseableHttpClient httpClient = HttpClients.createMinimal();
+    HttpGet httpGet = new HttpGet(webhook);
+    httpClient.execute(httpGet);
+    httpClient.close();
   }
 
   boolean isTimeToRun() {
@@ -69,6 +82,14 @@ public class WatchingJob {
     this.url = url;
   }
 
+  public String getWebhook() {
+    return this.webhook;
+  }
+
+  public void setWebhook(String webhook) {
+    this.webhook = webhook;
+  }
+
   public long getWatchingInterval() {
     return watchingInterval;
   }
@@ -83,6 +104,14 @@ public class WatchingJob {
 
   public void setLastRunDifferentPixels(long differentPixels) {
     this.lastRunDifferentPixels = differentPixels;
+  }
+
+  public long getPixelDifferenceToTrigger() {
+    return this.pixelDifferenceToTrigger;
+  }
+
+  public void setPixelDifferenceToTrigger(long pixelDifferenceToTrigger) {
+    this.pixelDifferenceToTrigger = pixelDifferenceToTrigger;
   }
 
 }
