@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpRequest, HttpHandler, HttpEvent,  HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -59,7 +59,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 this.router.navigate(['/login', { returnUrl: this.router.url }]);
             }
 
-            return Observable.throw(result);
+            return throwError(result);
         })));
     }
 
