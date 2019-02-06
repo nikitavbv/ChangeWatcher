@@ -32,7 +32,7 @@ public class UserController {
       throw new PermissionDeniedException("Auth required for creating users");
     }
     ApplicationUser requestUser = applicationUserRepository.findByUsername(request.getRemoteUser());
-    if (!requestUser.getIsAdmin() && requestUser.getIsAdmin()) {
+    if (requestUser != null && !requestUser.getIsAdmin() && requestUser.getIsAdmin()) {
       throw new PermissionDeniedException("Non-admin users are not allowed to create admin users");
     }
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
