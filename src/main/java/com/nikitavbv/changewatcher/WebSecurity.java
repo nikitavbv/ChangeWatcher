@@ -27,8 +27,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable().authorizeRequests()
-          .antMatchers(HttpMethod.POST, RouteConstants.USERS_API).permitAll()
-          .antMatchers(HttpMethod.POST, RouteConstants.LOGIN_API).permitAll()
+          .antMatchers(HttpMethod.GET, RouteConstants.INIT_API).permitAll()
+          .antMatchers(RouteConstants.USERS_API).permitAll()
+          .antMatchers(RouteConstants.LOGIN_API).permitAll()
+          .antMatchers(RouteConstants.PREVIEW_API).permitAll()
+          .antMatchers(RouteConstants.JOBS_API).permitAll()
           .antMatchers(RouteConstants.API_PATH_PATTERN).authenticated()
           .and()
           .addFilter(new JWTAuthenticationFilter(authenticationManager(), securityProperties))
