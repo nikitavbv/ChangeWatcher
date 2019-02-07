@@ -11,8 +11,49 @@
 
 .side-menu {
     width: 24%;
+    border-right: 1px solid @elementBorderColor;
+    min-height: 100vh;
 }
 
 .job-view {
     width: 76%;
+}
+
+.job {
+    width: 100%;
+    cursor: pointer;
+    padding: 4px 14px;
+    border-bottom: 1px solid @elementBorderColor;
+    transition: background-color 0.4s ease-out;
+
+    span {
+        display: block;
+    }
+
+    .job-title, .job-url {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .job-title {
+        font-size: 22px;
+    }
+
+    .job-url, .job-status, .job-difference {
+        color: @lowPriorityTextColor;
+    }
+
+    .job-info {
+        color: @primaryColor;
+        display: inline-block;
+    }
+}
+
+.job:hover {
+    background-color: @elementHoverColor;
+}
+
+.job.selected {
+    background-color: @elementSelectionColor;
 }

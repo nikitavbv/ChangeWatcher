@@ -11,21 +11,25 @@
     line-height: 36px;
     user-select: none;
     display: inline;
+    padding-left: 8px;
 }
 
-.settings-btn {
+.header-btns {
     float: right;
     line-height: 36px;
-    padding-right: 6px;
     transition: opacity 0.4s ease-out;
     opacity: 0;
-    cursor: pointer;
-    text-decoration: none;
-    color: @primaryColor;
+
+    a {
+        cursor: pointer;
+        text-decoration: none;
+        color: @primaryColor;
+        padding-right: 6px;
+    }
 }
 
 :host:hover {
-    .settings-btn {
+    .header-btns {
         opacity: 1;
     }
 }
