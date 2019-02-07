@@ -13,4 +13,8 @@ public class ApplicationProperties {
     return dataDir;
   }
 
+  public void setDataDir(String dataDir) {
+    this.dataDir = dataDir;
+  }
+
 }

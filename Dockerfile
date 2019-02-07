@@ -6,7 +6,14 @@ RUN mkdir /app
 WORKDIR /app
 EXPOSE 80
 
-RUN apk --update add bash curl unzip zip openjdk8 nodejs nodejs-npm
+RUN apk --update add bash curl unzip zip openjdk8 nodejs nodejs-npm xvfb firefox-esr ttf-dejavu ttf-liberation font-noto
+
+RUN mkdir /geckodriver && \
+    cd /geckodriver && \
+    wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz && \
+    tar -xvzf geckodriver* && \
+    chmod +x geckodriver
+
 RUN curl -s "https://get.sdkman.io" | bash \
     && bash -c "source \"/root/.sdkman/bin/sdkman-init.sh\" && sdk install gradle"
 

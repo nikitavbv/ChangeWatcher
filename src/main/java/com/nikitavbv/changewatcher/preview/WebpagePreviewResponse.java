@@ -8,4 +8,8 @@ public class WebpagePreviewResponse {
     this.screenshotID = screenshotID;
   }
 
+  public String getScreenshotID() {
+    return screenshotID;
+  }
+
 }

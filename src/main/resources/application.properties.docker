@@ -2,3 +2,5 @@ spring.jpa.hibernate.ddl-auto=update
 spring.datasource.url=${DB_URL}
 spring.datasource.username=${DB_USERNAME}
 spring.datasource.password=${DB_PASSWORD}
+
+app.general.data-dir=/app/data/
