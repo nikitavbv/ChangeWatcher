@@ -78,7 +78,6 @@ public class GeneratePreviewThread extends Thread {
       ImageIO.write(screenshot.getImage(), PreviewController.PREVIEW_IMAGE_FORMAT.toUpperCase(), targetFile);
       driver.close();
       xvfbProcess.destroy();
-
     } catch(Exception e) {
       System.err.println("Failed to generate url preview");
       e.printStackTrace();

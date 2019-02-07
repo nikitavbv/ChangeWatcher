@@ -12,7 +12,7 @@ import java.io.IOException;
 @Entity
 public class WatchingJob {
 
-  private static final String SCREENSHOT_IMAGE_FORMAT = "png";
+  static final String SCREENSHOT_IMAGE_FORMAT = "png";
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
