@@ -1,0 +1,43 @@
+<h1>New Job</h1>
+
+<input [(ngModel)]="jobName" placeholder="Job name..." />
+
+<div class="webpage-url-input">
+    <input [(ngModel)]="webpageUrl" placeholder="Webpage url..." />
+    <button (click)="previewPage()">Preview</button>
+</div>
+
+<button *ngIf="previewLoaded && !selectionSaved" (click)="saveSelection()" class="save-selection-btn">Save selection</button>
+
+<div *ngIf="!selectionSaved || makingPreview" class="webpage-preview">
+    <div *ngIf="makingPreview" class="loading-preview-msg">
+        Hold on while we are making a preview of this page...
+    </div>
+    <img *ngIf="!selectionSaved" src="" id="webpage-preview-img" />
+</div>
+
+<div *ngIf="selectionSaved" class="selection-size-info">
+    Selection: {{ this.currentSelectionWidth }}x{{ this.currentSelectionHeight }} pixels
+</div>
+
+<div *ngIf="selectionSaved" class="selection-threshold">
+    Change threshold:
+    <select [(ngModel)]="changeThreshold">
+        <option value="0">Any change</option>
+        <option value="0.05">Tiny change</option>
+        <option value="0.1">Small change</option>
+        <option value="0.25">Medium change</option>
+        <option value="0.5">Large change</option>
+    </select>
+</div>
+
+<div *ngIf="selectionSaved" class="watching-interval">
+    Watching interval:
+    <select [(ngModel)]="watchingInterval">
+        <option *ngFor="let watchingInterval of objectKeys(watchingIntervals)" value="{{ watchingInterval }}">{{ watchingIntervals[watchingInterval] }}</option>
+    </select>
+</div>    
+
+
+<input *ngIf="selectionSaved" [(ngModel)]="notificationWebhookUrl" placeholder="Notification webhook url..." />
+<button *ngIf="selectionSaved" (click)="saveJob()" class="save-btn">Save</button>

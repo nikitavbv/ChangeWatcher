@@ -24,10 +24,12 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/cropper.min.js"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "src/cropper.min.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true

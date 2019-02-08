@@ -10,17 +10,28 @@ body {
     margin: 0;
 }
 
-input {
+h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+
+input, select {
     display: block;
     width: 300px;
     background-color: @backgroundLight;
     border-radius: 2px;
     padding: 8px;
-    border: 1px solid @primaryColor;
+    border: 1px solid @elementBorderColor;
     font-weight: 100;
     font-size: 14pt;
     transition: border 0.4s ease-out;
     outline: none;
+}
+
+input:focus, .select:focus {
+    border-color: @primaryColor;
 }
 
 button, .button {

@@ -55,9 +55,7 @@ public class WatchingJobController {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
     job.setUser(user);
     watchingJobRepository.save(job);
-    user.addJob(job);
-    applicationUserRepository.save(user);
-    return new AddWatchingJobResponse(user.getJobs());
+    return new AddWatchingJobResponse(job.getID(), user.getJobs());
   }
 
   @PostMapping("/{jobID}")

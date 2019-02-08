@@ -63,7 +63,7 @@ public class WatchingJob {
     return lastCheckTime + watchingInterval < System.currentTimeMillis();
   }
 
-  long getID() {
+  public long getID() {
     return id;
   }
 

@@ -5,15 +5,16 @@ import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './_shared';
-import { HomeComponent } from './home';
+import { HomeComponent, CreateJobComponent } from './home';
 import { SettingsComponent } from './settings';
 import { LoginComponent } from './login';
 import { SetupComponent } from './setup';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthGuard } from './_guards';
-import { AuthenticationService, UserDataService, PageTitleService } from './_services';
+import { AuthenticationService, UserDataService, PageTitleService, JobService } from './_services';
 import { JwtInterceptor } from './_helpers';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +22,8 @@ import { JwtInterceptor } from './_helpers';
     HeaderComponent,
 
     HomeComponent,
+    CreateJobComponent,
+    
     SettingsComponent,
     SetupComponent,
     LoginComponent
@@ -37,6 +40,7 @@ import { JwtInterceptor } from './_helpers';
     AuthenticationService,
     UserDataService,
     PageTitleService,
+    JobService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
