@@ -1,10 +1,7 @@
 package com.nikitavbv.changewatcher.jobs;
 
-import com.nikitavbv.changewatcher.preview.PreviewController;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.GeckoDriverService;
@@ -79,7 +76,7 @@ public class WatchingJobThread extends Thread {
     driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
     driver.manage().window().setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
     try {
-      driver.get(url);
+      driver.get(job.getUrl());
     } catch(Exception e) {
       // ignore;
     }
@@ -112,8 +109,16 @@ public class WatchingJobThread extends Thread {
 
   private long compareImages(BufferedImage first, BufferedImage second) {
     long totalDifferentPixels = 0;
-    for (int x = 0; x < Math.min(first.getWidth(), second.getWidth()); x++) {
-      for (int y = 0; y < Math.min(first.getHeight(), second.getHeight()); y++) {
+    int startX = Math.min(job.getSelectionX(), Math.min(first.getWidth(), second.getWidth()));
+    int startY = Math.min(job.getSelectionY(), Math.min(first.getHeight(), second.getHeight()));
+    int width = Math.min(Math.min(first.getWidth(), second.getWidth()), job.getSelectionX() + job.getSelectionWidth());
+    int height = Math.min(
+        Math.min(first.getHeight(), second.getHeight()),
+        job.getSelectionY() + job.getSelectionHeight()
+    );
+
+    for (int x = startX; x < width; x++) {
+      for (int y = startY; y < height; y++) {
         int firstRGB = first.getRGB(x, y);
         int secondRGB = second.getRGB(x, y);
         if (firstRGB != secondRGB) {
