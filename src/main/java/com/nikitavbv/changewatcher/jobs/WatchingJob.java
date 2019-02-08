@@ -27,6 +27,11 @@ public class WatchingJob {
   private long lastCheckTime;
   private long lastRunDifferentPixels;
 
+  private int selectionX;
+  private int selectionY;
+  private int selectionWidth;
+  private int selectionHeight;
+
   @ManyToOne
   @JoinTable(
       name = "user_jobs",
@@ -114,4 +119,35 @@ public class WatchingJob {
     this.pixelDifferenceToTrigger = pixelDifferenceToTrigger;
   }
 
+  public int getSelectionX() {
+    return selectionX;
+  }
+
+  public void setSelectionX(int selectionX) {
+    this.selectionX = selectionX;
+  }
+
+  public int getSelectionY() {
+    return selectionY;
+  }
+
+  public void setSelectionY(int selectionY) {
+    this.selectionY = selectionY;
+  }
+
+  public int getSelectionWidth() {
+    return selectionWidth;
+  }
+
+  public void setSelectionWidth(int selectionWidth) {
+    this.selectionWidth = selectionWidth;
+  }
+
+  public int getSelectionHeight() {
+    return selectionHeight;
+  }
+
+  public void setSelectionHeight(int selectionHeight) {
+    this.selectionHeight = selectionHeight;
+  }
 }
