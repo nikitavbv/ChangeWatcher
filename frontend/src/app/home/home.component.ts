@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { PageTitleService, UserDataService, JobService } from '../_services';
 import { Job } from '../_models';
 
+import { format } from 'timeago.js';
+
 @Component({templateUrl: 'home.component.html', styleUrls: ['home.component.less']})
 export class HomeComponent implements OnInit {
 
@@ -46,6 +48,11 @@ export class HomeComponent implements OnInit {
                 return job;
             }
         }
+    }
+
+    formatAgo(timestamp: number) {
+        if (!timestamp) return;
+        return format(new Date(timestamp), 'en_US');
     }
 
 }

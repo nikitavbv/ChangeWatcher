@@ -14,4 +14,7 @@ export class Job {
     
     webhook: string;
 
+    lastCheckTime: number;
+    lastRunDifferentPixels: number;
+
 }

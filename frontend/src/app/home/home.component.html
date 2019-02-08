@@ -4,8 +4,8 @@
         <div *ngFor="let job of userData.jobs" (click)="selectJob(job)" class="job" [ngClass]="{'selected': selectedJobID === job.id}">
             <span class="job-title">{{ job.title }}</span>
             <span class="job-url">{{ job.url }}</span>
-            <span class="job-status">Last checked <span class="job-info">1 minute ago</span></span>
-            <span class="job-difference"><span class="job-info">142</span> pixels</span>
+            <span class="job-status">Last checked <span class="job-info">{{ formatAgo(job.lastCheckTime) }}</span></span>
+            <span class="job-difference"><span class="job-info">{{ job.lastRunDifferentPixels }}</span> pixels changed</span>
         </div>
     </div>
 </div>
