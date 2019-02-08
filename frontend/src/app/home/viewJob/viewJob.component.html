@@ -1,0 +1,18 @@
+<h1>{{ job.title }}</h1>
+<h2>{{ job.url }}</h2>
+
+<div>
+    Selection: {{ job.selectionWidth }}x{{ job.selectionHeight }} pixels
+</div>
+
+<div>
+    Change threshold: {{ job.pixelDiffrenceToTrigger }} pixels
+</div>
+
+<div>
+    Watching interval: {{ watchingIntervals[job.watchingInterval] || job.watchingInterval }}
+</div>
+
+<div>
+    Webhook: {{ job.webhook }}
+</div>

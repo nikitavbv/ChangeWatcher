@@ -35,5 +35,17 @@ export class HomeComponent implements OnInit {
         this.addingJob = false;
         this.selectedJobID = job.id;
     }
+    
+    getSelectedJob() {
+        if (!this.userData.jobs) { 
+            return;
+        }
+        
+        for (let job of this.userData.jobs) {
+            if (job.id === this.selectedJobID) {
+                return job;
+            }
+        }
+    }
 
 }

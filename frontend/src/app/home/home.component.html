@@ -11,7 +11,5 @@
 </div>
 <div class="job-view">
     <create-job *ngIf="addingJob"></create-job>
-    <div *ngIf="!addingJob">
-        job view
-    </div>
+    <view-job *ngIf="!addingJob && getSelectedJob()" [job]="getSelectedJob()"></view-job>
 </div>
