@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Job } from 'src/app/_models';
+import { JobService, UserDataService } from 'src/app/_services';
 
 @Component({
     selector: 'view-job',
@@ -19,5 +20,20 @@ export class ViewJobComponent {
     };
 
     @Input() job: Job;
+
+    constructor(
+        private jobService: JobService,
+        private userData: UserDataService,
+    ) {}
+
+    deleteJob() {
+        this.jobService.deleteJob(this.job.id)
+            .subscribe(() => {
+                this.userData.removeJobByID(this.job.id)
+                if (this.jobService.selectJobListener) {
+                    this.jobService.selectJobListener(null);
+                }
+            }, console.error);
+    }
 
 }

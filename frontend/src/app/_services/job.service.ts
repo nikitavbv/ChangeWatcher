@@ -52,4 +52,10 @@ export class JobService {
         });
     }
 
+    deleteJob(
+        jobID: number
+    ) {
+        return this.http.delete(`/api/v1/jobs/${jobID}`);
+    }
+
 }

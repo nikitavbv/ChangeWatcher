@@ -1,3 +1,5 @@
+@import '../../variables.less';
+
 :host {
     padding: 8px;
 }
@@ -9,4 +11,18 @@ h2 {
 div {
     font-size: 14pt;
     padding: 8px 0;
+}
+
+button {
+    margin: 6px auto;
+}
+
+.btn-delete {
+    background-color: @dangerColor;
+}
+
+.btn-delete:hover {
+    color: @dangerColor;
+    background-color: @lightElementColor;
+    border-color: @dangerColor;
 }

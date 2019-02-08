@@ -17,4 +17,8 @@ export class UserDataService {
         }));
     }
 
+    removeJobByID(id: number) {
+        this.jobs = this.jobs.filter(j => j.id != id);
+    }
+
 }
