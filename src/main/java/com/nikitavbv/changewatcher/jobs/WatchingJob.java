@@ -40,8 +40,8 @@ public class WatchingJob {
   )
   private ApplicationUser user;
 
-  Thread makeRunThread(String screenshotsDir) {
-    return new WatchingJobThread(this, screenshotsDir);
+  Thread makeRunThread(WatchingJobRepository repository, String screenshotsDir) {
+    return new WatchingJobThread(repository,this, screenshotsDir);
   }
 
   File getWebsiteScreenshotFile(String screenshotsDir) {
@@ -105,6 +105,18 @@ public class WatchingJob {
 
   ApplicationUser getUser() {
     return user;
+  }
+
+  public long getLastCheckTime() {
+    return this.lastCheckTime;
+  }
+
+  public void setLastCheckTime(long lastCheckTime) {
+    this.lastCheckTime = lastCheckTime;
+  }
+
+  public long getLastRunDifferentPixels() {
+    return this.lastRunDifferentPixels;
   }
 
   public void setLastRunDifferentPixels(long differentPixels) {

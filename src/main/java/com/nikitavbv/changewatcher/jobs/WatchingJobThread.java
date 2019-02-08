@@ -24,7 +24,7 @@ public class WatchingJobThread extends Thread {
   private static final int IMAGE_DEPTH = 24;
   private static final String SCREEN_MODE = WINDOW_WIDTH + "x" + WINDOW_HEIGHT + "x" + IMAGE_DEPTH;
 
-  private static final int DISPLAY_NUMBER = 98;
+  private static final int DISPLAY_NUMBER = 1002;
   private static final String XVFB_PATH = "/usr/bin/Xvfb";
   private static final String XVFB_COMMAND = XVFB_PATH +
       " -br -nolisten tcp -screen 0 " + SCREEN_MODE + " :" + DISPLAY_NUMBER;
@@ -32,12 +32,14 @@ public class WatchingJobThread extends Thread {
 
   private static final int PAGE_LOAD_TIMEOUT = 10;
 
+  private WatchingJobRepository repository;
   private WatchingJob job;
   private String screenshotsDir;
 
-  WatchingJobThread(WatchingJob job, String screenshotsDir) {
+  WatchingJobThread(WatchingJobRepository repository, WatchingJob job, String screenshotsDir) {
     this.job = job;
     this.screenshotsDir = screenshotsDir;
+    this.repository = repository;
   }
 
   public void run() {
@@ -53,6 +55,10 @@ public class WatchingJobThread extends Thread {
       } else {
         System.out.println("Job is not triggered: " + job.getID());
       }
+
+      job.setLastCheckTime(System.currentTimeMillis());
+
+      repository.save(job);
     } catch(IOException e) {
       System.err.println("Watching job failed");
       e.printStackTrace();
@@ -62,7 +68,21 @@ public class WatchingJobThread extends Thread {
   private File websiteScreenshot() throws IOException {
     final File targetFile = job.getWebsiteScreenshotFile(screenshotsDir);
     final File prevFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
-    FileUtils.copyFile(targetFile, prevFile);
+    if (targetFile.exists()) {
+      if (!prevFile.getParentFile().exists()) {
+        boolean result = prevFile.getParentFile().mkdirs();
+        if (!result) {
+          System.err.println("Failed to create parent dir for prev screenshot file");
+        }
+      }
+      if (!prevFile.exists()) {
+        boolean result = prevFile.createNewFile();
+        if (!result) {
+          System.err.println("Failed to create file for prev screenshot");
+        }
+      }
+      FileUtils.copyFile(targetFile, prevFile);
+    }
 
     final Process xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);
     final Map<String, String> environment = new HashMap<>();
@@ -104,6 +124,7 @@ public class WatchingJobThread extends Thread {
   }
 
   private long compareImages(File first, File second) throws IOException {
+    if (!first.exists() || !second.exists()) return -1;
     return compareImages(ImageIO.read(first), ImageIO.read(second));
   }
 

@@ -45,8 +45,11 @@ public class WatchingJobController {
     watchingJobRepository.findAll().stream()
         .filter(WatchingJob::isTimeToRun)
         .forEach(job -> {
-          executorService.submit(job.makeRunThread(getScreenshotsDir()));
-          watchingJobRepository.save(job);
+          try {
+            executorService.submit(job.makeRunThread(watchingJobRepository, getScreenshotsDir()));
+          } catch(Exception e) {
+            e.printStackTrace();
+          }
         });
   }
 
