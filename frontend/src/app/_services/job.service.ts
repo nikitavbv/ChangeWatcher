@@ -52,6 +52,23 @@ export class JobService {
         });
     }
 
+    updateJob(
+        jobID: number,
+        title: string,
+        url: string,
+        pixelDifferenceToTrigger: number,
+        watchingInterval: number,
+        webhook: string
+    ) {
+        return this.http.post(`/api/v1/jobs/${jobID}`, {
+            title,
+            url,
+            pixelDifferenceToTrigger,
+            watchingInterval,
+            webhook
+        });
+    }
+
     deleteJob(
         jobID: number
     ) {

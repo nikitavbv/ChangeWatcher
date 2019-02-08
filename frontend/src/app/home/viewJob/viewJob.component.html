@@ -1,20 +1,51 @@
-<h1>{{ job.title }}</h1>
-<h2>{{ job.url }}</h2>
+<div *ngIf="!editingJob" class="view-job-block">
+    <h1>{{ job.title }}</h1>
+    <h2>{{ job.url }}</h2>
 
-<div>
-    Selection: {{ job.selectionWidth }}x{{ job.selectionHeight }} pixels
+    <div>
+        Selection: {{ job.selectionWidth }}x{{ job.selectionHeight }} pixels
+    </div>
+
+    <div>
+        Change threshold: {{ job.pixelDifferenceToTrigger }} pixels
+    </div>
+
+    <div>
+        Watching interval: {{ watchingIntervals[job.watchingInterval] || job.watchingInterval }}
+    </div>
+
+    <div>
+        Webhook: {{ job.webhook }}
+    </div>
+
+    <button (click)="editJob()" class="btn-edit">Edit</button>
+    <button (click)="deleteJob()" class="btn-delete">Delete</button>
 </div>
 
-<div>
-    Change threshold: {{ job.pixelDiffrenceToTrigger }} pixels
-</div>
+<div *ngIf="editingJob" class="edit-job-block">
+    <div>
+        Title:
+        <input [(ngModel)]="job.title" placeholder="Job title...">
+    </div>
+    <div>
+        URL:
+        <input [(ngModel)]="job.url" placeholder="Job url...">
+    </div>
+    <div>
+        Change threshold: <input [(ngModel)]="job.pixelDifferenceToTrigger" placeholder="pixels...">
+    </div>
 
-<div>
-    Watching interval: {{ watchingIntervals[job.watchingInterval] || job.watchingInterval }}
-</div>
+    <div class="watching-interval">
+        Watching interval:
+        <select [(ngModel)]="job.watchingInterval">
+            <option *ngFor="let watchingInterval of objectKeys(watchingIntervals)" value="{{ watchingInterval }}">{{ watchingIntervals[watchingInterval] }}</option>
+        </select>
+    </div>
 
-<div>
-    Webhook: {{ job.webhook }}
-</div>
+    <div>
+        Webhook:
+        <input [(ngModel)]="job.webhook" placeholder="Job webhook...">
+    </div>
 
-<button (click)="deleteJob()" class="btn-delete">Delete</button>
+    <button (click)="saveEdits()">Save</button>
+</div>

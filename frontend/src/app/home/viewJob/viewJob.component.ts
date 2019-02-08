@@ -18,13 +18,19 @@ export class ViewJobComponent {
         [1000 * 60 * 60 * 24 * 7]: 'Every week',
         [1000 * 60 * 60 * 24 * 28]: 'Every month',
     };
+    objectKeys = Object.keys;
 
     @Input() job: Job;
+    editingJob: Boolean = false;
 
     constructor(
         private jobService: JobService,
         private userData: UserDataService,
     ) {}
+
+    editJob() {
+        this.editingJob = true;
+    }
 
     deleteJob() {
         this.jobService.deleteJob(this.job.id)
@@ -34,6 +40,19 @@ export class ViewJobComponent {
                     this.jobService.selectJobListener(null);
                 }
             }, console.error);
+    }
+
+    saveEdits() {
+        this.jobService.updateJob(
+            this.job.id,
+            this.job.title,
+            this.job.url,
+            this.job.pixelDifferenceToTrigger,
+            this.job.watchingInterval,
+            this.job.webhook,
+        ).subscribe(() => {
+            this.editingJob = false;
+        }, console.error);
     }
 
 }
