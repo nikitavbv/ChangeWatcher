@@ -1,35 +1,35 @@
 @import '../../variables.less';
 
 :host {
-    border-bottom: 1px solid @elementBorderColor;
-    padding: 6px;
+  border-bottom: 1px solid @elementBorderColor;
+  padding: 6px;
 }
 
 .app-name {
-    font-weight: 100;
-    font-size: 20px;
-    line-height: 36px;
-    user-select: none;
-    display: inline;
-    padding-left: 8px;
+  font-weight: 100;
+  font-size: 20px;
+  line-height: 36px;
+  user-select: none;
+  display: inline;
+  padding-left: 8px;
 }
 
 .header-btns {
-    float: right;
-    line-height: 36px;
-    transition: opacity 0.4s ease-out;
-    opacity: 0;
+  float: right;
+  line-height: 36px;
+  transition: opacity 0.4s ease-out;
+  opacity: 0;
 
-    a {
-        cursor: pointer;
-        text-decoration: none;
-        color: @primaryColor;
-        padding-right: 6px;
-    }
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color: @primaryColor;
+    padding-right: 6px;
+  }
 }
 
 :host:hover {
-    .header-btns {
-        opacity: 1;
-    }
+  .header-btns {
+    opacity: 1;
+  }
 }
