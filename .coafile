@@ -15,10 +15,6 @@ shortlog_length = 80
 bears = LineCountBear
 max_lines_per_file = 1000
 
-[css]
-bears = CSSLintBear
-files = frontend/src/css/*.css
-
 [stylelint]
 bears = StyleLintBear
 files = frontend/src/**/*.(less|css)
