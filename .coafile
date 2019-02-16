@@ -19,3 +19,6 @@ max_lines_per_file = 1000
 bears = StyleLintBear
 files = frontend/src/**/*.(less|css)
 indentation = 4
+ignore =
+    frontend/src/cropper.min.css
+
