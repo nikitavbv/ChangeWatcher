@@ -23,8 +23,8 @@ public class ChangeWatcherApplication {
     SpringApplication.run(ChangeWatcherApplication.class, args);
   }
 
-  @Bean
-  public BCryptPasswordEncoder bCryptPasswordEncoder() {
+  @Bean(name = "bCryptPasswordEncoder")
+  public BCryptPasswordEncoder bcryptPasswordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
