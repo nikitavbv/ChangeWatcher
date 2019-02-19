@@ -8,14 +8,13 @@ import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
 import org.apache.commons.io.IOUtils;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(RouteConstants.JOBS_API)

@@ -4,14 +4,13 @@ import com.nikitavbv.changewatcher.ApplicationProperties;
 import com.nikitavbv.changewatcher.RouteConstants;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(RouteConstants.PREVIEW_API)

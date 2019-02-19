@@ -7,9 +7,8 @@ import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(RouteConstants.INIT_API)

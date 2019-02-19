@@ -2,9 +2,9 @@ package com.nikitavbv.changewatcher.user;
 
 import com.nikitavbv.changewatcher.jobs.WatchingJob;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
 @Entity
 public class ApplicationUser {

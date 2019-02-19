@@ -3,9 +3,8 @@ package com.nikitavbv.changewatcher.user;
 import com.nikitavbv.changewatcher.RouteConstants;
 import com.nikitavbv.changewatcher.security.PermissionDeniedException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(RouteConstants.USERS_API)
