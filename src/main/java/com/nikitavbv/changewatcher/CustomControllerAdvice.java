@@ -1,10 +1,10 @@
 package com.nikitavbv.changewatcher;
 
 import com.nikitavbv.changewatcher.api.ErrorResponse;
-import com.nikitavbv.changewatcher.security.AuthRequiredException;
 import com.nikitavbv.changewatcher.jobs.ScreenshotNotFoundException;
 import com.nikitavbv.changewatcher.jobs.WatchingJobNotFoundException;
 import com.nikitavbv.changewatcher.preview.PreviewNotFoundException;
+import com.nikitavbv.changewatcher.security.AuthRequiredException;
 import com.nikitavbv.changewatcher.security.PermissionDeniedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

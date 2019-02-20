@@ -1,16 +1,16 @@
 package com.nikitavbv.changewatcher.preview;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class GeneratePreviewThread extends Thread {

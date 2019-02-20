@@ -5,9 +5,9 @@ import com.nikitavbv.changewatcher.SetupRequiredException;
 import com.nikitavbv.changewatcher.security.AuthRequiredException;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

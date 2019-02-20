@@ -1,11 +1,11 @@
 package com.nikitavbv.changewatcher.jobs;
 
 import com.nikitavbv.changewatcher.user.ApplicationUser;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
 import javax.persistence.*;
 import java.io.File;
 import java.io.IOException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 @Entity
