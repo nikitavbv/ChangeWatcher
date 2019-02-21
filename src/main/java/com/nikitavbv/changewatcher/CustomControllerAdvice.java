@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CustomControllerAdvice {
 
   @ExceptionHandler(PermissionDeniedException.class)
-  public ResponseEntity<ErrorResponse> handlePermissionDeniedException(PermissionDeniedException exception) {
+  public ResponseEntity<ErrorResponse> handlePermissionDeniedException(
+          PermissionDeniedException exception
+  ) {
     ErrorResponse response = new ErrorResponse("permission_denied", exception.getMessage());
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
   }
@@ -32,17 +34,20 @@ public class CustomControllerAdvice {
 
   @ExceptionHandler(PreviewNotFoundException.class)
   public ResponseEntity<ErrorResponse> handlePreviewNotFoundException() {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("preview_not_found"));
+    ErrorResponse errorResponse = new ErrorResponse("preview_not_found");
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
 
   @ExceptionHandler(WatchingJobNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleWatchingJobNotFoundException() {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("watching_job_not_found"));
+    ErrorResponse errorResponse = new ErrorResponse("watching_job_not_found");
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
 
   @ExceptionHandler(ScreenshotNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleScreenshotNotFoundException() {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("screenshot_not_found"));
+    ErrorResponse errorResponse = new ErrorResponse("screenshot_not_found");
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
 
 }

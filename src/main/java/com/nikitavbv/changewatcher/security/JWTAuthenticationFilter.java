@@ -38,8 +38,10 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
   }
 
   @Override
-  public Authentication attemptAuthentication(HttpServletRequest req,
-                                              HttpServletResponse res) throws AuthenticationException {
+  public Authentication attemptAuthentication(
+          HttpServletRequest req,
+          HttpServletResponse res
+  ) throws AuthenticationException {
     try {
       ApplicationUser creds = new ObjectMapper()
           .readValue(req.getInputStream(), ApplicationUser.class);

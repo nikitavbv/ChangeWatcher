@@ -30,14 +30,20 @@ public class PreviewController {
   @PostMapping
   public WebpagePreviewResponse makePreviewFor(@RequestBody WebpagePreviewRequest req) {
     final String screenshotID = UUID.randomUUID().toString();
-    final GeneratePreviewThread thread = new GeneratePreviewThread(req.getUrl(), screenshotID, getPreviewsDirPath());
+    final GeneratePreviewThread thread = new GeneratePreviewThread(
+            req.getUrl(),
+            screenshotID,
+            getPreviewsDirPath()
+    );
     executorService.submit(thread);
     return new WebpagePreviewResponse(screenshotID);
   }
 
   @GetMapping(value = "/{previewID}", produces = MediaType.IMAGE_PNG_VALUE)
   public @ResponseBody byte[] getPreview(@PathVariable String previewID) {
-    final File previewFile = new File(getPreviewsDirPath() + previewID + "." + PREVIEW_IMAGE_FORMAT);
+    final File previewFile = new File(
+            getPreviewsDirPath() + previewID + "." + PREVIEW_IMAGE_FORMAT
+    );
     if (!previewFile.exists()) {
       throw new PreviewNotFoundException();
     }

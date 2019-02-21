@@ -100,8 +100,9 @@ public class WatchingJobThread extends Thread {
     } catch(Exception e) {
       // ignore;
     }
-    Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
-        .takeScreenshot(driver);
+    Screenshot screenshot = new AShot()
+            .shootingStrategy(ShootingStrategies.viewportPasting(1000))
+            .takeScreenshot(driver);
 
     if (!targetFile.getParentFile().exists()) {
       boolean result = targetFile.getParentFile().mkdirs();
@@ -116,7 +117,11 @@ public class WatchingJobThread extends Thread {
       }
     }
 
-    ImageIO.write(screenshot.getImage(), WatchingJob.SCREENSHOT_IMAGE_FORMAT.toUpperCase(), targetFile);
+    ImageIO.write(
+            screenshot.getImage(),
+            WatchingJob.SCREENSHOT_IMAGE_FORMAT.toUpperCase(),
+            targetFile
+    );
     driver.close();
     xvfbProcess.destroy();
 
@@ -132,7 +137,10 @@ public class WatchingJobThread extends Thread {
     long totalDifferentPixels = 0;
     int startX = Math.min(job.getSelectionX(), Math.min(first.getWidth(), second.getWidth()));
     int startY = Math.min(job.getSelectionY(), Math.min(first.getHeight(), second.getHeight()));
-    int width = Math.min(Math.min(first.getWidth(), second.getWidth()), job.getSelectionX() + job.getSelectionWidth());
+    int width = Math.min(
+            Math.min(first.getWidth(), second.getWidth()),
+            job.getSelectionX() + job.getSelectionWidth()
+    );
     int height = Math.min(
         Math.min(first.getHeight(), second.getHeight()),
         job.getSelectionY() + job.getSelectionHeight()

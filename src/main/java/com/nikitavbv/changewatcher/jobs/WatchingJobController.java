@@ -53,7 +53,10 @@ public class WatchingJobController {
   }
 
   @PostMapping
-  public AddWatchingJobResponse addWatchingJob(HttpServletRequest req, @RequestBody WatchingJob job) {
+  public AddWatchingJobResponse addWatchingJob(
+          HttpServletRequest req,
+          @RequestBody WatchingJob job
+  ) {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
     job.setUser(user);
     watchingJobRepository.save(job);
@@ -65,7 +68,9 @@ public class WatchingJobController {
                                 @PathVariable long jobID,
                                 @RequestBody WatchingJob newJob) {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = watchingJobRepository.findById(jobID).orElseThrow(WatchingJobNotFoundException::new);
+    WatchingJob job = watchingJobRepository
+            .findById(jobID)
+            .orElseThrow(WatchingJobNotFoundException::new);
     if (job.getUser().getId() != user.getId()) {
       throw new PermissionDeniedException("Cannot edit jobs owned by other users");
     }
@@ -81,7 +86,9 @@ public class WatchingJobController {
   @DeleteMapping("/{jobID}")
   public StatusOKResponse deleteWatchingJob(HttpServletRequest req, @PathVariable long jobID) {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = watchingJobRepository.findById(jobID).orElseThrow(WatchingJobNotFoundException::new);
+    WatchingJob job = watchingJobRepository
+            .findById(jobID)
+            .orElseThrow(WatchingJobNotFoundException::new);
     if (job.getUser().getId() != user.getId()) {
       throw new PermissionDeniedException("Cannot delete jobs owned by other users");
     }
@@ -94,7 +101,9 @@ public class WatchingJobController {
   @GetMapping("/{jobID}/screenshot")
   public @ResponseBody byte[] getScreenshot(HttpServletRequest req, @PathVariable long jobID) {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = watchingJobRepository.findById(jobID).orElseThrow(WatchingJobNotFoundException::new);
+    WatchingJob job = watchingJobRepository
+            .findById(jobID)
+            .orElseThrow(WatchingJobNotFoundException::new);
     if (job.getUser().getId() != user.getId()) {
       throw new PermissionDeniedException("Cannot get screenshot of jobs owned by other users");
     }

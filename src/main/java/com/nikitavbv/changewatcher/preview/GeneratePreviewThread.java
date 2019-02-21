@@ -60,7 +60,9 @@ public class GeneratePreviewThread extends Thread {
       Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
           .takeScreenshot(driver);
 
-      final File targetFile = new File(previewsDir + previewID + "." + PreviewController.PREVIEW_IMAGE_FORMAT);
+      final File targetFile = new File(
+              previewsDir + previewID + "." + PreviewController.PREVIEW_IMAGE_FORMAT
+      );
       if (!targetFile.getParentFile().exists()) {
         boolean result = targetFile.getParentFile().mkdirs();
         if (!result) {
@@ -74,7 +76,11 @@ public class GeneratePreviewThread extends Thread {
         }
       }
 
-      ImageIO.write(screenshot.getImage(), PreviewController.PREVIEW_IMAGE_FORMAT.toUpperCase(), targetFile);
+      ImageIO.write(
+              screenshot.getImage(),
+              PreviewController.PREVIEW_IMAGE_FORMAT.toUpperCase(),
+              targetFile
+      );
       driver.close();
       xvfbProcess.destroy();
     } catch(Exception e) {
