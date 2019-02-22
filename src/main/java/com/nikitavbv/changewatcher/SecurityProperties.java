@@ -3,8 +3,8 @@ package com.nikitavbv.changewatcher;
 import static com.nikitavbv.changewatcher.security.SecurityConstants.SECRET_SIZE;
 
 import java.security.SecureRandom;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.Base64;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
