@@ -16,6 +16,13 @@ public class IndexController implements ErrorController {
   private static final String ERROR_MESSAGE_ATTRIBUTE = "javax.servlet.error.message";
   private static final String ERROR_PATH = "/error";
 
+  /**
+   * Processes errors from other controllers.
+   *
+   * Error message is returned as body.
+   * If no matching controller was found for route, this returns frontend index.html instead of
+   * 404 error.
+   */
   @RequestMapping(ERROR_PATH)
   public Object error(HttpServletRequest req) {
     int errorStatusCode = ((Integer) req.getAttribute(ERROR_STATUS_CODE_ATTRIBUTE));

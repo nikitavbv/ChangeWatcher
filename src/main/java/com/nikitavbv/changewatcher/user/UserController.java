@@ -24,6 +24,17 @@ public class UserController {
     return applicationUserRepository.findByUsername(httpRequest.getRemoteUser());
   }
 
+  /**
+   * Signs up user.
+   *
+   * User can be an admin if one of the following is true:
+   *  - There are no users registered yet and new one is the first.
+   *  - This request is performed by admin user.
+   *
+   * @param user user to create
+   * @throws PermissionDeniedException if user does not have rights to sign up new user
+   * @return user id
+   */
   @PostMapping
   public SignUpResult signUp(HttpServletRequest request,
                      @RequestBody ApplicationUser user) {

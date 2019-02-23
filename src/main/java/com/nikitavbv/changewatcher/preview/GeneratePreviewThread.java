@@ -39,6 +39,9 @@ public class GeneratePreviewThread extends Thread {
     this.previewsDir = previewsDir;
   }
 
+  /**
+   * Run preview generation.
+   */
   public void run() {
     try {
       final Process xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);

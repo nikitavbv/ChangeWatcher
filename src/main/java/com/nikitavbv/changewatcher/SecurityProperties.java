@@ -12,6 +12,11 @@ import org.springframework.context.annotation.Configuration;
 public class SecurityProperties {
   String secret;
 
+  /**
+   * Generates secret token.
+   *
+   * @return generated token.
+   */
   public String generateSecret() {
     SecureRandom random = new SecureRandom();
     byte[] randomBytes = new byte[SECRET_SIZE];

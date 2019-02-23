@@ -20,6 +20,13 @@ public class InitApiController {
     this.applicationUserRepository = applicationUserRepository;
   }
 
+  /**
+   * Handles API init requests
+   *
+   * @throws SetupRequiredException if application setup has not been done yet
+   * @throws AuthRequiredException if unauthorized user accesses this api
+   * @return basic user data
+   */
   @GetMapping
   public InitApiResponse doInit(HttpServletRequest request) {
     if (!checkIfSetupIsDone()) {

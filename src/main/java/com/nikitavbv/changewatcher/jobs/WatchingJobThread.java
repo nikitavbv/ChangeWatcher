@@ -42,6 +42,9 @@ public class WatchingJobThread extends Thread {
     this.repository = repository;
   }
 
+  /**
+   * Run watching thread.
+   */
   public void run() {
     try {
       File imageFile = websiteScreenshot();

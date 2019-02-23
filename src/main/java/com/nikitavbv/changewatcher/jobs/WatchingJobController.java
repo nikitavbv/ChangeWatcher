@@ -31,6 +31,13 @@ public class WatchingJobController {
 
   private ExecutorService executorService = Executors.newFixedThreadPool(MAX_CHECKS_THREADS);
 
+  /**
+   * Creates controller for WatchingJob.
+   *
+   * @param applicationUserRepository repository with user details
+   * @param watchingJobRepository repository with watching job details
+   * @param applicationProperties general application configuration
+   */
   public WatchingJobController(ApplicationUserRepository applicationUserRepository,
                                WatchingJobRepository watchingJobRepository,
                                ApplicationProperties applicationProperties) {
@@ -40,7 +47,7 @@ public class WatchingJobController {
   }
 
   @Scheduled(fixedRate = WATCHING_RATE)
-  public void runJobs() {
+  private void runJobs() {
     watchingJobRepository.findAll().stream()
         .filter(WatchingJob::isTimeToRun)
         .forEach(job -> {
@@ -52,6 +59,11 @@ public class WatchingJobController {
         });
   }
 
+  /**
+   * Creates new watching job related to this user and saves it to repository.
+   *
+   * @return job id and job list
+   */
   @PostMapping
   public AddWatchingJobResponse addWatchingJob(
           HttpServletRequest req,
@@ -63,6 +75,11 @@ public class WatchingJobController {
     return new AddWatchingJobResponse(job.getID(), user.getJobs());
   }
 
+  /**
+   * Updates job details.
+   *
+   * @throws PermissionDeniedException if user cannot access this job
+   */
   @PostMapping("/{jobID}")
   public StatusOKResponse updateWatchingJob(HttpServletRequest req,
                                 @PathVariable long jobID,
@@ -83,6 +100,11 @@ public class WatchingJobController {
     return new StatusOKResponse();
   }
 
+  /**
+   * Deletes job.
+   *
+   * @throws PermissionDeniedException if user cannot access this job
+   */
   @DeleteMapping("/{jobID}")
   public StatusOKResponse deleteWatchingJob(HttpServletRequest req, @PathVariable long jobID) {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
@@ -98,6 +120,12 @@ public class WatchingJobController {
     return new StatusOKResponse();
   }
 
+  /**
+   * Provides latest screenshot made by this job.
+   *
+   * @throws PermissionDeniedException if user does not have access to this job
+   * @throws ScreenshotNotFoundException if no screenshots have been produced by this job yet
+   */
   @GetMapping("/{jobID}/screenshot")
   public @ResponseBody byte[] getScreenshot(HttpServletRequest req, @PathVariable long jobID) {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());

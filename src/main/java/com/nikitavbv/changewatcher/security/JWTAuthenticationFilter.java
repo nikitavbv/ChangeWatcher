@@ -30,6 +30,12 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
   private AuthenticationManager authenticationManager;
   private SecurityProperties securityProperties;
 
+  /**
+   * Creates JWTAuthentication filter.
+   *
+   * @param authenticationManager for user authentication
+   * @param securityProperties configuration for security tokens
+   */
   public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
                                  SecurityProperties securityProperties) {
     super(new AntPathRequestMatcher(RouteConstants.LOGIN_API, "POST"));
