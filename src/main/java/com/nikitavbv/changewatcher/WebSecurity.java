@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   private UserDetailsServiceImpl userDetailsService;
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private BCryptPasswordEncoder bcryptPasswordEncoder;
   private SecurityProperties securityProperties;
 
   /*
@@ -31,7 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                      BCryptPasswordEncoder bCryptPasswordEncoder,
                      SecurityProperties securityProperties) {
     this.userDetailsService = userDetailsService;
-    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    this.bcryptPasswordEncoder = bCryptPasswordEncoder;
     this.securityProperties = securityProperties;
   }
 
@@ -52,7 +52,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+    auth.userDetailsService(userDetailsService).passwordEncoder(bcryptPasswordEncoder);
   }
 
 }

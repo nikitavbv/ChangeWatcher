@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
   private ApplicationUserRepository applicationUserRepository;
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private BCryptPasswordEncoder bcryptPasswordEncoder;
 
   public UserController(ApplicationUserRepository applicationUserRepository,
                         BCryptPasswordEncoder bCryptPasswordEncoder) {
     this.applicationUserRepository = applicationUserRepository;
-    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    this.bcryptPasswordEncoder = bCryptPasswordEncoder;
   }
 
   @GetMapping
@@ -45,7 +45,7 @@ public class UserController {
     if (requestUser != null && !requestUser.getIsAdmin() && requestUser.getIsAdmin()) {
       throw new PermissionDeniedException("Non-admin users are not allowed to create admin users");
     }
-    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
     applicationUserRepository.save(user);
     return new SignUpResult(user.getId());
   }
