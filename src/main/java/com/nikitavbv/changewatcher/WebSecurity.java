@@ -20,7 +20,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
   private BCryptPasswordEncoder bcryptPasswordEncoder;
   private SecurityProperties securityProperties;
 
-  /*
+  /**
    * Creates WebSecurity.
    *
    * @param userDetailsService required to set password encoder
