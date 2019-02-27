@@ -28,7 +28,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
    * @param securityProperties security configuration loaded from application.properties.
    */
   public WebSecurity(UserDetailsServiceImpl userDetailsService,
-                     BCryptPasswordEncoder bCryptPasswordEncoder,
+                     BCryptPasswordEncoder bcryptPasswordEncoder,
                      SecurityProperties securityProperties) {
     this.userDetailsService = userDetailsService;
     this.bcryptPasswordEncoder = bCryptPasswordEncoder;
