@@ -24,14 +24,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
    * Creates WebSecurity.
    *
    * @param userDetailsService required to set password encoder
-   * @param bCryptPasswordEncoder password encoder to use for user passwords
+   * @param bcryptPasswordEncoder password encoder to use for user passwords
    * @param securityProperties security configuration loaded from application.properties.
    */
   public WebSecurity(UserDetailsServiceImpl userDetailsService,
                      BCryptPasswordEncoder bcryptPasswordEncoder,
                      SecurityProperties securityProperties) {
     this.userDetailsService = userDetailsService;
-    this.bcryptPasswordEncoder = bCryptPasswordEncoder;
+    this.bcryptPasswordEncoder = bcryptPasswordEncoder;
     this.securityProperties = securityProperties;
   }
 
