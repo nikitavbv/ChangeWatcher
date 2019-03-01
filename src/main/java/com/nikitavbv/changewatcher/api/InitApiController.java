@@ -21,7 +21,7 @@ public class InitApiController {
   }
 
   /**
-   * Handles API init requests
+   * Handles API init requests.
    *
    * @throws SetupRequiredException if application setup has not been done yet
    * @throws AuthRequiredException if unauthorized user accesses this api
