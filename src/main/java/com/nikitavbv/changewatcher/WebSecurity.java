@@ -1,7 +1,7 @@
 package com.nikitavbv.changewatcher;
 
-import com.nikitavbv.changewatcher.security.JWTAuthenticationFilter;
-import com.nikitavbv.changewatcher.security.JWTAuthorizationFilter;
+import com.nikitavbv.changewatcher.security.JwtAuthenticationFilter;
+import com.nikitavbv.changewatcher.security.JwtAuthorizationFilter;
 import com.nikitavbv.changewatcher.security.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -45,8 +45,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
           .antMatchers(RouteConstants.JOBS_API).permitAll()
           .antMatchers(RouteConstants.API_PATH_PATTERN).authenticated()
           .and()
-          .addFilter(new JWTAuthorizationFilter(authenticationManager(), securityProperties))
-          .addFilterBefore(new JWTAuthenticationFilter(authenticationManager(), securityProperties),
+          .addFilter(new JwtAuthorizationFilter(authenticationManager(), securityProperties))
+          .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(), securityProperties),
               UsernamePasswordAuthenticationFilter.class);
   }
 

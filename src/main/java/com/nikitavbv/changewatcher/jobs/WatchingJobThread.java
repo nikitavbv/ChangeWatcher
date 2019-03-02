@@ -151,9 +151,9 @@ public class WatchingJobThread extends Thread {
 
     for (int x = startX; x < width; x++) {
       for (int y = startY; y < height; y++) {
-        int firstRGB = first.getRGB(x, y);
-        int secondRGB = second.getRGB(x, y);
-        if (firstRGB != secondRGB) {
+        int firstRgb = first.getRGB(x, y);
+        int secondRgb = second.getRGB(x, y);
+        if (firstRgb != secondRgb) {
           totalDifferentPixels++;
         }
       }

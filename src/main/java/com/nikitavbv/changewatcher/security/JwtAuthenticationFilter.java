@@ -25,7 +25,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static com.nikitavbv.changewatcher.security.SecurityConstants.*;
 
-public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
   private AuthenticationManager authenticationManager;
   private SecurityProperties securityProperties;
@@ -36,7 +36,7 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
    * @param authenticationManager for user authentication
    * @param securityProperties configuration for security tokens
    */
-  public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
+  public JwtAuthenticationFilter(AuthenticationManager authenticationManager,
                                  SecurityProperties securityProperties) {
     super(new AntPathRequestMatcher(RouteConstants.LOGIN_API, "POST"));
     this.authenticationManager = authenticationManager;

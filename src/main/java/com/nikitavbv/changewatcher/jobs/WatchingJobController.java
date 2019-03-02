@@ -2,7 +2,7 @@ package com.nikitavbv.changewatcher.jobs;
 
 import com.nikitavbv.changewatcher.ApplicationProperties;
 import com.nikitavbv.changewatcher.RouteConstants;
-import com.nikitavbv.changewatcher.api.StatusOKResponse;
+import com.nikitavbv.changewatcher.api.StatusOkResponse;
 import com.nikitavbv.changewatcher.security.PermissionDeniedException;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
@@ -81,9 +81,9 @@ public class WatchingJobController {
    * @throws PermissionDeniedException if user cannot access this job
    */
   @PostMapping("/{jobID}")
-  public StatusOKResponse updateWatchingJob(HttpServletRequest req,
-                                @PathVariable long jobID,
-                                @RequestBody WatchingJob newJob) {
+  public StatusOkResponse updateWatchingJob(HttpServletRequest req,
+                                            @PathVariable long jobID,
+                                            @RequestBody WatchingJob newJob) {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
     WatchingJob job = watchingJobRepository
             .findById(jobID)
@@ -97,7 +97,7 @@ public class WatchingJobController {
     job.setWebhook(newJob.getWebhook());
     job.setPixelDifferenceToTrigger(newJob.getPixelDifferenceToTrigger());
     watchingJobRepository.save(job);
-    return new StatusOKResponse();
+    return new StatusOkResponse();
   }
 
   /**
@@ -106,7 +106,7 @@ public class WatchingJobController {
    * @throws PermissionDeniedException if user cannot access this job
    */
   @DeleteMapping("/{jobID}")
-  public StatusOKResponse deleteWatchingJob(HttpServletRequest req, @PathVariable long jobID) {
+  public StatusOkResponse deleteWatchingJob(HttpServletRequest req, @PathVariable long jobID) {
     ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
     WatchingJob job = watchingJobRepository
             .findById(jobID)
@@ -117,7 +117,7 @@ public class WatchingJobController {
     user.removeJob(job);
     applicationUserRepository.save(user);
     watchingJobRepository.delete(job);
-    return new StatusOKResponse();
+    return new StatusOkResponse();
   }
 
   /**

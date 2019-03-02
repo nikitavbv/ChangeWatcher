@@ -1,6 +1,6 @@
 package com.nikitavbv.changewatcher.api;
 
-public class StatusOKResponse {
+public class StatusOkResponse {
 
   private String status = "OK";
 
