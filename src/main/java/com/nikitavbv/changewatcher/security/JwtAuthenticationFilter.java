@@ -1,5 +1,9 @@
 package com.nikitavbv.changewatcher.security;
 
+import static com.nikitavbv.changewatcher.security.SecurityConstants.EXPIRATION_TIME;
+import static com.nikitavbv.changewatcher.security.SecurityConstants.HEADER_STRING;
+import static com.nikitavbv.changewatcher.security.SecurityConstants.TOKEN_PREFIX;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nikitavbv.changewatcher.RouteConstants;
 import com.nikitavbv.changewatcher.SecurityProperties;
@@ -22,8 +26,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import static com.nikitavbv.changewatcher.security.SecurityConstants.*;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
