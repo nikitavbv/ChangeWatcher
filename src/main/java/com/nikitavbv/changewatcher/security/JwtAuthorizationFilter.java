@@ -64,7 +64,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         if (user != null) {
           return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
         }
-      } catch(SignatureException e) {
+      } catch (SignatureException e) {
         // ignore (token is invalid)
       }
       return null;

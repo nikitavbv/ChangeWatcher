@@ -57,7 +57,7 @@ public class GeneratePreviewThread extends Thread {
       driver.manage().window().setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
       try {
         driver.get(url);
-      } catch(Exception e) {
+      } catch (Exception e) {
         // ignore;
       }
       Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
@@ -86,7 +86,7 @@ public class GeneratePreviewThread extends Thread {
       );
       driver.close();
       xvfbProcess.destroy();
-    } catch(Exception e) {
+    } catch (Exception e) {
       System.err.println("Failed to generate url preview");
       e.printStackTrace();
     }

@@ -62,7 +62,7 @@ public class PreviewController {
 
     try {
       return IOUtils.toByteArray(new FileInputStream(previewFile));
-    } catch(IOException e) {
+    } catch (IOException e) {
       throw new PreviewNotFoundException();
     }
   }

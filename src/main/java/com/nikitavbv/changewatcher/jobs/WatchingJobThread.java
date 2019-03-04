@@ -62,7 +62,7 @@ public class WatchingJobThread extends Thread {
       job.setLastCheckTime(System.currentTimeMillis());
 
       repository.save(job);
-    } catch(IOException e) {
+    } catch (IOException e) {
       System.err.println("Watching job failed");
       e.printStackTrace();
     }
@@ -100,7 +100,7 @@ public class WatchingJobThread extends Thread {
     driver.manage().window().setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
     try {
       driver.get(job.getUrl());
-    } catch(Exception e) {
+    } catch (Exception e) {
       // ignore;
     }
     Screenshot screenshot = new AShot()

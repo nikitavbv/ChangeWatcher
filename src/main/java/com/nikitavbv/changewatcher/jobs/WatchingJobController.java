@@ -60,7 +60,7 @@ public class WatchingJobController {
         .forEach(job -> {
           try {
             executorService.submit(job.makeRunThread(watchingJobRepository, getScreenshotsDir()));
-          } catch(Exception e) {
+          } catch (Exception e) {
             e.printStackTrace();
           }
         });
@@ -150,7 +150,7 @@ public class WatchingJobController {
 
     try {
       return IOUtils.toByteArray(new FileInputStream(screenshotFile));
-    } catch(IOException e) {
+    } catch (IOException e) {
       throw new ScreenshotNotFoundException();
     }
   }

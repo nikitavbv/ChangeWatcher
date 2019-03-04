@@ -60,7 +60,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
               creds.getPassword(),
               new ArrayList<>())
       );
-    } catch(IOException e) {
+    } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
