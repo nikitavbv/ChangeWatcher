@@ -26,8 +26,8 @@ public class WatchingJobThread extends Thread {
 
   private static final int DISPLAY_NUMBER = 1002;
   private static final String XVFB_PATH = "/usr/bin/Xvfb";
-  private static final String XVFB_COMMAND = XVFB_PATH +
-      " -br -nolisten tcp -screen 0 " + SCREEN_MODE + " :" + DISPLAY_NUMBER;
+  private static final String XVFB_COMMAND = XVFB_PATH
+          + " -br -nolisten tcp -screen 0 " + SCREEN_MODE + " :" + DISPLAY_NUMBER;
   private static final String GECKO_DRIVER_PATH = "/geckodriver/geckodriver";
 
   private static final int PAGE_LOAD_TIMEOUT = 10;
