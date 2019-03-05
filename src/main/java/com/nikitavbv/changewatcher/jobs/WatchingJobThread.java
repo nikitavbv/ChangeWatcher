@@ -132,7 +132,9 @@ public class WatchingJobThread extends Thread {
   }
 
   private long compareImages(File first, File second) throws IOException {
-    if (!first.exists() || !second.exists()) return -1;
+    if (!first.exists() || !second.exists()) {
+      return -1;
+    }
     return compareImages(ImageIO.read(first), ImageIO.read(second));
   }
 
