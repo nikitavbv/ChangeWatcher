@@ -69,7 +69,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
   protected void successfulAuthentication(HttpServletRequest req,
                                           HttpServletResponse res,
                                           FilterChain chain,
-                                          Authentication auth) throws IOException, ServletException {
+                                          Authentication auth) {
     String secret = securityProperties.getSecret();
     if (secret == null) {
       securityProperties.setSecret(securityProperties.generateSecret());
