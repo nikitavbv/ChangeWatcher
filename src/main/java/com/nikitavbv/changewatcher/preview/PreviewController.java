@@ -24,7 +24,7 @@ public class PreviewController {
 
   private static final int MAX_PREVIEW_THREADS = 1;
   private static final String PREVIEWS_DIR = "previews/";
-  private static final String PREVIEW_IMAGE_FORMAT = "png";
+  static final String PREVIEW_IMAGE_FORMAT = "png";
 
   private ApplicationProperties applicationProperties;
   private ExecutorService executorService = Executors.newFixedThreadPool(MAX_PREVIEW_THREADS);
