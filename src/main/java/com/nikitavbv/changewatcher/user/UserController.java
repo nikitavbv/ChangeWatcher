@@ -18,9 +18,9 @@ public class UserController {
   private BCryptPasswordEncoder bcryptPasswordEncoder;
 
   public UserController(ApplicationUserRepository applicationUserRepository,
-                        BCryptPasswordEncoder bCryptPasswordEncoder) {
+                        BCryptPasswordEncoder bcryptPasswordEncoder) {
     this.applicationUserRepository = applicationUserRepository;
-    this.bcryptPasswordEncoder = bCryptPasswordEncoder;
+    this.bcryptPasswordEncoder = bcryptPasswordEncoder;
   }
 
   @GetMapping
