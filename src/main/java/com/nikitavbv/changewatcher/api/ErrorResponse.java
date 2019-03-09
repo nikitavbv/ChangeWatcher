@@ -1,5 +1,10 @@
 package com.nikitavbv.changewatcher.api;
 
+/**
+ * Returned by controllers if error occurred while processing request.
+ *
+ * @author Nikita Volobuev
+ */
 public class ErrorResponse {
 
   private String error;

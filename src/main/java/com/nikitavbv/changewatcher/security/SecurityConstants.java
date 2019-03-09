@@ -1,5 +1,10 @@
 package com.nikitavbv.changewatcher.security;
 
+/**
+ * Security constants like token configuration.
+ *
+ * @author Nikita Volobuev
+ */
 public class SecurityConstants {
   public static final String TOKEN_PREFIX = "Bearer ";
   public static final String HEADER_STRING = "Authorization";

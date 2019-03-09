@@ -2,6 +2,11 @@ package com.nikitavbv.changewatcher.jobs;
 
 import java.util.List;
 
+/**
+ * Add watching job api response.
+ *
+ * @author Nikita Volobuev
+ */
 public class AddWatchingJobResponse {
 
   private List<WatchingJob> jobs;

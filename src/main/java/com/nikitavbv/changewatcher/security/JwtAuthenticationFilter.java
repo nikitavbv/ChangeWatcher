@@ -27,6 +27,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * Checks user credentials and generates auth tokens.
+ *
+ * @author Nikita Volobuev
+ */
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
   private AuthenticationManager authenticationManager;

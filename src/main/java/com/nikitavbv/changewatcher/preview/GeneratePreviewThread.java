@@ -13,6 +13,11 @@ import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+/**
+ * Thread to generate web page preview screenshots.
+ *
+ * @author Nikita Volobuev
+ */
 public class GeneratePreviewThread extends Thread {
 
   private static final int WINDOW_WIDTH = 1366;

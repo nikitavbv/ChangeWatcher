@@ -14,6 +14,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+/**
+ * Entity to represent website change watching job.
+ *
+ * @author Nikita Volobuev
+ */
 @Entity
 public class WatchingJob {
 

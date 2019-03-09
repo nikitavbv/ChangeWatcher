@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * API to create users and get information about them.
+ *
+ * @author Nikita Volobuev
+ */
 @RestController
 @RequestMapping(RouteConstants.USERS_API)
 public class UserController {

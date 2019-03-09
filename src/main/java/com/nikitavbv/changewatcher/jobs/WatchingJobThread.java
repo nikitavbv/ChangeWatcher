@@ -16,7 +16,11 @@ import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
-
+/**
+ * Thread to make web page screenshots and detect changes.
+ *
+ * @author Nikita Volobuev
+ */
 public class WatchingJobThread extends Thread {
 
   private static final int WINDOW_WIDTH = 1366;

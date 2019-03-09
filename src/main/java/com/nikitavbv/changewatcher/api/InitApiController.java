@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * API to provide basic user information.
+ *
+ * @author Nikita Volobuev
+ */
 @RestController
 @RequestMapping(RouteConstants.INIT_API)
 public class InitApiController {

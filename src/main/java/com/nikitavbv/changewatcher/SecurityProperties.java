@@ -7,6 +7,11 @@ import java.util.Base64;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Application security configuration. Set by app.security.
+ *
+ * @author Nikita Volobuev
+ */
 @Configuration
 @ConfigurationProperties("app.security")
 public class SecurityProperties {

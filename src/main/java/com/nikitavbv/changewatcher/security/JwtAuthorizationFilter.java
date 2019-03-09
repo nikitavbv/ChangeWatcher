@@ -17,6 +17,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+/**
+ * Checks jwt tokens to be valid.
+ *
+ * @author Nikita Volobuev
+ */
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
   private SecurityProperties securityProperties;

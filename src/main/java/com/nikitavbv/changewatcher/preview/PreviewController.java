@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * API to fetch web page previews.
+ *
+ * @author Nikita Volobuev
+ */
 @RestController
 @RequestMapping(RouteConstants.PREVIEW_API)
 public class PreviewController {

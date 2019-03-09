@@ -12,6 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+/**
+ * Entity representing application user.
+ *
+ * @author Nikita Volobuev
+ */
 @Entity
 public class ApplicationUser {
 

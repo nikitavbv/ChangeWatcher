@@ -11,6 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Handle exceptions thrown by other controllers.
+ *
+ * @author Nikita Volobuev
+ */
 @ControllerAdvice
 public class CustomControllerAdvice {
 

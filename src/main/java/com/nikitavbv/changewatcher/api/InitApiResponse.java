@@ -4,6 +4,11 @@ import com.nikitavbv.changewatcher.jobs.WatchingJob;
 
 import java.util.List;
 
+/**
+ * Response of init api call.
+ *
+ * @author Nikita Volobuev
+ */
 public class InitApiResponse {
 
   private List<WatchingJob> jobs;

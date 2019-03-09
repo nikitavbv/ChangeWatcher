@@ -23,6 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * API to create, update and delete change watching jobs.
+ *
+ * @author Nikita Volobuev
+ */
 @RestController
 @RequestMapping(RouteConstants.JOBS_API)
 public class WatchingJobController {

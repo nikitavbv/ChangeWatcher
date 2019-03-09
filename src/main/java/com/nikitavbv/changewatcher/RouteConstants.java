@@ -1,5 +1,10 @@
 package com.nikitavbv.changewatcher;
 
+/**
+ * API routes constants.
+ *
+ * @author Nikita Volobuev
+ */
 public class RouteConstants {
 
   public static final String API_ROOT = "/api/v1";
