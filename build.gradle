@@ -98,8 +98,8 @@ spotbugs {
 pmd {
     consoleOutput = true
     ruleSets = [
-            "java-basic",
-            "java-braces",
+            "java-basic"
+            /*"java-braces",
             "java-codesize",
             "java-comments",
             "java-design",
@@ -115,6 +115,6 @@ pmd {
             "java-strings",
             "java-typeresolution",
             "java-unnecessary",
-            "java-unusedcode"
+            "java-unusedcode"*/
     ]
 }
