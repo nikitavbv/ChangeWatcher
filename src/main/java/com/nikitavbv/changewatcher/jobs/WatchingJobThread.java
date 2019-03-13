@@ -91,14 +91,20 @@ public class WatchingJobThread extends Thread {
       FileUtils.copyFile(targetFile, prevFile);
     }
 
+    saveScreenshotToFile(targetFile);
+
+    return targetFile;
+  }
+
+  private void saveScreenshotToFile(File targetFile) throws IOException {
     final Process xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);
     final Map<String, String> environment = new HashMap<>();
     environment.put("DISPLAY", ":" + DISPLAY_NUMBER + ".0");
     System.setProperty("webdriver.gecko.driver", GECKO_DRIVER_PATH);
     final GeckoDriverService service = new GeckoDriverService.Builder()
-        .usingAnyFreePort()
-        .withEnvironment(environment)
-        .build();
+            .usingAnyFreePort()
+            .withEnvironment(environment)
+            .build();
     final WebDriver driver = new FirefoxDriver(service);
     driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
     driver.manage().window().setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -131,8 +137,6 @@ public class WatchingJobThread extends Thread {
     );
     driver.close();
     xvfbProcess.destroy();
-
-    return targetFile;
   }
 
   private long compareImages(File first, File second) throws IOException {
