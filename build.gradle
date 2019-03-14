@@ -101,8 +101,8 @@ pmd {
             "java-basic",
             "java-braces",
             "java-codesize"
-            /*"java-comments",
-            "java-design",
+            "java-comments",
+            /*"java-design",
             "java-empty",
             "java-finalizers",
             "java-imports",
