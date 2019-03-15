@@ -100,7 +100,7 @@ pmd {
     ruleSets = [
             "java-basic",
             "java-braces",
-            "java-codesize"
+            "java-codesize",
             "java-comments",
             /*"java-design",
             "java-empty",
