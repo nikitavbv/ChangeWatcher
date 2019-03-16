@@ -136,7 +136,8 @@ public class WatchingJobController {
    * Provides latest screenshot made by this job.
    *
    * @throws PermissionDeniedException if user does not have access to this job
-   * @throws ScreenshotNotFoundException if no screenshots have been produced by this job yet
+   * @throws ScreenshotNotFoundException if no screenshots have been produced
+   * by this job yet
    */
   @GetMapping("/{jobID}/screenshot")
   public @ResponseBody byte[] getScreenshot(HttpServletRequest req, @PathVariable long jobID) {

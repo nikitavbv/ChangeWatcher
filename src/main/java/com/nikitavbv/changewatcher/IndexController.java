@@ -25,8 +25,8 @@ public class IndexController implements ErrorController {
    * Processes errors from other controllers.
    *
    * <p>Error message is returned as body.
-   * If no matching controller was found for route, this returns frontend index.html instead of
-   * 404 error.</p>
+   * If no matching controller was found for route, this returns frontend
+   * index.html instead of 404 error.</p>
    */
   @RequestMapping(ERROR_PATH)
   public Object error(HttpServletRequest req) {
