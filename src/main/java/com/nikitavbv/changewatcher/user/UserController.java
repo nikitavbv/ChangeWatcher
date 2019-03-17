@@ -41,8 +41,7 @@ public class UserController {
    *  - This request is performed by admin user.</p>
    *
    * @param user user to create
-   * @throws PermissionDeniedException if user does not have rights to sign up
-   * new user
+   * @throws PermissionDeniedException if sign up by this user is not allowed
    * @return user id
    */
   @PostMapping
