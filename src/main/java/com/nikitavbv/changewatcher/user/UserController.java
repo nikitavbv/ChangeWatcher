@@ -39,7 +39,6 @@ public class UserController {
    * <p>User can be an admin if one of the following is true:
    *  - There are no users registered yet and new one is the first.
    *  - This request is performed by admin user.</p>
-   *
    * @param user user to create
    * @throws PermissionDeniedException if sign up by this user is not allowed
    * @return user id
