@@ -137,7 +137,7 @@ public class WatchingJobController {
    *
    * @throws PermissionDeniedException if user does not have access to this job
    * @throws ScreenshotNotFoundException if no screenshots have been produced
-   * by this job yet
+   *     by this job yet
    */
   @GetMapping("/{jobID}/screenshot")
   public @ResponseBody byte[] getScreenshot(HttpServletRequest req, @PathVariable long jobID) {
