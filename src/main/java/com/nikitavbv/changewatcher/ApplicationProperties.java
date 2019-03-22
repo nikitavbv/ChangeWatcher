@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("app.general")
 public class ApplicationProperties {
 
-  // Directory where application data (like screenshots) is stored
+  /** Directory where application data (like screenshots) is stored */
   private String dataDir;
 
   public String getDataDir() {
