@@ -15,6 +15,7 @@ public class ApplicationProperties {
   /** Directory where application data (like screenshots) is stored */
   private String dataDir;
 
+  /** Returns path to the directory where application data is stored. */
   public String getDataDir() {
     return dataDir;
   }
