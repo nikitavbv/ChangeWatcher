@@ -20,6 +20,7 @@ public class ApplicationProperties {
     return dataDir;
   }
 
+  /** Sets path to the directory where application data is stored. */
   public void setDataDir(String dataDir) {
     this.dataDir = dataDir;
   }
