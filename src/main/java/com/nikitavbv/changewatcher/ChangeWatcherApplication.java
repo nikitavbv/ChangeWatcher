@@ -23,6 +23,7 @@ public class ChangeWatcherApplication {
     SpringApplication.run(ChangeWatcherApplication.class, args);
   }
 
+  /** This bean provides BCrypt encoder for password hashing. */
   @Bean(name = "bCryptPasswordEncoder")
   public BCryptPasswordEncoder bcryptPasswordEncoder() {
     return new BCryptPasswordEncoder();
