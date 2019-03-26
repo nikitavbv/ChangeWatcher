@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CustomControllerAdvice {
 
+  /** Send api permission denied exception response. */
   @ExceptionHandler(PermissionDeniedException.class)
   public ResponseEntity<ErrorResponse> handlePermissionDeniedException(
           PermissionDeniedException exception
