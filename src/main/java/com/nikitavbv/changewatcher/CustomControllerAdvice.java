@@ -28,6 +28,7 @@ public class CustomControllerAdvice {
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
   }
 
+  /** Inform client that auth is required to access this api. */
   @ExceptionHandler(AuthRequiredException.class)
   public ResponseEntity<ErrorResponse> handleAuthRequiredException() {
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponse("auth_required"));
