@@ -34,7 +34,7 @@ public class CustomControllerAdvice {
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponse("auth_required"));
   }
 
-  /** Inform client that application setup should be performed before this API can be used. */
+  /** Inform client that application setup should be performed. */
   @ExceptionHandler(SetupRequiredException.class)
   public ResponseEntity<ErrorResponse> handleSetupRequiredException() {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("setup_required"));
