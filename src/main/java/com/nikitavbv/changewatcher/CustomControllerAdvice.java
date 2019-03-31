@@ -40,6 +40,7 @@ public class CustomControllerAdvice {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("setup_required"));
   }
 
+  /** Inform client that requested preview does not exist. */
   @ExceptionHandler(PreviewNotFoundException.class)
   public ResponseEntity<ErrorResponse> handlePreviewNotFoundException() {
     ErrorResponse errorResponse = new ErrorResponse("preview_not_found");
