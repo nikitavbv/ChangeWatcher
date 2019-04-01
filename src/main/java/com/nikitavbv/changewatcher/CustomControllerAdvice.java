@@ -47,12 +47,14 @@ public class CustomControllerAdvice {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
 
+  /** Inform client that requested job does not exist. */
   @ExceptionHandler(WatchingJobNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleWatchingJobNotFoundException() {
     ErrorResponse errorResponse = new ErrorResponse("watching_job_not_found");
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
 
+  /** Inform client that requested screenshot does not exist. */
   @ExceptionHandler(ScreenshotNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleScreenshotNotFoundException() {
     ErrorResponse errorResponse = new ErrorResponse("screenshot_not_found");
