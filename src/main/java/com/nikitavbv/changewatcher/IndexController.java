@@ -17,8 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class IndexController implements ErrorController {
 
+  /** Attribute of HttpServletRequest containing error status code. */
   private static final String ERROR_STATUS_CODE_ATTRIBUTE = "javax.servlet.error.status_code";
+  /** Attribute of HttpServletRequest containing error message. */
   private static final String ERROR_MESSAGE_ATTRIBUTE = "javax.servlet.error.message";
+  /** Status of error page. */
   private static final String ERROR_PATH = "/error";
 
   /**
