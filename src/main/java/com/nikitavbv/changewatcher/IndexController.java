@@ -43,6 +43,7 @@ public class IndexController implements ErrorController {
     return ResponseEntity.status(errorStatusCode).body(new ErrorResponse("error", errorMessage));
   }
 
+  /** Returns path of the error page. */
   @Override
   public String getErrorPath() {
     return ERROR_PATH;
