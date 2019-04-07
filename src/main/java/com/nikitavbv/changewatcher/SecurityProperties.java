@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("app.security")
 public class SecurityProperties {
   /** Secret token. */
-  String secret;
+  private String secret;
 
   /**
    * Generates secret token.
