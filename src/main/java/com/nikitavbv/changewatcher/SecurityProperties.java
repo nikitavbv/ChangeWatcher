@@ -30,10 +30,12 @@ public class SecurityProperties {
     return Base64.getEncoder().encodeToString(randomBytes);
   }
 
+  /** Returns secret token. */
   public String getSecret() {
     return secret;
   }
 
+  /** Set secret token. */
   public void setSecret(String secret) {
     this.secret = secret;
   }
