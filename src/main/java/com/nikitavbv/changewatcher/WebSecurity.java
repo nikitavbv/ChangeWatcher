@@ -21,8 +21,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
+  /** Service which provides user data. */
   private UserDetailsServiceImpl userDetailsService;
+  /** Service to hash passwords. */
   private BCryptPasswordEncoder bcryptPasswordEncoder;
+  /** Security configuration. */
   private SecurityProperties securityProperties;
 
   /**
