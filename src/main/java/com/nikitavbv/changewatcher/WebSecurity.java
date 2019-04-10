@@ -44,6 +44,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     this.securityProperties = securityProperties;
   }
 
+  /** Configure security for api routes. */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable().authorizeRequests()
