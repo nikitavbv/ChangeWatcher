@@ -60,6 +60,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
               UsernamePasswordAuthenticationFilter.class);
   }
 
+  /** Sets auth configuration */
   @Override
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService).passwordEncoder(bcryptPasswordEncoder);
