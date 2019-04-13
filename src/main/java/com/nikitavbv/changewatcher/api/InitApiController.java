@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(RouteConstants.INIT_API)
 public class InitApiController {
 
+  /** Repository with user data. */
   private ApplicationUserRepository applicationUserRepository;
 
   public InitApiController(ApplicationUserRepository applicationUserRepository) {
