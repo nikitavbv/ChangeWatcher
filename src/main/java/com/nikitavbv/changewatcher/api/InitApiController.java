@@ -22,6 +22,11 @@ public class InitApiController {
   /** Repository with user data. */
   private ApplicationUserRepository applicationUserRepository;
 
+  /**
+   * Constructs InitApiController.
+   *
+   * @param applicationUserRepository repository with user data
+   */
   public InitApiController(ApplicationUserRepository applicationUserRepository) {
     this.applicationUserRepository = applicationUserRepository;
   }
