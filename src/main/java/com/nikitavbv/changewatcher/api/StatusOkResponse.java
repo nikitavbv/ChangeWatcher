@@ -8,8 +8,10 @@ package com.nikitavbv.changewatcher.api;
  */
 public class StatusOkResponse {
 
+  /** Status OK constant. */
   private String status = "OK";
 
+  /** Returns status. */
   public String getStatus() {
     return status;
   }
