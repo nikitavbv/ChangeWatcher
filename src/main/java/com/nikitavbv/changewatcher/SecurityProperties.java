@@ -12,11 +12,10 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author Nikita Volobuev
  */
-@Configuration
 @ConfigurationProperties("app.security")
 public class SecurityProperties {
   /** Secret token. */
-  private String secret;
+  String secret;
 
   /**
    * Generates secret token.
