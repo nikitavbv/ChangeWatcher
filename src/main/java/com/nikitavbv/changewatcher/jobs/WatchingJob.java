@@ -51,6 +51,7 @@ public class WatchingJob {
   )
   private ApplicationUser user;
 
+  /** Make new thread to run this watching job. */
   Thread makeRunThread(WatchingJobRepository repository, String screenshotsDir) {
     return new WatchingJobThread(repository,this, screenshotsDir);
   }
