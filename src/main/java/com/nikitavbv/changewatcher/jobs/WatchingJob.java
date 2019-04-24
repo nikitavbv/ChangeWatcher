@@ -56,6 +56,12 @@ public class WatchingJob {
     return new WatchingJobThread(repository,this, screenshotsDir);
   }
 
+  /**
+   * Returns File where screenshot is saved to.
+   *
+   * @param screenshotsDir directory where screenshots are stored
+   * @return file where screenshot is saved to.
+   */
   File getWebsiteScreenshotFile(String screenshotsDir) {
     return new File(screenshotsDir + "/" + getID() + "." + SCREENSHOT_IMAGE_FORMAT);
   }
