@@ -66,6 +66,12 @@ public class WatchingJob {
     return new File(screenshotsDir + "/" + getID() + "." + SCREENSHOT_IMAGE_FORMAT);
   }
 
+  /**
+   * Returns File where previous screenshot was saved to.
+   *
+   * @param screenshotsDir directory where screenshots are stored
+   * @return file where previous screenshot was saved to.
+   */
   File getPrevWebsiteScreenshotFile(String screenshotsDir) {
     return new File(screenshotsDir + "/" + getID() + "_prev1" + "." + SCREENSHOT_IMAGE_FORMAT);
   }
