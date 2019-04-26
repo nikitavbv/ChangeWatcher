@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author Nikita Volobuev
  */
-@Configuration
 @ConfigurationProperties("app.general")
 public class ApplicationProperties {
 
