@@ -5,7 +5,6 @@ import static com.nikitavbv.changewatcher.security.SecurityConstants.SECRET_SIZE
 import java.security.SecureRandom;
 import java.util.Base64;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Application security configuration. Set by app.security.
