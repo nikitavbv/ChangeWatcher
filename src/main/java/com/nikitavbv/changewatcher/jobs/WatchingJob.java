@@ -22,8 +22,7 @@ import org.apache.http.impl.client.HttpClients;
 @Entity
 public class WatchingJob {
 
-  /* Used by other classes in this package */
-  static final String SCREENSHOT_IMAGE_FORMAT = "png";
+  /* Used by other classes in this package */ static final String SCREENSHOT_IMAGE_FORMAT = "png";
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
