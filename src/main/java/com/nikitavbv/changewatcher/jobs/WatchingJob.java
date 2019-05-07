@@ -22,6 +22,7 @@ import org.apache.http.impl.client.HttpClients;
 @Entity
 public class WatchingJob {
 
+  /** Image format used for screenshot files. */
   /* default */ static final String SCREENSHOT_IMAGE_FORMAT = "png";
 
   @Id
