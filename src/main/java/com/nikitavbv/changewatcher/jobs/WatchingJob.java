@@ -25,6 +25,7 @@ public class WatchingJob {
   /** Image format used for screenshot files. */
   /* default */ static final String SCREENSHOT_IMAGE_FORMAT = "png";
 
+  /** Job id */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
