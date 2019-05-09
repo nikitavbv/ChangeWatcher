@@ -30,6 +30,7 @@ public class WatchingJob {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  /** Name of the watching job */
   private String title;
   private String url;
   private String webhook; // for notifications
