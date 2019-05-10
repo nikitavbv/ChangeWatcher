@@ -32,6 +32,7 @@ public class WatchingJob {
 
   /** Name of the watching job */
   private String title;
+  /** URL of webpage which is being watched. */
   private String url;
   private String webhook; // for notifications
   private long pixelDifferenceToTrigger;
