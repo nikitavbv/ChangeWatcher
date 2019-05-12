@@ -36,6 +36,7 @@ public class WatchingJob {
   private String url;
   /** Webhook to send post request to when change is detected. */
   private String webhook;
+  /** Number of pixels to be changed to trigger listeners */
   private long pixelDifferenceToTrigger;
 
   private long watchingInterval;
