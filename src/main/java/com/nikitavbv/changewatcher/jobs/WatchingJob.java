@@ -39,6 +39,7 @@ public class WatchingJob {
   /** Number of pixels to be changed to trigger listeners */
   private long pixelDifferenceToTrigger;
 
+  /** How often website is checked for changes. */
   private long watchingInterval;
   private long lastCheckTime;
   private long lastRunDifferentPixels;
