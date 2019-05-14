@@ -41,6 +41,7 @@ public class WatchingJob {
 
   /** How often website is checked for changes. */
   private long watchingInterval;
+  /** Timestamp of last web page fetch */
   private long lastCheckTime;
   private long lastRunDifferentPixels;
 
