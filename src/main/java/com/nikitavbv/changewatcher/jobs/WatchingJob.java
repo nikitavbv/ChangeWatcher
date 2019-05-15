@@ -43,6 +43,7 @@ public class WatchingJob {
   private long watchingInterval;
   /** Timestamp of last web page fetch */
   private long lastCheckTime;
+  /** Number of pixel changes detected during the last check. */
   private long lastRunDifferentPixels;
 
   private int selectionX;
