@@ -46,6 +46,7 @@ public class WatchingJob {
   /** Number of pixel changes detected during the last check. */
   private long lastRunDifferentPixels;
 
+  /** X coordinate of selection bounds  */
   private int selectionX;
   private int selectionY;
   private int selectionWidth;
