@@ -48,6 +48,7 @@ public class WatchingJob {
 
   /** X coordinate of selection bounds  */
   private int selectionX;
+  /** Y coordinate of selection bounds */
   private int selectionY;
   private int selectionWidth;
   private int selectionHeight;
