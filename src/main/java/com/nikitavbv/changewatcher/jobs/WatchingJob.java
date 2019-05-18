@@ -50,9 +50,12 @@ public class WatchingJob {
   private int selectionX;
   /** Y coordinate of selection bounds */
   private int selectionY;
+  /** Width of the selection region */
   private int selectionWidth;
+  /** Height of the selection region */
   private int selectionHeight;
 
+  /** User wh0 owns this job */
   @ManyToOne
   @JoinTable(
       name = "user_jobs",
