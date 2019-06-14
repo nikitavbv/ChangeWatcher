@@ -30,7 +30,7 @@ public class WatchingJob {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  /** Name of the watching job */
+  /** Name of the watching job. */
   private String title;
   /** URL of webpage which is being watched. */
   private String url;
@@ -46,16 +46,16 @@ public class WatchingJob {
   /** Number of pixel changes detected during the last check. */
   private long lastRunDifferentPixels;
 
-  /** X coordinate of selection bounds  */
+  /** X coordinate of selection bounds. */
   private int selectionX;
-  /** Y coordinate of selection bounds */
+  /** Y coordinate of selection bounds. */
   private int selectionY;
-  /** Width of the selection region */
+  /** Width of the selection region. */
   private int selectionWidth;
-  /** Height of the selection region */
+  /** Height of the selection region. */
   private int selectionHeight;
 
-  /** User wh0 owns this job */
+  /** User wh0 owns this job. */
   @ManyToOne
   @JoinTable(
       name = "user_jobs",
