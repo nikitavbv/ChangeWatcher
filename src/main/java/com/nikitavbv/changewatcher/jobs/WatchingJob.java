@@ -36,12 +36,12 @@ public class WatchingJob {
   private String url;
   /** Webhook to send post request to when change is detected. */
   private String webhook;
-  /** Number of pixels to be changed to trigger listeners */
+  /** Number of pixels to be changed to trigger listeners. */
   private long pixelDifferenceToTrigger;
 
   /** How often website is checked for changes. */
   private long watchingInterval;
-  /** Timestamp of last web page fetch */
+  /** Timestamp of last web page fetch. */
   private long lastCheckTime;
   /** Number of pixel changes detected during the last check. */
   private long lastRunDifferentPixels;
