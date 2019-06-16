@@ -65,7 +65,7 @@ public class WatchingJob {
   private ApplicationUser user;
 
   /** Make new thread to run this watching job. */
-  Thread makeRunThread(WatchingJobRepository repository, String screenshotsDir) {
+  /* default */ Thread makeRunThread(WatchingJobRepository repository, String screenshotsDir) {
     return new WatchingJobThread(repository,this, screenshotsDir);
   }
 
@@ -75,7 +75,7 @@ public class WatchingJob {
    * @param screenshotsDir directory where screenshots are stored
    * @return file where screenshot is saved to.
    */
-  File getWebsiteScreenshotFile(String screenshotsDir) {
+  /* default */ File getWebsiteScreenshotFile(String screenshotsDir) {
     return new File(screenshotsDir + "/" + getID() + "." + SCREENSHOT_IMAGE_FORMAT);
   }
 
@@ -85,18 +85,18 @@ public class WatchingJob {
    * @param screenshotsDir directory where screenshots are stored
    * @return file where previous screenshot was saved to.
    */
-  File getPrevWebsiteScreenshotFile(String screenshotsDir) {
+  /* default */ File getPrevWebsiteScreenshotFile(String screenshotsDir) {
     return new File(screenshotsDir + "/" + getID() + "_prev1" + "." + SCREENSHOT_IMAGE_FORMAT);
   }
 
-  void runWebhook() throws IOException {
+  /* default */ void runWebhook() throws IOException {
     CloseableHttpClient httpClient = HttpClients.createMinimal();
     HttpGet httpGet = new HttpGet(webhook);
     httpClient.execute(httpGet);
     httpClient.close();
   }
 
-  boolean isTimeToRun() {
+  /* default */ boolean isTimeToRun() {
     return lastCheckTime + watchingInterval < System.currentTimeMillis();
   }
 
