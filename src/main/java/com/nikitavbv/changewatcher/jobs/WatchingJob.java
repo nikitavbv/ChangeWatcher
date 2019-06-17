@@ -100,6 +100,10 @@ public class WatchingJob {
     return lastCheckTime + watchingInterval < System.currentTimeMillis();
   }
 
+  /**
+   * Get id of this job.
+   * @return id of this job.
+   */
   public long getID() {
     return id;
   }
