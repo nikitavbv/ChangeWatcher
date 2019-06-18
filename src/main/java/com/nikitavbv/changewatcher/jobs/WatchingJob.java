@@ -108,6 +108,10 @@ public class WatchingJob {
     return id;
   }
 
+  /**
+   * Set user who owns this job
+   * @param user who owns this job
+   */
   public void setUser(ApplicationUser user) {
     this.user = user;
   }
