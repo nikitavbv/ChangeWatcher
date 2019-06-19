@@ -109,7 +109,7 @@ public class WatchingJob {
   }
 
   /**
-   * Set user who owns this job
+   * Set user who owns this job.
    * @param user who owns this job
    */
   public void setUser(ApplicationUser user) {
