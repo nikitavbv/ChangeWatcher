@@ -116,6 +116,10 @@ public class WatchingJob {
     this.user = user;
   }
 
+  /**
+   * Get job title.
+   * @return job title
+   */
   public String getTitle() {
     return title;
   }
