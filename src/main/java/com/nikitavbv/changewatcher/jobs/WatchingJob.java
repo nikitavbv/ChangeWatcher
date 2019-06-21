@@ -124,6 +124,9 @@ public class WatchingJob {
     return title;
   }
 
+  /**
+   * Set watching job title.
+   */
   public void setTitle(String title) {
     this.title = title;
   }
