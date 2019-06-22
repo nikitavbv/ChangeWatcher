@@ -131,6 +131,10 @@ public class WatchingJob {
     this.title = title;
   }
 
+  /**
+   * Returns URL which is being monitored.
+   * @return job url
+   */
   public String getUrl() {
     return url;
   }
