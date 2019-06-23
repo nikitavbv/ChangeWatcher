@@ -139,6 +139,10 @@ public class WatchingJob {
     return url;
   }
 
+  /**
+   * Set URL which is being monitored
+   * @param url url to set
+   */
   public void setUrl(String url) {
     this.url = url;
   }
