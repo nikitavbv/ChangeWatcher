@@ -147,6 +147,10 @@ public class WatchingJob {
     this.url = url;
   }
 
+  /**
+   * Get this job notification webhook url
+   * @return
+   */
   public String getWebhook() {
     return this.webhook;
   }
