@@ -155,6 +155,7 @@ public class WatchingJob {
     return this.webhook;
   }
 
+  /** Set job notification webhook url */
   public void setWebhook(String webhook) {
     this.webhook = webhook;
   }
