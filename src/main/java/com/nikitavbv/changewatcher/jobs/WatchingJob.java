@@ -140,7 +140,7 @@ public class WatchingJob {
   }
 
   /**
-   * Set URL which is being monitored
+   * Set URL which is being monitored.
    * @param url url to set
    */
   public void setUrl(String url) {
@@ -148,18 +148,23 @@ public class WatchingJob {
   }
 
   /**
-   * Get this job notification webhook url
+   * Get this job notification webhook url.
    * @return
    */
   public String getWebhook() {
     return this.webhook;
   }
 
-  /** Set job notification webhook url */
+  /** Set job notification webhook url. */
   public void setWebhook(String webhook) {
     this.webhook = webhook;
   }
 
+  /**
+   * Get job watching interval, i.e. how often this gets rechecked.
+   *
+   * @return watching interval
+   */
   public long getWatchingInterval() {
     return watchingInterval;
   }
