@@ -169,6 +169,11 @@ public class WatchingJob {
     return watchingInterval;
   }
 
+    /**
+     * Set job watching interval, i.e. how often webpage gets rechecked.
+     * 
+     * @param watchingInterval
+     */
   public void setWatchingInterval(long watchingInterval) {
     this.watchingInterval = watchingInterval;
   }
