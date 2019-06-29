@@ -177,7 +177,11 @@ public class WatchingJob {
   public void setWatchingInterval(long watchingInterval) {
     this.watchingInterval = watchingInterval;
   }
-  
+
+  /**
+   * Get User who owns this job.
+   * @return job owner
+   */
   ApplicationUser getUser() {
     return user;
   }
