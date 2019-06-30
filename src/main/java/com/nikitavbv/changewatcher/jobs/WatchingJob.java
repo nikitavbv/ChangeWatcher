@@ -186,6 +186,11 @@ public class WatchingJob {
     return user;
   }
 
+  /**
+   * Get timestamp of last check.
+   *
+   * @return timestamp of last check
+   */
   public long getLastCheckTime() {
     return this.lastCheckTime;
   }
