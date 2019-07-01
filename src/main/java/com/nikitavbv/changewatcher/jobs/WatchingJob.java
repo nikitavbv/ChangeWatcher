@@ -195,6 +195,7 @@ public class WatchingJob {
     return this.lastCheckTime;
   }
 
+  /** Set timestamp of last check. */
   public void setLastCheckTime(long lastCheckTime) {
     this.lastCheckTime = lastCheckTime;
   }
