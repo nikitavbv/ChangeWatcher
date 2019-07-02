@@ -200,6 +200,11 @@ public class WatchingJob {
     this.lastCheckTime = lastCheckTime;
   }
 
+  /**
+   * Get total number of pixels which were different during last check.
+   *
+   * @return total different pixels
+   */
   public long getLastRunDifferentPixels() {
     return this.lastRunDifferentPixels;
   }
