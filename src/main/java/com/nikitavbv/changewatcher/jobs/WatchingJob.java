@@ -209,6 +209,11 @@ public class WatchingJob {
     return this.lastRunDifferentPixels;
   }
 
+  /**
+   * Set total number of pixels which were different during last check.
+   *
+   * @param differentPixels total different pixels
+   */
   public void setLastRunDifferentPixels(long differentPixels) {
     this.lastRunDifferentPixels = differentPixels;
   }
