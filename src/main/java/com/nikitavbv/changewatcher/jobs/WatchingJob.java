@@ -218,6 +218,11 @@ public class WatchingJob {
     this.lastRunDifferentPixels = differentPixels;
   }
 
+  /**
+   * Get total number of pixels required for notification to be triggered.
+   *
+   * @return number of pixels to trigger notification
+   */
   public long getPixelDifferenceToTrigger() {
     return this.pixelDifferenceToTrigger;
   }
