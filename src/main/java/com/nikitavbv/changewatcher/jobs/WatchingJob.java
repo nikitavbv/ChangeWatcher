@@ -227,6 +227,11 @@ public class WatchingJob {
     return this.pixelDifferenceToTrigger;
   }
 
+  /**
+   * Set total number of pixles required for notification to be triggered.
+   *
+   * @param pixelDifferenceToTrigger number of pixels to trigger notification
+   */
   public void setPixelDifferenceToTrigger(long pixelDifferenceToTrigger) {
     this.pixelDifferenceToTrigger = pixelDifferenceToTrigger;
   }
