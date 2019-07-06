@@ -236,6 +236,10 @@ public class WatchingJob {
     this.pixelDifferenceToTrigger = pixelDifferenceToTrigger;
   }
 
+  /**
+   * Returns x coordinate of top left corner of region selected for tracking.
+   * @return x coordinate of top left corner
+   */
   public int getSelectionX() {
     return selectionX;
   }
