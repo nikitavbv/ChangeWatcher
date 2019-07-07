@@ -244,6 +244,11 @@ public class WatchingJob {
     return selectionX;
   }
 
+  /**
+   * Set x coordinate of top left corner of region selected for tracking.
+   *
+   * @param selectionX x coordinate of top left corner
+   */
   public void setSelectionX(int selectionX) {
     this.selectionX = selectionX;
   }
