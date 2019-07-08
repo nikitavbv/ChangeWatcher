@@ -253,6 +253,10 @@ public class WatchingJob {
     this.selectionX = selectionX;
   }
 
+  /**
+   * Returns y coordinate of top left corner of region selected for tracking.
+   * @return y coordinate of top left corner
+   */
   public int getSelectionY() {
     return selectionY;
   }
