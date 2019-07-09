@@ -261,22 +261,47 @@ public class WatchingJob {
     return selectionY;
   }
 
+  /**
+   * Set y coordinate of top left corner of region selected for tracking.
+   *
+   * @param selectionY y coordinate of top left corner
+   */
   public void setSelectionY(int selectionY) {
     this.selectionY = selectionY;
   }
 
+  /**
+   * Returns width of selected region for tracking.
+   *
+   * @return width of selected region for tracking
+   */
   public int getSelectionWidth() {
     return selectionWidth;
   }
 
+  /**
+   * Sets width of selected region for tracking.
+   *
+   * @param selectionWidth width of selected region for tracking
+   */
   public void setSelectionWidth(int selectionWidth) {
     this.selectionWidth = selectionWidth;
   }
 
+  /**
+   * Returns height of selected region for tracking.
+   *
+   * @return height of selected region for tracking
+   */
   public int getSelectionHeight() {
     return selectionHeight;
   }
 
+  /**
+   * Sets height of selected region for tracking.
+   *
+   * @param selectionHeight returns height of selected region for tracking
+   */
   public void setSelectionHeight(int selectionHeight) {
     this.selectionHeight = selectionHeight;
   }
