@@ -182,7 +182,7 @@ public class WatchingJob {
    * Get User who owns this job.
    * @return job owner
    */
-  ApplicationUser getUser() {
+  /* default */ ApplicationUser getUser() {
     return user;
   }
 
