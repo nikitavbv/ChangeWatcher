@@ -32,13 +32,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(RouteConstants.JOBS_API)
 public class WatchingJobController {
 
+  /** Rate at which each page is rechecked. */
   private static final int WATCHING_RATE = 1000 * 60 * 10; // every 10 minutes
+  /** Maximum number of threads to run page checks. */
   private static final int MAX_CHECKS_THREADS = 10;
 
+  /** Directory to save screenshots to. */
   private static final String SCREENSHOTS_DIR = "screenshots/";
 
+  /** User information is needed to manage their jobs. */
   private ApplicationUserRepository applicationUserRepository;
+  /** Job repository is required to manage jobs. */
   private WatchingJobRepository watchingJobRepository;
+  /** Application properties are required to get application data/screenshots dir.*/
   private ApplicationProperties applicationProperties;
 
   private ExecutorService executorService = Executors.newFixedThreadPool(MAX_CHECKS_THREADS);
