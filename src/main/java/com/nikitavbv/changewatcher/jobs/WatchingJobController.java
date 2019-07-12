@@ -47,6 +47,7 @@ public class WatchingJobController {
   /** Application properties are required to get application data/screenshots dir.*/
   private ApplicationProperties applicationProperties;
 
+  /** Executor service to run jobs. */
   private ExecutorService executorService = Executors.newFixedThreadPool(MAX_CHECKS_THREADS);
 
   /**
