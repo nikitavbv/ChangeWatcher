@@ -20,23 +20,42 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
  */
 public class GeneratePreviewThread extends Thread {
 
+  /** Browser window width when taking screenshot. */
   private static final int WINDOW_WIDTH = 1366;
+  /** Browser window height when taking screenshot. */
   private static final int WINDOW_HEIGHT = 768;
+  /** Image depth of virtual display where browser is launched. */
   private static final int IMAGE_DEPTH = 24;
+  /** Screen mode of virtual display where browser is launched. */
   private static final String SCREEN_MODE = WINDOW_WIDTH + "x" + WINDOW_HEIGHT + "x" + IMAGE_DEPTH;
 
+  /** Number of virtual display used for browser. */
   private static final int DISPLAY_NUMBER = 1001;
+  /** Path to xvfb which is used to create virtual display. */
   private static final String XVFB_PATH = "/usr/bin/Xvfb";
+  /** xvfb command to create virtual display. */
   private static final String XVFB_COMMAND = XVFB_PATH
           + " -br -nolisten tcp -screen 0 " + SCREEN_MODE + " :" + DISPLAY_NUMBER;
+  /** Path to geckodriver which is used to control firefox. */
   private static final String GECKO_DRIVER_PATH = "/geckodriver/geckodriver";
 
+  /** Max number of seconds we wait before page is considered loaded. */
   private static final int PAGE_LOAD_TIMEOUT = 10;
 
+  /** Page url to make preview of. */
   private String url;
+  /** Preview ID, or name of the file to save preview to. */
   private String previewID;
+  /** Directory where page previews are stored. */
   private String previewsDir;
 
+  /**
+   * Creates GeneratePreviewThread.
+   *
+   * @param url link to page to generate preview of
+   * @param previewID name of the preview file
+   * @param previewsDir directory where previews are saved to
+   */
   GeneratePreviewThread(String url, String previewID, String previewsDir) {
     super();
     this.url = url;
@@ -96,5 +115,4 @@ public class GeneratePreviewThread extends Thread {
       e.printStackTrace();
     }
   }
-
 }
