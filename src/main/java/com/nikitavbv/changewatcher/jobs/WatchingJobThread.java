@@ -23,23 +23,42 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
  */
 public class WatchingJobThread extends Thread {
 
+  /** Browser window width when taking screenshot. */
   private static final int WINDOW_WIDTH = 1366;
+  /** Browser window height when taking screenshot. */
   private static final int WINDOW_HEIGHT = 768;
+  /** Image depth of virtual display where browser is launched. */
   private static final int IMAGE_DEPTH = 24;
+  /** Screen mode of virtual display where browser is launched. */
   private static final String SCREEN_MODE = WINDOW_WIDTH + "x" + WINDOW_HEIGHT + "x" + IMAGE_DEPTH;
 
+  /** Number of virtual display used for browser. */
   private static final int DISPLAY_NUMBER = 1002;
+  /** Path to xvfb which is used to create virtual display. */
   private static final String XVFB_PATH = "/usr/bin/Xvfb";
+  /** xvfb command to create virtual display. */
   private static final String XVFB_COMMAND = XVFB_PATH
           + " -br -nolisten tcp -screen 0 " + SCREEN_MODE + " :" + DISPLAY_NUMBER;
+  /** Path to geckodriver which is used to control firefox. */
   private static final String GECKO_DRIVER_PATH = "/geckodriver/geckodriver";
 
+  /** Max number of seconds we wait before page is considered loaded. */
   private static final int PAGE_LOAD_TIMEOUT = 10;
 
+  /** WatchingJobRepository to get job data and save updates. */
   private WatchingJobRepository repository;
+  /** Watching job specific to this thread. */
   private WatchingJob job;
+  /** Directory where screenshots are saved to. */
   private String screenshotsDir;
 
+  /**
+   * Creates WatchingJobThread.
+   *
+   * @param repository WatchingJobRepository to get/update job info.
+   * @param job watching job which will be checked in this thread.
+   * @param screenshotsDir directory to save screenshot to.
+   */
   WatchingJobThread(WatchingJobRepository repository, WatchingJob job, String screenshotsDir) {
     this.job = job;
     this.screenshotsDir = screenshotsDir;
@@ -72,6 +91,7 @@ public class WatchingJobThread extends Thread {
     }
   }
 
+  /** Make screenshot of page. */
   private File websiteScreenshot() throws IOException {
     final File targetFile = job.getWebsiteScreenshotFile(screenshotsDir);
     final File prevFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
@@ -96,6 +116,11 @@ public class WatchingJobThread extends Thread {
     return targetFile;
   }
 
+  /**
+   * Save page screenshot to file.
+   *
+   * @param targetFile file to save screenshot to.
+   */
   private void saveScreenshotToFile(File targetFile) throws IOException {
     final Process xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);
     final Map<String, String> environment = new HashMap<>();
@@ -139,6 +164,14 @@ public class WatchingJobThread extends Thread {
     xvfbProcess.destroy();
   }
 
+  /**
+   * Get number of pixels different between two images.
+   * Pixels are considered different if rgb's do not match.
+   *
+   * @param first file with first image.
+   * @param second file with second image.
+   * @return total different pixels
+   */
   private long compareImages(File first, File second) throws IOException {
     if (!first.exists() || !second.exists()) {
       return -1;
@@ -146,6 +179,14 @@ public class WatchingJobThread extends Thread {
     return compareImages(ImageIO.read(first), ImageIO.read(second));
   }
 
+  /**
+   * Get number of pixels different between two images.
+   * Pixels are considered different if rgb's do not match.
+   *
+   * @param first first image
+   * @param second second image
+   * @return total different pixels
+   */
   private long compareImages(BufferedImage first, BufferedImage second) {
     long totalDifferentPixels = 0;
     int startX = Math.min(job.getSelectionX(), Math.min(first.getWidth(), second.getWidth()));
@@ -170,5 +211,4 @@ public class WatchingJobThread extends Thread {
     }
     return totalDifferentPixels;
   }
-
 }
