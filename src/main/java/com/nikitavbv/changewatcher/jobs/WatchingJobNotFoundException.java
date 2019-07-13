@@ -7,6 +7,7 @@ package com.nikitavbv.changewatcher.jobs;
  */
 public class WatchingJobNotFoundException extends RuntimeException {
 
+  /** Creates WatchingJobNotFoundException. */
   public WatchingJobNotFoundException() {
     super("Watching job not found");
   }
