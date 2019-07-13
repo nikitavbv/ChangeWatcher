@@ -8,14 +8,19 @@ package com.nikitavbv.changewatcher.preview;
  */
 public class WebpagePreviewResponse {
 
+  /** ID of screenshot generated. */
   String screenshotID;
 
+  /**
+   * Creates webpage preview response.
+   * @param screenshotID id of page screenshot.
+   */
   WebpagePreviewResponse(String screenshotID) {
     this.screenshotID = screenshotID;
   }
 
+  /** Returns id of page screenshot. */
   public String getScreenshotID() {
     return screenshotID;
   }
-
 }
