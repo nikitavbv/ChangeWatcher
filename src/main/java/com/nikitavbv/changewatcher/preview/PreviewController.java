@@ -27,13 +27,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(RouteConstants.PREVIEW_API)
 public class PreviewController {
 
+  /** Maximum number of threads used to generate previews. */
   private static final int MAX_PREVIEW_THREADS = 1;
+  /** Directory to save preview screenshots to. */
   private static final String PREVIEWS_DIR = "previews/";
+  /** Preview image format. */
   static final String PREVIEW_IMAGE_FORMAT = "png";
 
+  /** ApplicationProperties are required to get application data dir. */
   private ApplicationProperties applicationProperties;
+  /** Thread pool used to run preview threads. */
   private ExecutorService executorService = Executors.newFixedThreadPool(MAX_PREVIEW_THREADS);
 
+  /**
+   * Creates preview controller.
+   *
+   * @param applicationProperties application properties
+   */
   public PreviewController(ApplicationProperties applicationProperties) {
     this.applicationProperties = applicationProperties;
   }
@@ -72,6 +82,7 @@ public class PreviewController {
     }
   }
 
+  /** Returns previews dir. */
   private String getPreviewsDirPath() {
     return applicationProperties.getDataDir() + PREVIEWS_DIR;
   }
