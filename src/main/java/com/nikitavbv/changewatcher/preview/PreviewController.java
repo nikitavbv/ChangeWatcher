@@ -32,7 +32,7 @@ public class PreviewController {
   /** Directory to save preview screenshots to. */
   private static final String PREVIEWS_DIR = "previews/";
   /** Preview image format. */
-  static final String PREVIEW_IMAGE_FORMAT = "png";
+  /* default */ static final String PREVIEW_IMAGE_FORMAT = "png";
 
   /** ApplicationProperties are required to get application data dir. */
   private ApplicationProperties applicationProperties;
