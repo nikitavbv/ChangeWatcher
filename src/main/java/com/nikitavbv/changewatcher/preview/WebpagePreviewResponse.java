@@ -9,7 +9,7 @@ package com.nikitavbv.changewatcher.preview;
 public class WebpagePreviewResponse {
 
   /** ID of screenshot generated. */
-  String screenshotID;
+  /* default */ String screenshotID;
 
   /**
    * Creates webpage preview response.
