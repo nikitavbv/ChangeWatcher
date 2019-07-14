@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,7 +33,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  */
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
+  /** AuthenticationManager to set user auth to username/password. */
   private AuthenticationManager authenticationManager;
+  /** SecurityProperties to get application secret used while generating session tokens. */
   private SecurityProperties securityProperties;
 
   /**
@@ -50,6 +51,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     this.securityProperties = securityProperties;
   }
 
+  /** Authenticate user with provided username/password. */
   @Override
   public Authentication attemptAuthentication(
           HttpServletRequest req,
@@ -70,6 +72,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     }
   }
 
+  /** On successful authentication, generate new token and send it back with auth header. */
   @Override
   protected void successfulAuthentication(HttpServletRequest req,
                                           HttpServletResponse res,
@@ -92,5 +95,4 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
     res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
   }
-
 }
