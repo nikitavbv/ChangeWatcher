@@ -18,12 +18,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+  /** ApplicationUserRepository to get user details. */
   private ApplicationUserRepository applicationUserRepository;
 
+  /**
+   * Creates UserDetailsServiceImpl.
+   *
+   * @param applicationUserRepository user data repository
+   */
   public UserDetailsServiceImpl(ApplicationUserRepository applicationUserRepository) {
     this.applicationUserRepository = applicationUserRepository;
   }
 
+  /**
+   * Get user data by username.
+   *
+   * @param username user name
+   * @return user data
+   * @throws UsernameNotFoundException if user with such username is not found
+   */
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
@@ -32,5 +45,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
     return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
   }
-
 }
