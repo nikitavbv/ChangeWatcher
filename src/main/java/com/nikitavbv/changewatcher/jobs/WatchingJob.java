@@ -163,7 +163,7 @@ public class WatchingJob {
   /**
    * Get job watching interval, i.e. how often this gets rechecked.
    *
-   * @return watching interval
+   * @return watching interval (milliseconds)
    */
   public long getWatchingInterval() {
     return watchingInterval;
@@ -172,7 +172,7 @@ public class WatchingJob {
   /**
    * Set job watching interval, i.e. how often webpage gets rechecked.
    *
-   * @param watchingInterval
+   * @param watchingInterval milliseconds between page checks
    */
   public void setWatchingInterval(long watchingInterval) {
     this.watchingInterval = watchingInterval;
