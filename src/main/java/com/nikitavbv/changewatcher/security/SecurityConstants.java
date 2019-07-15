@@ -10,7 +10,7 @@ public class SecurityConstants {
   public static final String TOKEN_PREFIX = "Bearer ";
   /** HTTP header for auth info. */
   public static final String HEADER_STRING = "Authorization";
-  /** Auth token TTL */
+  /** Auth token TTL. */
   public static final long EXPIRATION_TIME = 864_000_000; // 10 days
   /** Length of application secret. */
   public static final int SECRET_SIZE = 512 / 8; // in bytes
