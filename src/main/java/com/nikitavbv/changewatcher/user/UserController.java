@@ -19,15 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(RouteConstants.USERS_API)
 public class UserController {
 
+  /** ApplicationUserRepository to get user details. */
   private ApplicationUserRepository applicationUserRepository;
+  /** BCryptPasswordEncoder to hash user passwords. */
   private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+  /** Creates UserController. */
   public UserController(ApplicationUserRepository applicationUserRepository,
                         BCryptPasswordEncoder bcryptPasswordEncoder) {
     this.applicationUserRepository = applicationUserRepository;
     this.bcryptPasswordEncoder = bcryptPasswordEncoder;
   }
 
+  /** Get currently authenticated user information. */
   @GetMapping
   public ApplicationUser getUserInfo(HttpServletRequest httpRequest) {
     return applicationUserRepository.findByUsername(httpRequest.getRemoteUser());
