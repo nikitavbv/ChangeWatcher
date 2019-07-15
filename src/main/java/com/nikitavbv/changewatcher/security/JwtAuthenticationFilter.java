@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
   /** AuthenticationManager to set user auth to username/password. */
   private AuthenticationManager authenticationManager;
-  /** SecurityProperties to get application secret used while generating session tokens. */
+  /** SecurityProperties to get application secret used for session tokens. */
   private SecurityProperties securityProperties;
 
   /**
@@ -72,7 +72,11 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     }
   }
 
-  /** On successful authentication, generate new token and send it back with auth header. */
+  /**
+   * On successful authentication, generate and send new token.
+   *
+   * Token is sent in Authorization header.
+   */
   @Override
   protected void successfulAuthentication(HttpServletRequest req,
                                           HttpServletResponse res,
