@@ -11,7 +11,7 @@ public class SignUpResult {
   /** ID of user, who was just registered. */
   private long userID;
 
-  /** Creates SignUpResult/ */
+  /** Creates SignUpResult. */
   SignUpResult(long userID) {
     this.userID = userID;
   }
