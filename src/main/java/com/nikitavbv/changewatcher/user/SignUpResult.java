@@ -8,14 +8,16 @@ package com.nikitavbv.changewatcher.user;
  */
 public class SignUpResult {
 
+  /** ID of user, who was just registered. */
   private long userID;
 
+  /** Creates SignUpResult/ */
   SignUpResult(long userID) {
     this.userID = userID;
   }
 
+  /** Returns id of user who was just registered. */
   public long getUserID() {
     return userID;
   }
-
 }
