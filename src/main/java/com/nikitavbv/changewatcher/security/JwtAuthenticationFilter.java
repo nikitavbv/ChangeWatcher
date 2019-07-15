@@ -75,7 +75,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
   /**
    * On successful authentication, generate and send new token.
    *
-   * Token is sent in Authorization header.
+   * <p>Token is sent in Authorization header.</p>
    */
   @Override
   protected void successfulAuthentication(HttpServletRequest req,
