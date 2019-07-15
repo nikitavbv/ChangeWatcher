@@ -7,8 +7,12 @@ package com.nikitavbv.changewatcher.security;
  */
 public class PermissionDeniedException extends RuntimeException {
 
+  /**
+   * Creates PermissionDeniedException.
+   *
+   * @param msg details
+   * */
   public PermissionDeniedException(String msg) {
     super(msg);
   }
-
 }
