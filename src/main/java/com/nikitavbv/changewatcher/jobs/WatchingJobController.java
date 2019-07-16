@@ -164,7 +164,7 @@ public class WatchingJobController {
     try {
       return IOUtils.toByteArray(new FileInputStream(screenshotFile));
     } catch (IOException e) {
-      throw new ScreenshotNotFoundException();
+      throw new ScreenshotNotFoundException(e);
     }
   }
 
