@@ -28,6 +28,7 @@ public class ApplicationUser {
   private String username;
   /** User password (hashed). */
   private String password;
+  /** Indicates if user is admin. */
   private boolean isAdmin = false;
 
   /** Watching jobs created by this user. */
