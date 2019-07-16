@@ -12,7 +12,7 @@ import java.util.List;
 public class InitApiResponse {
 
   /** List of user's watching jobs. */
-  private List<WatchingJob> jobs;
+  private final List<WatchingJob> jobs;
 
   /**
    * Construct init api response.

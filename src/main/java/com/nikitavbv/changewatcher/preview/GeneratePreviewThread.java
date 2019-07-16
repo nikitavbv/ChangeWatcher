@@ -43,11 +43,11 @@ public class GeneratePreviewThread extends Thread {
   private static final int PAGE_LOAD_TIMEOUT = 10;
 
   /** Page url to make preview of. */
-  private String url;
+  private final String url;
   /** Preview ID, or name of the file to save preview to. */
-  private String previewID;
+  private final String previewID;
   /** Directory where page previews are stored. */
-  private String previewsDir;
+  private final String previewsDir;
 
   /**
    * Creates GeneratePreviewThread.

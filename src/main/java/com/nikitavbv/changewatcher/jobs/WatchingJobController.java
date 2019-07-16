@@ -41,11 +41,11 @@ public class WatchingJobController {
   private static final String SCREENSHOTS_DIR = "screenshots/";
 
   /** User information is needed to manage their jobs. */
-  private ApplicationUserRepository applicationUserRepository;
+  private final ApplicationUserRepository applicationUserRepository;
   /** Job repository is required to manage jobs. */
-  private WatchingJobRepository watchingJobRepository;
+  private final WatchingJobRepository watchingJobRepository;
   /** Application properties are required to get application data/screenshots dir.*/
-  private ApplicationProperties applicationProperties;
+  private final ApplicationProperties applicationProperties;
 
   /** Executor service to run jobs. */
   private ExecutorService executorService = Executors.newFixedThreadPool(MAX_CHECKS_THREADS);

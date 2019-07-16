@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
   /** ApplicationUserRepository to get user details. */
-  private ApplicationUserRepository applicationUserRepository;
+  private final ApplicationUserRepository applicationUserRepository;
   /** BCryptPasswordEncoder to hash user passwords. */
-  private BCryptPasswordEncoder bcryptPasswordEncoder;
+  private final BCryptPasswordEncoder bcryptPasswordEncoder;
 
   /** Creates UserController. */
   public UserController(ApplicationUserRepository applicationUserRepository,

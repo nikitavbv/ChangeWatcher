@@ -25,7 +25,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
   /** Security properties to validate tokens with application secret. */
-  private SecurityProperties securityProperties;
+  private final SecurityProperties securityProperties;
 
   /** Creates JwtAuthorizationFilter. */
   public JwtAuthorizationFilter(AuthenticationManager authManager,

@@ -38,7 +38,7 @@ public class ApplicationUser {
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "job_id")
   )
-  private List<WatchingJob> jobs = new ArrayList<>();
+  private final List<WatchingJob> jobs = new ArrayList<>();
 
   /** Add a new watching job to this user. */
   public void addJob(WatchingJob job) {

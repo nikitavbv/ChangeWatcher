@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class InitApiController {
 
   /** Repository with user data. */
-  private ApplicationUserRepository applicationUserRepository;
+  private final ApplicationUserRepository applicationUserRepository;
 
   /**
    * Constructs InitApiController.

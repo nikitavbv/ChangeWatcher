@@ -34,9 +34,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
   /** AuthenticationManager to set user auth to username/password. */
-  private AuthenticationManager authenticationManager;
+  private final AuthenticationManager authenticationManager;
   /** SecurityProperties to get application secret used for session tokens. */
-  private SecurityProperties securityProperties;
+  private final SecurityProperties securityProperties;
 
   /**
    * Creates JWTAuthentication filter.

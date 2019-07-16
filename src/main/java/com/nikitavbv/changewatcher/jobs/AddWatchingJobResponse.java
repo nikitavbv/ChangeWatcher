@@ -10,9 +10,9 @@ import java.util.List;
 public class AddWatchingJobResponse {
 
   /** List of all watching jobs of this user. */
-  private List<WatchingJob> jobs;
+  private final List<WatchingJob> jobs;
   /** The ID of new job which was just created. */
-  private long newJobID;
+  private final long newJobID;
 
   /** Construct add watching job response. */
   public AddWatchingJobResponse(long newJobID, List<WatchingJob> jobs) {

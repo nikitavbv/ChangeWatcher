@@ -35,9 +35,9 @@ public class PreviewController {
   /* default */ static final String PREVIEW_IMAGE_FORMAT = "png";
 
   /** ApplicationProperties are required to get application data dir. */
-  private ApplicationProperties applicationProperties;
+  private final ApplicationProperties applicationProperties;
   /** Thread pool used to run preview threads. */
-  private ExecutorService executorService = Executors.newFixedThreadPool(MAX_PREVIEW_THREADS);
+  private final ExecutorService executorService = Executors.newFixedThreadPool(MAX_PREVIEW_THREADS);
 
   /**
    * Creates preview controller.

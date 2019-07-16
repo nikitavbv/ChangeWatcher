@@ -9,7 +9,7 @@ package com.nikitavbv.changewatcher.user;
 public class SignUpResult {
 
   /** ID of user, who was just registered. */
-  private long userID;
+  private final long userID;
 
   /** Creates SignUpResult. */
   SignUpResult(long userID) {

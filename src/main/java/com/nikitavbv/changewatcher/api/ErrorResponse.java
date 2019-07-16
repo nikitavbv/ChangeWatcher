@@ -8,7 +8,7 @@ package com.nikitavbv.changewatcher.api;
 public class ErrorResponse {
 
   /** Error name. */
-  private String error;
+  private final String error;
   /** Error message. */
   private String message;
 
