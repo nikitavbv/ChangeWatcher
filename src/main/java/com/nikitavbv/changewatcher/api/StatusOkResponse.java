@@ -9,11 +9,11 @@ package com.nikitavbv.changewatcher.api;
 public class StatusOkResponse {
 
   /** Status OK constant. */
-  private final String status = "OK";
+  private static final String STATUS_OK = "OK";
 
   /** Returns status. */
   public String getStatus() {
-    return status;
+    return STATUS_OK;
   }
 
 }
