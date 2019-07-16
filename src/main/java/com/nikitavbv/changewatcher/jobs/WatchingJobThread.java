@@ -48,9 +48,9 @@ public class WatchingJobThread extends Thread {
   /** WatchingJobRepository to get job data and save updates. */
   private WatchingJobRepository repository;
   /** Watching job specific to this thread. */
-  private WatchingJob job;
+  private final WatchingJob job;
   /** Directory where screenshots are saved to. */
-  private String screenshotsDir;
+  private final String screenshotsDir;
 
   /**
    * Creates WatchingJobThread.
