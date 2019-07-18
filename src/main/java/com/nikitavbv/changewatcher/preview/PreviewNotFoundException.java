@@ -8,8 +8,13 @@ package com.nikitavbv.changewatcher.preview;
  */
 public class PreviewNotFoundException extends RuntimeException {
 
+  private static final String DESCRIPTION = "Preview not found";
+
   PreviewNotFoundException() {
-    super("Preview not found");
+    super(DESCRIPTION);
   }
 
+  PreviewNotFoundException(Throwable e) {
+    super(DESCRIPTION, e);
+  }
 }
