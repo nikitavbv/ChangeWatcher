@@ -2,6 +2,7 @@ package com.nikitavbv.changewatcher.preview;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
@@ -105,7 +106,7 @@ public class GeneratePreviewThread extends Thread {
 
       ImageIO.write(
               screenshot.getImage(),
-              PreviewController.PREVIEW_IMAGE_FORMAT.toUpperCase(),
+              PreviewController.PREVIEW_IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
               targetFile
       );
       driver.close();

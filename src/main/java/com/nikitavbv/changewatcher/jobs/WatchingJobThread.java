@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
@@ -46,7 +47,7 @@ public class WatchingJobThread extends Thread {
   private static final int PAGE_LOAD_TIMEOUT = 10;
 
   /** WatchingJobRepository to get job data and save updates. */
-  private WatchingJobRepository repository;
+  private final WatchingJobRepository repository;
   /** Watching job specific to this thread. */
   private final WatchingJob job;
   /** Directory where screenshots are saved to. */
@@ -157,7 +158,7 @@ public class WatchingJobThread extends Thread {
 
     ImageIO.write(
             screenshot.getImage(),
-            WatchingJob.SCREENSHOT_IMAGE_FORMAT.toUpperCase(),
+            WatchingJob.SCREENSHOT_IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
             targetFile
     );
     driver.close();

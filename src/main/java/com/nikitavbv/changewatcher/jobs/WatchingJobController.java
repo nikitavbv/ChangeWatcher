@@ -48,7 +48,7 @@ public class WatchingJobController {
   private final ApplicationProperties applicationProperties;
 
   /** Executor service to run jobs. */
-  private ExecutorService executorService = Executors.newFixedThreadPool(MAX_CHECKS_THREADS);
+  private final ExecutorService executorService = Executors.newFixedThreadPool(MAX_CHECKS_THREADS);
 
   /**
    * Creates controller for WatchingJob.
