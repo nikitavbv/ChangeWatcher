@@ -75,6 +75,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
       } catch (SignatureException e) {
         // ignore (token is invalid)
+        return null;
       }
       return null;
     }
