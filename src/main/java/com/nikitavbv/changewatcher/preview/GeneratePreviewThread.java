@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,9 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
  * @author Nikita Volobuev
  */
 public class GeneratePreviewThread extends Thread {
+
+  /** Logger for this class. */
+  private static final Logger LOG = Logger.getLogger(GeneratePreviewThread.class.getName());
 
   /** Browser window width when taking screenshot. */
   private static final int WINDOW_WIDTH = 1366;
@@ -83,7 +87,7 @@ public class GeneratePreviewThread extends Thread {
       try {
         driver.get(url);
       } catch (Exception e) {
-        // ignore;
+        LOG.warning("Exception while getting page: " + e.getMessage());
       }
       Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
           .takeScreenshot(driver);
