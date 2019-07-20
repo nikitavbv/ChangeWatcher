@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
@@ -45,6 +46,9 @@ public class WatchingJobThread extends Thread {
 
   /** Max number of seconds we wait before page is considered loaded. */
   private static final int PAGE_LOAD_TIMEOUT = 10;
+
+  /** Logger for this class. */
+  private final Logger LOG = Logger.getLogger(WatchingJobThread.class.getName());
 
   /** WatchingJobRepository to get job data and save updates. */
   private final WatchingJobRepository repository;
@@ -137,7 +141,7 @@ public class WatchingJobThread extends Thread {
     try {
       driver.get(job.getUrl());
     } catch (Exception e) {
-      // ignore;
+      LOG.warning("Exception while getting url: " + e.getMessage());
     }
     Screenshot screenshot = new AShot()
             .shootingStrategy(ShootingStrategies.viewportPasting(1000))
