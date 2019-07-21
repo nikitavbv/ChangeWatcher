@@ -25,6 +25,9 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
  */
 public class WatchingJobThread extends Thread {
 
+  /** Logger for this class. */
+  private final static Logger LOG = Logger.getLogger(WatchingJobThread.class.getName());
+
   /** Browser window width when taking screenshot. */
   private static final int WINDOW_WIDTH = 1366;
   /** Browser window height when taking screenshot. */
@@ -46,9 +49,6 @@ public class WatchingJobThread extends Thread {
 
   /** Max number of seconds we wait before page is considered loaded. */
   private static final int PAGE_LOAD_TIMEOUT = 10;
-
-  /** Logger for this class. */
-  private final Logger LOG = Logger.getLogger(WatchingJobThread.class.getName());
 
   /** WatchingJobRepository to get job data and save updates. */
   private final WatchingJobRepository repository;
