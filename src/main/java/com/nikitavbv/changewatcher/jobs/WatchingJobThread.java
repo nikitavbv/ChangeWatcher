@@ -82,10 +82,10 @@ public class WatchingJobThread extends Thread {
       job.setLastRunDifferentPixels(differentPixels);
 
       if (differentPixels >= job.getPixelDifferenceToTrigger()) {
-        System.out.println("Job triggered: " + job.getID());
+        LOG.info("Job triggered: " + job.getID());
         job.runWebhook();
       } else {
-        System.out.println("Job is not triggered: " + job.getID());
+        LOG.info("Job is not triggered: " + job.getID());
       }
 
       job.setLastCheckTime(System.currentTimeMillis());
@@ -141,7 +141,9 @@ public class WatchingJobThread extends Thread {
     try {
       driver.get(job.getUrl());
     } catch (Exception e) {
-      LOG.warning("Exception while getting url: " + e.getMessage());
+      if (LOG.isLoggable(Level.WARNING)) {
+        LOG.warning("Exception while getting url: " + e.getMessage());
+      }
     }
     Screenshot screenshot = new AShot()
             .shootingStrategy(ShootingStrategies.viewportPasting(1000))

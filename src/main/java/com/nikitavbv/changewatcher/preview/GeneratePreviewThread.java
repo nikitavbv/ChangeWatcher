@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.openqa.selenium.Dimension;
@@ -87,7 +88,9 @@ public class GeneratePreviewThread extends Thread {
       try {
         driver.get(url);
       } catch (Exception e) {
-        LOG.warning("Exception while getting page: " + e.getMessage());
+        if (LOG.isLoggable(Level.WARNING)) {
+          LOG.warning("Exception while getting page: " + e.getMessage());
+        }
       }
       Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
           .takeScreenshot(driver);
@@ -116,7 +119,9 @@ public class GeneratePreviewThread extends Thread {
       driver.close();
       xvfbProcess.destroy();
     } catch (Exception e) {
-      LOG.warning("Failed to generate url preview: " + e.getMessage());
+      if (LOG.isLoggable(Level.WARNING)) {
+        LOG.warning("Failed to generate url preview: " + e.getMessage());
+      }
     }
   }
 }
