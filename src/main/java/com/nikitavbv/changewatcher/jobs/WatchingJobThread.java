@@ -27,7 +27,7 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 public class WatchingJobThread extends Thread {
 
   /** Logger for this class. */
-  private final static Logger LOG = Logger.getLogger(WatchingJobThread.class.getName());
+  private static final Logger LOG = Logger.getLogger(WatchingJobThread.class.getName());
 
   /** Browser window width when taking screenshot. */
   private static final int WINDOW_WIDTH = 1366;
