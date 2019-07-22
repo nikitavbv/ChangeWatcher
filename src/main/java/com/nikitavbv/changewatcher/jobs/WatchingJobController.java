@@ -11,6 +11,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -31,6 +33,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(RouteConstants.JOBS_API)
 public class WatchingJobController {
+
+  /** Logger for this class. */
+  private static final Logger LOG = Logger.getLogger(WatchingJobController.class.getName());
 
   /** Rate at which each page is rechecked. */
   private static final int WATCHING_RATE = 1000 * 60 * 10; // every 10 minutes
@@ -73,7 +78,7 @@ public class WatchingJobController {
           try {
             executorService.submit(job.makeRunThread(watchingJobRepository, getScreenshotsDir()));
           } catch (Exception e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Failed to submit job to executorService", e);
           }
         });
   }

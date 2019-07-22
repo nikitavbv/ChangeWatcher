@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
@@ -91,8 +92,7 @@ public class WatchingJobThread extends Thread {
 
       repository.save(job);
     } catch (IOException e) {
-      System.err.println("Watching job failed");
-      e.printStackTrace();
+      LOG.log(Level.SEVERE, "Watching job failed", e);
     }
   }
 
@@ -104,13 +104,13 @@ public class WatchingJobThread extends Thread {
       if (!prevFile.getParentFile().exists()) {
         boolean result = prevFile.getParentFile().mkdirs();
         if (!result) {
-          System.err.println("Failed to create parent dir for prev screenshot file");
+          LOG.warning("Failed to create parent dir for prev screenshot file");
         }
       }
       if (!prevFile.exists()) {
         boolean result = prevFile.createNewFile();
         if (!result) {
-          System.err.println("Failed to create file for prev screenshot");
+          LOG.warning("Failed to create file for prev screenshot");
         }
       }
       FileUtils.copyFile(targetFile, prevFile);
@@ -150,13 +150,13 @@ public class WatchingJobThread extends Thread {
     if (!targetFile.getParentFile().exists()) {
       boolean result = targetFile.getParentFile().mkdirs();
       if (!result) {
-        System.err.println("Failed to make dirs for preview directory");
+        LOG.warning("Failed to make dirs for preview directory");
       }
     }
     if (!targetFile.exists()) {
       boolean result = targetFile.createNewFile();
       if (!result) {
-        System.err.println("Failed to create new file for preview");
+        LOG.warning("Failed to create new file for preview");
       }
     }
 

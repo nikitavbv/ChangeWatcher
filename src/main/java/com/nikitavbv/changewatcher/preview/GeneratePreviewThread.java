@@ -98,13 +98,13 @@ public class GeneratePreviewThread extends Thread {
       if (!targetFile.getParentFile().exists()) {
         boolean result = targetFile.getParentFile().mkdirs();
         if (!result) {
-          System.err.println("Failed to make dirs for preview directory");
+          LOG.warning("Failed to make dirs for preview directory");
         }
       }
       if (!targetFile.exists()) {
         boolean result = targetFile.createNewFile();
         if (!result) {
-          System.err.println("Failed to create new file for preview");
+          LOG.warning("Failed to create new file for preview");
         }
       }
 
@@ -116,8 +116,7 @@ public class GeneratePreviewThread extends Thread {
       driver.close();
       xvfbProcess.destroy();
     } catch (Exception e) {
-      System.err.println("Failed to generate url preview");
-      e.printStackTrace();
+      LOG.warning("Failed to generate url preview: " + e.getMessage());
     }
   }
 }
