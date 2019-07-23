@@ -82,9 +82,11 @@ public class WatchingJobThread extends Thread {
       job.setLastRunDifferentPixels(differentPixels);
 
       if (differentPixels >= job.getPixelDifferenceToTrigger()) {
-        LOG.info("Job triggered: " + job.getID());
+        if (LOG.isLoggable(Level.INFO)) {
+          LOG.info("Job triggered: " + job.getID());
+        }
         job.runWebhook();
-      } else {
+      } else if (LOG.isLoggable(Level.INFO)) {
         LOG.info("Job is not triggered: " + job.getID());
       }
 
