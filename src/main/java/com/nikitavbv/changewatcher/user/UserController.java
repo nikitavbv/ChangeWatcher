@@ -20,21 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
   /** ApplicationUserRepository to get user details. */
-  private final ApplicationUserRepository applicationUserRepository;
+  private final ApplicationUserRepository userRepository;
   /** BCryptPasswordEncoder to hash user passwords. */
-  private final BCryptPasswordEncoder bcryptPasswordEncoder;
+  private final BCryptPasswordEncoder passwordEncoder;
 
   /** Creates UserController. */
-  public UserController(ApplicationUserRepository applicationUserRepository,
-                        BCryptPasswordEncoder bcryptPasswordEncoder) {
-    this.applicationUserRepository = applicationUserRepository;
-    this.bcryptPasswordEncoder = bcryptPasswordEncoder;
+  public UserController(ApplicationUserRepository userRepository,
+                        BCryptPasswordEncoder passwordEncoder) {
+    this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   /** Get currently authenticated user information. */
   @GetMapping
   public ApplicationUser getUserInfo(HttpServletRequest httpRequest) {
-    return applicationUserRepository.findByUsername(httpRequest.getRemoteUser());
+    return userRepository.findByUsername(httpRequest.getRemoteUser());
   }
 
   /**
@@ -50,15 +50,15 @@ public class UserController {
     // User can be an admin if one of the following is true:
     // - There are no users registered yet and new one is the first.
     // - This request is performed by admin user.
-    if (request.getRemoteUser() == null && applicationUserRepository.count() != 0L) {
+    if (request.getRemoteUser() == null && userRepository.count() != 0L) {
       throw new PermissionDeniedException("Auth required for creating users");
     }
-    ApplicationUser requestUser = applicationUserRepository.findByUsername(request.getRemoteUser());
-    if (requestUser != null && !requestUser.getIsAdmin() && requestUser.getIsAdmin()) {
+    ApplicationUser requestUser = userRepository.findByUsername(request.getRemoteUser());
+    if (requestUser != null && !requestUser.isAdmin() && requestUser.isAdmin()) {
       throw new PermissionDeniedException("Non-admin users are not allowed to create admin users");
     }
-    user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
-    applicationUserRepository.save(user);
-    return new SignUpResult(user.getId());
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    userRepository.save(user);
+    return new SignUpResult(user.getUserID());
   }
 }

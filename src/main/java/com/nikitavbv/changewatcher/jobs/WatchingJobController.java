@@ -40,43 +40,43 @@ public class WatchingJobController {
   /** Rate at which each page is rechecked. */
   private static final int WATCHING_RATE = 1000 * 60 * 10; // every 10 minutes
   /** Maximum number of threads to run page checks. */
-  private static final int MAX_CHECKS_THREADS = 10;
+  private static final int MAX_THREADS = 10;
 
   /** Directory to save screenshots to. */
   private static final String SCREENSHOTS_DIR = "screenshots/";
 
   /** User information is needed to manage their jobs. */
-  private final ApplicationUserRepository applicationUserRepository;
+  private final ApplicationUserRepository userRepository;
   /** Job repository is required to manage jobs. */
-  private final WatchingJobRepository watchingJobRepository;
+  private final WatchingJobRepository jobRepository;
   /** Application properties are required to get application data/screenshots dir.*/
-  private final ApplicationProperties applicationProperties;
+  private final ApplicationProperties properties;
 
   /** Executor service to run jobs. */
-  private final ExecutorService executorService = Executors.newFixedThreadPool(MAX_CHECKS_THREADS);
+  private final ExecutorService executorService = Executors.newFixedThreadPool(MAX_THREADS);
 
   /**
    * Creates controller for WatchingJob.
    *
-   * @param applicationUserRepository repository with user details
-   * @param watchingJobRepository repository with watching job details
-   * @param applicationProperties general application configuration
+   * @param userRepository repository with user details
+   * @param jobRepository repository with watching job details
+   * @param properties general application configuration
    */
-  public WatchingJobController(ApplicationUserRepository applicationUserRepository,
-                               WatchingJobRepository watchingJobRepository,
-                               ApplicationProperties applicationProperties) {
-    this.applicationUserRepository = applicationUserRepository;
-    this.watchingJobRepository = watchingJobRepository;
-    this.applicationProperties = applicationProperties;
+  public WatchingJobController(ApplicationUserRepository userRepository,
+                               WatchingJobRepository jobRepository,
+                               ApplicationProperties properties) {
+    this.userRepository = userRepository;
+    this.jobRepository = jobRepository;
+    this.properties = properties;
   }
 
   @Scheduled(fixedRate = WATCHING_RATE)
   private void runJobs() {
-    watchingJobRepository.findAll().stream()
+    jobRepository.findAll().stream()
         .filter(WatchingJob::isTimeToRun)
         .forEach(job -> {
           try {
-            executorService.submit(job.makeRunThread(watchingJobRepository, getScreenshotsDir()));
+            executorService.submit(job.makeRunThread(jobRepository, getScreenshotsDir()));
           } catch (Exception e) {
             LOG.log(Level.SEVERE, "Failed to submit job to executorService", e);
           }
@@ -93,9 +93,9 @@ public class WatchingJobController {
           HttpServletRequest req,
           @RequestBody WatchingJob job
   ) {
-    ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
+    ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
     job.setUser(user);
-    watchingJobRepository.save(job);
+    jobRepository.save(job);
     return new AddWatchingJobResponse(job.getID(), user.getJobs());
   }
 
@@ -108,19 +108,19 @@ public class WatchingJobController {
   public StatusOkResponse updateWatchingJob(HttpServletRequest req,
                                             @PathVariable long jobID,
                                             @RequestBody WatchingJob newJob) {
-    ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = watchingJobRepository
+    ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
+    WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
-    if (job.getUser().getId() != user.getId()) {
+    if (job.getUser().getUserID() != user.getUserID()) {
       throw new PermissionDeniedException("Cannot edit jobs owned by other users");
     }
     job.setTitle(newJob.getTitle());
     job.setUrl(newJob.getUrl());
     job.setWatchingInterval(newJob.getWatchingInterval());
     job.setWebhook(newJob.getWebhook());
-    job.setPixelDifferenceToTrigger(newJob.getPixelDifferenceToTrigger());
-    watchingJobRepository.save(job);
+    job.setPixelThreshold(newJob.getPixelThreshold());
+    jobRepository.save(job);
     return new StatusOkResponse();
   }
 
@@ -131,16 +131,16 @@ public class WatchingJobController {
    */
   @DeleteMapping("/{jobID}")
   public StatusOkResponse deleteWatchingJob(HttpServletRequest req, @PathVariable long jobID) {
-    ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = watchingJobRepository
+    ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
+    WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
-    if (job.getUser().getId() != user.getId()) {
+    if (job.getUser().getUserID() != user.getUserID()) {
       throw new PermissionDeniedException("Cannot delete jobs owned by other users");
     }
     user.removeJob(job);
-    applicationUserRepository.save(user);
-    watchingJobRepository.delete(job);
+    userRepository.save(user);
+    jobRepository.delete(job);
     return new StatusOkResponse();
   }
 
@@ -153,11 +153,11 @@ public class WatchingJobController {
    */
   @GetMapping("/{jobID}/screenshot")
   public @ResponseBody byte[] getScreenshot(HttpServletRequest req, @PathVariable long jobID) {
-    ApplicationUser user = applicationUserRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = watchingJobRepository
+    ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
+    WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
-    if (job.getUser().getId() != user.getId()) {
+    if (job.getUser().getUserID() != user.getUserID()) {
       throw new PermissionDeniedException("Cannot get screenshot of jobs owned by other users");
     }
 
@@ -174,7 +174,7 @@ public class WatchingJobController {
   }
 
   private String getScreenshotsDir() {
-    return applicationProperties.getDataDir() + SCREENSHOTS_DIR;
+    return properties.getDataDir() + SCREENSHOTS_DIR;
   }
 
 }

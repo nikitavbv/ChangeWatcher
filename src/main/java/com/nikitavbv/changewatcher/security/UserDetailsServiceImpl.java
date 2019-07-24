@@ -19,15 +19,15 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
   /** ApplicationUserRepository to get user details. */
-  private final ApplicationUserRepository applicationUserRepository;
+  private final ApplicationUserRepository userRepository;
 
   /**
    * Creates UserDetailsServiceImpl.
    *
-   * @param applicationUserRepository user data repository
+   * @param userRepository user data repository
    */
-  public UserDetailsServiceImpl(ApplicationUserRepository applicationUserRepository) {
-    this.applicationUserRepository = applicationUserRepository;
+  public UserDetailsServiceImpl(ApplicationUserRepository userRepository) {
+    this.userRepository = userRepository;
   }
 
   /**
@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
    */
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
+    ApplicationUser applicationUser = userRepository.findByUsername(username);
     if (applicationUser == null) {
       throw new UsernameNotFoundException(username);
     }

@@ -18,9 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController implements ErrorController {
 
   /** Attribute of HttpServletRequest containing error status code. */
-  private static final String ERROR_STATUS_CODE_ATTRIBUTE = "javax.servlet.error.status_code";
+  private static final String ERROR_STATUS_CODE = "javax.servlet.error.status_code";
   /** Attribute of HttpServletRequest containing error message. */
-  private static final String ERROR_MESSAGE_ATTRIBUTE = "javax.servlet.error.message";
+  private static final String ERROR_MESSAGE = "javax.servlet.error.message";
   /** Status of error page. */
   private static final String ERROR_PATH = "/error";
 
@@ -33,13 +33,13 @@ public class IndexController implements ErrorController {
    */
   @RequestMapping(ERROR_PATH)
   public Object error(HttpServletRequest req) {
-    int errorStatusCode = ((Integer) req.getAttribute(ERROR_STATUS_CODE_ATTRIBUTE));
+    int errorStatusCode = ((Integer) req.getAttribute(ERROR_STATUS_CODE));
 
     if (errorStatusCode == HttpStatus.NOT_FOUND.value()) {
       return new ModelAndView("index.html");
     }
 
-    String errorMessage = ((String) req.getAttribute(ERROR_MESSAGE_ATTRIBUTE));
+    String errorMessage = ((String) req.getAttribute(ERROR_MESSAGE));
     return ResponseEntity.status(errorStatusCode).body(new ErrorResponse("error", errorMessage));
   }
 

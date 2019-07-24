@@ -96,7 +96,7 @@ public class GeneratePreviewThread extends Thread {
           .takeScreenshot(driver);
 
       final File targetFile = new File(
-              previewsDir + previewID + "." + PreviewController.PREVIEW_IMAGE_FORMAT
+              previewsDir + previewID + "." + PreviewController.IMAGE_FORMAT
       );
       if (!targetFile.getParentFile().exists()) {
         boolean result = targetFile.getParentFile().mkdirs();
@@ -113,7 +113,7 @@ public class GeneratePreviewThread extends Thread {
 
       ImageIO.write(
               screenshot.getImage(),
-              PreviewController.PREVIEW_IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
+              PreviewController.IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
               targetFile
       );
       driver.close();

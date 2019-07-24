@@ -79,9 +79,9 @@ public class WatchingJobThread extends Thread {
       File imageFile = websiteScreenshot();
       File prevImageFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
       long differentPixels = compareImages(imageFile, prevImageFile);
-      job.setLastRunDifferentPixels(differentPixels);
+      job.setLastRunDifference(differentPixels);
 
-      if (differentPixels >= job.getPixelDifferenceToTrigger()) {
+      if (differentPixels >= job.getPixelThreshold()) {
         if (LOG.isLoggable(Level.INFO)) {
           LOG.info("Job triggered: " + job.getID());
         }
@@ -166,7 +166,7 @@ public class WatchingJobThread extends Thread {
 
     ImageIO.write(
             screenshot.getImage(),
-            WatchingJob.SCREENSHOT_IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
+            WatchingJob.SCREENSHOT_FORMAT.toUpperCase(Locale.getDefault()),
             targetFile
     );
     driver.close();
@@ -197,7 +197,7 @@ public class WatchingJobThread extends Thread {
    * @return total different pixels
    */
   private long compareImages(BufferedImage first, BufferedImage second) {
-    long totalDifferentPixels = 0;
+    long differentPixels = 0;
     int startX = Math.min(job.getSelectionX(), Math.min(first.getWidth(), second.getWidth()));
     int startY = Math.min(job.getSelectionY(), Math.min(first.getHeight(), second.getHeight()));
     int width = Math.min(
@@ -214,10 +214,10 @@ public class WatchingJobThread extends Thread {
         int firstRgb = first.getRGB(x, y);
         int secondRgb = second.getRGB(x, y);
         if (firstRgb != secondRgb) {
-          totalDifferentPixels++;
+          differentPixels++;
         }
       }
     }
-    return totalDifferentPixels;
+    return differentPixels;
   }
 }

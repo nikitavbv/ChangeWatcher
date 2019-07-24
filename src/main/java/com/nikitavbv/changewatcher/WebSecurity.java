@@ -22,26 +22,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   /** Service which provides user data. */
-  private final UserDetailsServiceImpl userDetailsService;
+  private final UserDetailsServiceImpl userDetails;
   /** Service to hash passwords. */
-  private final BCryptPasswordEncoder bcryptPasswordEncoder;
+  private final BCryptPasswordEncoder passwordEncoder;
   /** Security configuration. */
-  private final SecurityProperties securityProperties;
+  private final SecurityProperties security;
 
   /**
    * Creates WebSecurity.
    *
-   * @param userDetailsService required to set password encoder
-   * @param bcryptPasswordEncoder password encoder to use for user passwords
-   * @param securityProperties security configuration loaded from
+   * @param userDetails required to set password encoder
+   * @param passwordEncoder password encoder to use for user passwords
+   * @param security security configuration loaded from
    *                           application.properties.
    */
-  public WebSecurity(UserDetailsServiceImpl userDetailsService,
-                     BCryptPasswordEncoder bcryptPasswordEncoder,
-                     SecurityProperties securityProperties) {
-    this.userDetailsService = userDetailsService;
-    this.bcryptPasswordEncoder = bcryptPasswordEncoder;
-    this.securityProperties = securityProperties;
+  public WebSecurity(UserDetailsServiceImpl userDetails,
+                     BCryptPasswordEncoder passwordEncoder,
+                     SecurityProperties security) {
+    this.userDetails = userDetails;
+    this.passwordEncoder = passwordEncoder;
+    this.security = security;
   }
 
   /** Configure security for api routes. */
@@ -55,15 +55,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
           .antMatchers(RouteConstants.JOBS_API).permitAll()
           .antMatchers(RouteConstants.API_PATH_PATTERN).authenticated()
           .and()
-          .addFilter(new JwtAuthorizationFilter(authenticationManager(), securityProperties))
-          .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(), securityProperties),
+          .addFilter(new JwtAuthorizationFilter(authenticationManager(), security))
+          .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(), security),
               UsernamePasswordAuthenticationFilter.class);
   }
 
   /** Sets auth configuration. */
   @Override
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService).passwordEncoder(bcryptPasswordEncoder);
+    auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder);
   }
 
 }

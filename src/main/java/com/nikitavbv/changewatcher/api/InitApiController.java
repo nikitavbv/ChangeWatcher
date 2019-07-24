@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class InitApiController {
 
   /** Repository with user data. */
-  private final ApplicationUserRepository applicationUserRepository;
+  private final ApplicationUserRepository userRepository;
 
   /**
    * Constructs InitApiController.
    *
-   * @param applicationUserRepository repository with user data
+   * @param userRepository repository with user data
    */
-  public InitApiController(ApplicationUserRepository applicationUserRepository) {
-    this.applicationUserRepository = applicationUserRepository;
+  public InitApiController(ApplicationUserRepository userRepository) {
+    this.userRepository = userRepository;
   }
 
   /**
@@ -44,7 +44,7 @@ public class InitApiController {
       throw new SetupRequiredException();
     }
 
-    ApplicationUser user = applicationUserRepository.findByUsername(request.getRemoteUser());
+    ApplicationUser user = userRepository.findByUsername(request.getRemoteUser());
     if (user == null) {
       throw new AuthRequiredException();
     }
@@ -52,7 +52,7 @@ public class InitApiController {
   }
 
   private boolean checkIfSetupIsDone() {
-    return applicationUserRepository.count() > 0;
+    return userRepository.count() > 0;
   }
 
 }

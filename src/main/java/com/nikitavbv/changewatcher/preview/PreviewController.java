@@ -28,24 +28,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class PreviewController {
 
   /** Maximum number of threads used to generate previews. */
-  private static final int MAX_PREVIEW_THREADS = 1;
+  private static final int MAX_THREADS = 1;
   /** Directory to save preview screenshots to. */
   private static final String PREVIEWS_DIR = "previews/";
   /** Preview image format. */
-  /* default */ static final String PREVIEW_IMAGE_FORMAT = "png";
+  /* default */ static final String IMAGE_FORMAT = "png";
 
   /** ApplicationProperties are required to get application data dir. */
-  private final ApplicationProperties applicationProperties;
+  private final ApplicationProperties properties;
   /** Thread pool used to run preview threads. */
-  private final ExecutorService executorService = Executors.newFixedThreadPool(MAX_PREVIEW_THREADS);
+  private final ExecutorService executorService = Executors.newFixedThreadPool(MAX_THREADS);
 
   /**
    * Creates preview controller.
    *
-   * @param applicationProperties application properties
+   * @param properties application properties
    */
-  public PreviewController(ApplicationProperties applicationProperties) {
-    this.applicationProperties = applicationProperties;
+  public PreviewController(ApplicationProperties properties) {
+    this.properties = properties;
   }
 
   /**
@@ -69,7 +69,7 @@ public class PreviewController {
   @GetMapping(value = "/{previewID}", produces = MediaType.IMAGE_PNG_VALUE)
   public @ResponseBody byte[] getPreview(@PathVariable String previewID) {
     final File previewFile = new File(
-            getPreviewsDirPath() + previewID + "." + PREVIEW_IMAGE_FORMAT
+            getPreviewsDirPath() + previewID + "." + IMAGE_FORMAT
     );
     if (!previewFile.exists()) {
       throw new PreviewNotFoundException();
@@ -84,6 +84,6 @@ public class PreviewController {
 
   /** Returns previews dir. */
   private String getPreviewsDirPath() {
-    return applicationProperties.getDataDir() + PREVIEWS_DIR;
+    return properties.getDataDir() + PREVIEWS_DIR;
   }
 }

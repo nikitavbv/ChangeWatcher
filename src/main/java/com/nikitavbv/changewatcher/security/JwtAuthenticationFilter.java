@@ -34,21 +34,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
   /** AuthenticationManager to set user auth to username/password. */
-  private final AuthenticationManager authenticationManager;
+  private final AuthenticationManager authManager;
   /** SecurityProperties to get application secret used for session tokens. */
-  private final SecurityProperties securityProperties;
+  private final SecurityProperties properties;
 
   /**
    * Creates JWTAuthentication filter.
    *
-   * @param authenticationManager for user authentication
-   * @param securityProperties configuration for security tokens
+   * @param authManager for user authentication
+   * @param properties configuration for security tokens
    */
-  public JwtAuthenticationFilter(AuthenticationManager authenticationManager,
-                                 SecurityProperties securityProperties) {
+  public JwtAuthenticationFilter(AuthenticationManager authManager,
+                                 SecurityProperties properties) {
     super(new AntPathRequestMatcher(RouteConstants.LOGIN_API, "POST"));
-    this.authenticationManager = authenticationManager;
-    this.securityProperties = securityProperties;
+    this.authManager = authManager;
+    this.properties = properties;
   }
 
   /** Authenticate user with provided username/password. */
@@ -61,7 +61,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
       ApplicationUser creds = new ObjectMapper()
           .readValue(req.getInputStream(), ApplicationUser.class);
 
-      return authenticationManager.authenticate(
+      return authManager.authenticate(
           new UsernamePasswordAuthenticationToken(
               creds.getUsername(),
               creds.getPassword(),
@@ -82,10 +82,10 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
                                           HttpServletResponse res,
                                           FilterChain chain,
                                           Authentication auth) {
-    String secret = securityProperties.getSecret();
+    String secret = properties.getSecret();
     if (secret == null) {
-      securityProperties.setSecret(securityProperties.generateSecret());
-      secret = securityProperties.getSecret();
+      properties.setSecret(properties.generateSecret());
+      secret = properties.getSecret();
     }
 
     byte[] keyBytes = Decoders.BASE64.decode(secret);

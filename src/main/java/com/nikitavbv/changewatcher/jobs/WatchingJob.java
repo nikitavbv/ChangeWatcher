@@ -23,12 +23,12 @@ import org.apache.http.impl.client.HttpClients;
 public class WatchingJob {
 
   /** Image format used for screenshot files. */
-  /* default */ static final String SCREENSHOT_IMAGE_FORMAT = "png";
+  /* default */ static final String SCREENSHOT_FORMAT = "png";
 
-  /** Job id. */
+  /** Job jobID. */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private long jobID;
 
   /** Name of the watching job. */
   private String title;
@@ -37,14 +37,14 @@ public class WatchingJob {
   /** Webhook to send post request to when change is detected. */
   private String webhook;
   /** Number of pixels to be changed to trigger listeners. */
-  private long pixelDifferenceToTrigger;
+  private long pixelThreshold;
 
   /** How often website is checked for changes. */
   private long watchingInterval;
   /** Timestamp of last web page fetch. */
   private long lastCheckTime;
   /** Number of pixel changes detected during the last check. */
-  private long lastRunDifferentPixels;
+  private long lastRunDifference;
 
   /** X coordinate of selection bounds. */
   private int selectionX;
@@ -76,7 +76,7 @@ public class WatchingJob {
    * @return file where screenshot is saved to.
    */
   /* default */ File getWebsiteScreenshotFile(String screenshotsDir) {
-    return new File(screenshotsDir + "/" + getID() + "." + SCREENSHOT_IMAGE_FORMAT);
+    return new File(screenshotsDir + "/" + getID() + "." + SCREENSHOT_FORMAT);
   }
 
   /**
@@ -86,7 +86,7 @@ public class WatchingJob {
    * @return file where previous screenshot was saved to.
    */
   /* default */ File getPrevWebsiteScreenshotFile(String screenshotsDir) {
-    return new File(screenshotsDir + "/" + getID() + "_prev1" + "." + SCREENSHOT_IMAGE_FORMAT);
+    return new File(screenshotsDir + "/" + getID() + "_prev1" + "." + SCREENSHOT_FORMAT);
   }
 
   /* default */ void runWebhook() throws IOException {
@@ -101,11 +101,11 @@ public class WatchingJob {
   }
 
   /**
-   * Get id of this job.
-   * @return id of this job.
+   * Get jobID of this job.
+   * @return jobID of this job.
    */
   public long getID() {
-    return id;
+    return jobID;
   }
 
   /**
@@ -205,8 +205,8 @@ public class WatchingJob {
    *
    * @return total different pixels
    */
-  public long getLastRunDifferentPixels() {
-    return this.lastRunDifferentPixels;
+  public long getLastRunDifference() {
+    return this.lastRunDifference;
   }
 
   /**
@@ -214,8 +214,8 @@ public class WatchingJob {
    *
    * @param differentPixels total different pixels
    */
-  public void setLastRunDifferentPixels(long differentPixels) {
-    this.lastRunDifferentPixels = differentPixels;
+  public void setLastRunDifference(long differentPixels) {
+    this.lastRunDifference = differentPixels;
   }
 
   /**
@@ -223,17 +223,17 @@ public class WatchingJob {
    *
    * @return number of pixels to trigger notification
    */
-  public long getPixelDifferenceToTrigger() {
-    return this.pixelDifferenceToTrigger;
+  public long getPixelThreshold() {
+    return this.pixelThreshold;
   }
 
   /**
    * Set total number of pixles required for notification to be triggered.
    *
-   * @param pixelDifferenceToTrigger number of pixels to trigger notification
+   * @param pixelThreshold number of pixels to trigger notification
    */
-  public void setPixelDifferenceToTrigger(long pixelDifferenceToTrigger) {
-    this.pixelDifferenceToTrigger = pixelDifferenceToTrigger;
+  public void setPixelThreshold(long pixelThreshold) {
+    this.pixelThreshold = pixelThreshold;
   }
 
   /**

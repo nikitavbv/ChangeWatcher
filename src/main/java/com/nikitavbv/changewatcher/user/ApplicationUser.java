@@ -20,16 +20,16 @@ import javax.persistence.OneToMany;
 @Entity
 public class ApplicationUser {
 
-  /** User id. */
+  /** User userID. */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private long userID;
   /** User name. */
   private String username;
   /** User password (hashed). */
   private String password;
   /** Indicates if user is admin. */
-  private boolean isAdmin = false;
+  private boolean admin = false;
 
   /** Watching jobs created by this user. */
   @OneToMany
@@ -50,9 +50,9 @@ public class ApplicationUser {
     this.jobs.remove(job);
   }
 
-  /** Get user id. */
-  public long getId() {
-    return id;
+  /** Get user userID. */
+  public long getUserID() {
+    return userID;
   }
 
   /** Get user name. */
@@ -76,13 +76,13 @@ public class ApplicationUser {
   }
 
   /** Return if this user is admin. */
-  public boolean getIsAdmin() {
-    return isAdmin;
+  public boolean isAdmin() {
+    return admin;
   }
 
   /** Set admin status of this user. */
   public void setIsAdmin(boolean isAdmin) {
-    this.isAdmin = isAdmin;
+    this.admin = isAdmin;
   }
 
   /** Get list of jobs belonging to this user. */

@@ -25,13 +25,13 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
   /** Security properties to validate tokens with application secret. */
-  private final SecurityProperties securityProperties;
+  private final SecurityProperties properties;
 
   /** Creates JwtAuthorizationFilter. */
   public JwtAuthorizationFilter(AuthenticationManager authManager,
-                                SecurityProperties securityProperties) {
+                                SecurityProperties properties) {
     super(authManager);
-    this.securityProperties = securityProperties;
+    this.properties = properties;
   }
 
   /** Update authentication with token provided by user. */
@@ -57,10 +57,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
   private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
     String token = request.getHeader(HEADER_STRING);
     if (token != null) {
-      String secret = securityProperties.getSecret();
+      String secret = properties.getSecret();
       if (secret == null) {
-        securityProperties.setSecret(securityProperties.generateSecret());
-        secret = securityProperties.getSecret();
+        properties.setSecret(properties.generateSecret());
+        secret = properties.getSecret();
       }
 
       try {
