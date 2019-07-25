@@ -19,7 +19,7 @@ public class InitApiResponse {
    *
    * @param jobs list of watching jobs of user performing the request.
    */
-  public InitApiResponse(List<WatchingJob> jobs) {
+  public InitApiResponse(final List<WatchingJob> jobs) {
     this.jobs = jobs;
   }
 

@@ -62,9 +62,9 @@ public class WatchingJobController {
    * @param jobRepository repository with watching job details
    * @param properties general application configuration
    */
-  public WatchingJobController(ApplicationUserRepository userRepository,
-                               WatchingJobRepository jobRepository,
-                               ApplicationProperties properties) {
+  public WatchingJobController(final ApplicationUserRepository userRepository,
+                               final WatchingJobRepository jobRepository,
+                               final ApplicationProperties properties) {
     this.userRepository = userRepository;
     this.jobRepository = jobRepository;
     this.properties = properties;
@@ -90,10 +90,10 @@ public class WatchingJobController {
    */
   @PostMapping
   public AddWatchingJobResponse addWatchingJob(
-          HttpServletRequest req,
-          @RequestBody WatchingJob job
+          final HttpServletRequest req,
+          @RequestBody final WatchingJob job
   ) {
-    ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
+    final ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
     job.setUser(user);
     jobRepository.save(job);
     return new AddWatchingJobResponse(job.getID(), user.getJobs());
@@ -105,11 +105,11 @@ public class WatchingJobController {
    * @throws PermissionDeniedException if user cannot access this job
    */
   @PostMapping("/{jobID}")
-  public StatusOkResponse updateWatchingJob(HttpServletRequest req,
-                                            @PathVariable long jobID,
-                                            @RequestBody WatchingJob newJob) {
-    ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = jobRepository
+  public StatusOkResponse updateWatchingJob(final HttpServletRequest req,
+                                            @PathVariable final long jobID,
+                                            @RequestBody final WatchingJob newJob) {
+    final ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
+    final WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
     if (job.getUser().getUserID() != user.getUserID()) {
@@ -130,9 +130,9 @@ public class WatchingJobController {
    * @throws PermissionDeniedException if user cannot access this job
    */
   @DeleteMapping("/{jobID}")
-  public StatusOkResponse deleteWatchingJob(HttpServletRequest req, @PathVariable long jobID) {
-    ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = jobRepository
+  public StatusOkResponse deleteWatchingJob(final HttpServletRequest req, @PathVariable final long jobID) {
+    final ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
+    final WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
     if (job.getUser().getUserID() != user.getUserID()) {
@@ -152,16 +152,16 @@ public class WatchingJobController {
    *     by this job yet
    */
   @GetMapping("/{jobID}/screenshot")
-  public @ResponseBody byte[] getScreenshot(HttpServletRequest req, @PathVariable long jobID) {
-    ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
-    WatchingJob job = jobRepository
+  public @ResponseBody byte[] getScreenshot(final HttpServletRequest req, @PathVariable final long jobID) {
+    final ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
+    final WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
     if (job.getUser().getUserID() != user.getUserID()) {
       throw new PermissionDeniedException("Cannot get screenshot of jobs owned by other users");
     }
 
-    File screenshotFile = job.getWebsiteScreenshotFile(getScreenshotsDir());
+    final File screenshotFile = job.getWebsiteScreenshotFile(getScreenshotsDir());
     if (!screenshotFile.exists()) {
       throw new ScreenshotNotFoundException();
     }

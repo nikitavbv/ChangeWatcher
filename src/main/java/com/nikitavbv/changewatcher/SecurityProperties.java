@@ -23,7 +23,7 @@ public class SecurityProperties {
    */
   public String generateSecret() {
     SecureRandom random = new SecureRandom();
-    byte[] randomBytes = new byte[SECRET_SIZE];
+    final byte[] randomBytes = new byte[SECRET_SIZE];
     random.nextBytes(randomBytes);
     return Base64.getEncoder().encodeToString(randomBytes);
   }
@@ -34,7 +34,7 @@ public class SecurityProperties {
   }
 
   /** Set secret token. */
-  public void setSecret(String secret) {
+  public void setSecret(final String secret) {
     this.secret = secret;
   }
 

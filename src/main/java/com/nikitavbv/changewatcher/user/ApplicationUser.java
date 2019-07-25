@@ -41,12 +41,12 @@ public class ApplicationUser {
   private final List<WatchingJob> jobs = new ArrayList<>();
 
   /** Add a new watching job to this user. */
-  public void addJob(WatchingJob job) {
+  public void addJob(final WatchingJob job) {
     this.jobs.add(job);
   }
 
   /** Remove watching job from this user. */
-  public void removeJob(WatchingJob job) {
+  public void removeJob(final WatchingJob job) {
     this.jobs.remove(job);
   }
 
@@ -61,7 +61,7 @@ public class ApplicationUser {
   }
 
   /** Set user name. */
-  public void setUsername(String username) {
+  public void setUsername(final String username) {
     this.username = username;
   }
 
@@ -71,7 +71,7 @@ public class ApplicationUser {
   }
 
   /** Set user password. */
-  public void setPassword(String password) {
+  public void setPassword(final String password) {
     this.password = password;
   }
 
@@ -81,7 +81,7 @@ public class ApplicationUser {
   }
 
   /** Set admin status of this user. */
-  public void setIsAdmin(boolean isAdmin) {
+  public void setIsAdmin(final boolean isAdmin) {
     this.admin = isAdmin;
   }
 

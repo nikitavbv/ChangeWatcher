@@ -12,7 +12,7 @@ public class PermissionDeniedException extends RuntimeException {
    *
    * @param msg details
    * */
-  public PermissionDeniedException(String msg) {
+  public PermissionDeniedException(final String msg) {
     super(msg);
   }
 }

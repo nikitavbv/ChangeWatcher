@@ -22,9 +22,9 @@ public class CustomControllerAdvice {
   /** Send api permission denied exception response. */
   @ExceptionHandler(PermissionDeniedException.class)
   public ResponseEntity<ErrorResponse> handlePermissionDeniedException(
-          PermissionDeniedException exception
+          final PermissionDeniedException exception
   ) {
-    ErrorResponse response = new ErrorResponse("permission_denied", exception.getMessage());
+    final ErrorResponse response = new ErrorResponse("permission_denied", exception.getMessage());
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
   }
 
@@ -43,21 +43,21 @@ public class CustomControllerAdvice {
   /** Inform client that requested preview does not exist. */
   @ExceptionHandler(PreviewNotFoundException.class)
   public ResponseEntity<ErrorResponse> handlePreviewNotFoundException() {
-    ErrorResponse errorResponse = new ErrorResponse("preview_not_found");
+    final ErrorResponse errorResponse = new ErrorResponse("preview_not_found");
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
 
   /** Inform client that requested job does not exist. */
   @ExceptionHandler(WatchingJobNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleWatchingJobNotFoundException() {
-    ErrorResponse errorResponse = new ErrorResponse("watching_job_not_found");
+    final ErrorResponse errorResponse = new ErrorResponse("watching_job_not_found");
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
 
   /** Inform client that requested screenshot does not exist. */
   @ExceptionHandler(ScreenshotNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleScreenshotNotFoundException() {
-    ErrorResponse errorResponse = new ErrorResponse("screenshot_not_found");
+    final ErrorResponse errorResponse = new ErrorResponse("screenshot_not_found");
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
 

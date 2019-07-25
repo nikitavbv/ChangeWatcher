@@ -65,7 +65,9 @@ public class WatchingJobThread extends Thread {
    * @param job watching job which will be checked in this thread.
    * @param screenshotsDir directory to save screenshot to.
    */
-  WatchingJobThread(WatchingJobRepository repository, WatchingJob job, String screenshotsDir) {
+  WatchingJobThread(final WatchingJobRepository repository,
+                    final WatchingJob job,
+                    final String screenshotsDir) {
     this.job = job;
     this.screenshotsDir = screenshotsDir;
     this.repository = repository;
@@ -76,9 +78,9 @@ public class WatchingJobThread extends Thread {
    */
   public void run() {
     try {
-      File imageFile = websiteScreenshot();
-      File prevImageFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
-      long differentPixels = compareImages(imageFile, prevImageFile);
+      final File imageFile = websiteScreenshot();
+      final File prevImageFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
+      final long differentPixels = compareImages(imageFile, prevImageFile);
       job.setLastRunDifference(differentPixels);
 
       if (differentPixels >= job.getPixelThreshold()) {
@@ -104,13 +106,13 @@ public class WatchingJobThread extends Thread {
     final File prevFile = job.getPrevWebsiteScreenshotFile(screenshotsDir);
     if (targetFile.exists()) {
       if (!prevFile.getParentFile().exists()) {
-        boolean result = prevFile.getParentFile().mkdirs();
+        final boolean result = prevFile.getParentFile().mkdirs();
         if (!result) {
           LOG.warning("Failed to create parent dir for prev screenshot file");
         }
       }
       if (!prevFile.exists()) {
-        boolean result = prevFile.createNewFile();
+        final boolean result = prevFile.createNewFile();
         if (!result) {
           LOG.warning("Failed to create file for prev screenshot");
         }
@@ -128,7 +130,7 @@ public class WatchingJobThread extends Thread {
    *
    * @param targetFile file to save screenshot to.
    */
-  private void saveScreenshotToFile(File targetFile) throws IOException {
+  private void saveScreenshotToFile(final File targetFile) throws IOException {
     final Process xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);
     final Map<String, String> environment = new HashMap<>();
     environment.put("DISPLAY", ":" + DISPLAY_NUMBER + ".0");
@@ -147,18 +149,18 @@ public class WatchingJobThread extends Thread {
         LOG.warning("Exception while getting url: " + e.getMessage());
       }
     }
-    Screenshot screenshot = new AShot()
+    final Screenshot screenshot = new AShot()
             .shootingStrategy(ShootingStrategies.viewportPasting(1000))
             .takeScreenshot(driver);
 
     if (!targetFile.getParentFile().exists()) {
-      boolean result = targetFile.getParentFile().mkdirs();
+      final boolean result = targetFile.getParentFile().mkdirs();
       if (!result) {
         LOG.warning("Failed to make dirs for preview directory");
       }
     }
     if (!targetFile.exists()) {
-      boolean result = targetFile.createNewFile();
+      final boolean result = targetFile.createNewFile();
       if (!result) {
         LOG.warning("Failed to create new file for preview");
       }
@@ -181,7 +183,7 @@ public class WatchingJobThread extends Thread {
    * @param second file with second image.
    * @return total different pixels
    */
-  private long compareImages(File first, File second) throws IOException {
+  private long compareImages(final File first, final File second) throws IOException {
     if (!first.exists() || !second.exists()) {
       return -1;
     }
@@ -196,23 +198,23 @@ public class WatchingJobThread extends Thread {
    * @param second second image
    * @return total different pixels
    */
-  private long compareImages(BufferedImage first, BufferedImage second) {
+  private long compareImages(final BufferedImage first, final BufferedImage second) {
     long differentPixels = 0;
-    int startX = Math.min(job.getSelectionX(), Math.min(first.getWidth(), second.getWidth()));
-    int startY = Math.min(job.getSelectionY(), Math.min(first.getHeight(), second.getHeight()));
-    int width = Math.min(
+    final int startX = Math.min(job.getSelectionX(), Math.min(first.getWidth(), second.getWidth()));
+    final int startY = Math.min(job.getSelectionY(), Math.min(first.getHeight(), second.getHeight()));
+    final int width = Math.min(
             Math.min(first.getWidth(), second.getWidth()),
             job.getSelectionX() + job.getSelectionWidth()
     );
-    int height = Math.min(
+    final int height = Math.min(
         Math.min(first.getHeight(), second.getHeight()),
         job.getSelectionY() + job.getSelectionHeight()
     );
 
     for (int x = startX; x < width; x++) {
       for (int y = startY; y < height; y++) {
-        int firstRgb = first.getRGB(x, y);
-        int secondRgb = second.getRGB(x, y);
+        final int firstRgb = first.getRGB(x, y);
+        final int secondRgb = second.getRGB(x, y);
         if (firstRgb != secondRgb) {
           differentPixels++;
         }

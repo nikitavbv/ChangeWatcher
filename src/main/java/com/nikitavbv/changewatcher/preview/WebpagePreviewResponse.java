@@ -15,7 +15,7 @@ public class WebpagePreviewResponse {
    * Creates webpage preview response.
    * @param screenshotID id of page screenshot.
    */
-  WebpagePreviewResponse(String screenshotID) {
+  WebpagePreviewResponse(final String screenshotID) {
     this.screenshotID = screenshotID;
   }
 

@@ -28,18 +28,18 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
   private final SecurityProperties properties;
 
   /** Creates JwtAuthorizationFilter. */
-  public JwtAuthorizationFilter(AuthenticationManager authManager,
-                                SecurityProperties properties) {
+  public JwtAuthorizationFilter(final AuthenticationManager authManager,
+                                final SecurityProperties properties) {
     super(authManager);
     this.properties = properties;
   }
 
   /** Update authentication with token provided by user. */
   @Override
-  protected void doFilterInternal(HttpServletRequest req,
-                                  HttpServletResponse res,
-                                  FilterChain chain) throws IOException, ServletException {
-    String header = req.getHeader(HEADER_STRING);
+  protected void doFilterInternal(final HttpServletRequest req,
+                                  final HttpServletResponse res,
+                                  final FilterChain chain) throws IOException, ServletException {
+    final String header = req.getHeader(HEADER_STRING);
 
     if (header == null || !header.startsWith(TOKEN_PREFIX)) {
       chain.doFilter(req, res);
@@ -54,8 +54,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
   }
 
   /** Performs authentication with token provided in request header.ii */
-  private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-    String token = request.getHeader(HEADER_STRING);
+  private UsernamePasswordAuthenticationToken getAuthentication(final HttpServletRequest request) {
+    final String token = request.getHeader(HEADER_STRING);
     if (token != null) {
       String secret = properties.getSecret();
       if (secret == null) {
@@ -64,7 +64,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
       }
 
       try {
-        String user = Jwts.parser()
+        final String user = Jwts.parser()
             .setSigningKey(secret)
             .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
             .getBody()

@@ -13,13 +13,13 @@ public class ErrorResponse {
   private String message;
 
   /** Construct ErrorResponse given error name and message. */
-  public ErrorResponse(String error, String message) {
+  public ErrorResponse(final String error, final String message) {
     this.error = error;
     this.message = message;
   }
 
   /** Construct ErrorResponse given error name. */
-  public ErrorResponse(String error) {
+  public ErrorResponse(final String error) {
     this.error = error;
   }
 

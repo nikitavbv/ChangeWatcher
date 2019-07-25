@@ -44,8 +44,8 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
    * @param authManager for user authentication
    * @param properties configuration for security tokens
    */
-  public JwtAuthenticationFilter(AuthenticationManager authManager,
-                                 SecurityProperties properties) {
+  public JwtAuthenticationFilter(final AuthenticationManager authManager,
+                                 final SecurityProperties properties) {
     super(new AntPathRequestMatcher(RouteConstants.LOGIN_API, "POST"));
     this.authManager = authManager;
     this.properties = properties;
@@ -54,11 +54,11 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
   /** Authenticate user with provided username/password. */
   @Override
   public Authentication attemptAuthentication(
-          HttpServletRequest req,
-          HttpServletResponse res
+          final HttpServletRequest req,
+          final HttpServletResponse res
   ) throws AuthenticationException {
     try {
-      ApplicationUser creds = new ObjectMapper()
+      final ApplicationUser creds = new ObjectMapper()
           .readValue(req.getInputStream(), ApplicationUser.class);
 
       return authManager.authenticate(
@@ -78,20 +78,20 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
    * <p>Token is sent in Authorization header.</p>
    */
   @Override
-  protected void successfulAuthentication(HttpServletRequest req,
-                                          HttpServletResponse res,
-                                          FilterChain chain,
-                                          Authentication auth) {
+  protected void successfulAuthentication(final HttpServletRequest req,
+                                          final HttpServletResponse res,
+                                          final FilterChain chain,
+                                          final Authentication auth) {
     String secret = properties.getSecret();
     if (secret == null) {
       properties.setSecret(properties.generateSecret());
       secret = properties.getSecret();
     }
 
-    byte[] keyBytes = Decoders.BASE64.decode(secret);
-    SecretKey key = Keys.hmacShaKeyFor(keyBytes);
+    final byte[] keyBytes = Decoders.BASE64.decode(secret);
+    final SecretKey key = Keys.hmacShaKeyFor(keyBytes);
 
-    String token = Jwts.builder()
+    final String token = Jwts.builder()
         .setSubject(((User) auth.getPrincipal()).getUsername())
         .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
         .signWith(key)

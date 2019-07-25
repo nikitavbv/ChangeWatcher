@@ -12,7 +12,7 @@ public class ScreenshotNotFoundException extends RuntimeException {
     super("Screenshot not found");
   }
 
-  ScreenshotNotFoundException(Throwable cause) {
+  ScreenshotNotFoundException(final Throwable cause) {
     super("Screenshot not found", cause);
   }
 }

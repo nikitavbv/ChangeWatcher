@@ -25,15 +25,15 @@ public class UserController {
   private final BCryptPasswordEncoder passwordEncoder;
 
   /** Creates UserController. */
-  public UserController(ApplicationUserRepository userRepository,
-                        BCryptPasswordEncoder passwordEncoder) {
+  public UserController(final ApplicationUserRepository userRepository,
+                        final BCryptPasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
   }
 
   /** Get currently authenticated user information. */
   @GetMapping
-  public ApplicationUser getUserInfo(HttpServletRequest httpRequest) {
+  public ApplicationUser getUserInfo(final HttpServletRequest httpRequest) {
     return userRepository.findByUsername(httpRequest.getRemoteUser());
   }
 
@@ -45,15 +45,15 @@ public class UserController {
    * @return user id
    */
   @PostMapping
-  public SignUpResult signUp(HttpServletRequest request,
-                     @RequestBody ApplicationUser user) {
+  public SignUpResult signUp(final HttpServletRequest request,
+                     @RequestBody final ApplicationUser user) {
     // User can be an admin if one of the following is true:
     // - There are no users registered yet and new one is the first.
     // - This request is performed by admin user.
     if (request.getRemoteUser() == null && userRepository.count() != 0L) {
       throw new PermissionDeniedException("Auth required for creating users");
     }
-    ApplicationUser requestUser = userRepository.findByUsername(request.getRemoteUser());
+    final ApplicationUser requestUser = userRepository.findByUsername(request.getRemoteUser());
     if (requestUser != null && !requestUser.isAdmin() && requestUser.isAdmin()) {
       throw new PermissionDeniedException("Non-admin users are not allowed to create admin users");
     }

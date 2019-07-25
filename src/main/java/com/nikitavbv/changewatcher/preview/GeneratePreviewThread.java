@@ -62,7 +62,7 @@ public class GeneratePreviewThread extends Thread {
    * @param previewID name of the preview file
    * @param previewsDir directory where previews are saved to
    */
-  GeneratePreviewThread(String url, String previewID, String previewsDir) {
+  GeneratePreviewThread(final String url, final String previewID, final String previewsDir) {
     super();
     this.url = url;
     this.previewID = previewID;
@@ -92,20 +92,20 @@ public class GeneratePreviewThread extends Thread {
           LOG.warning("Exception while getting page: " + e.getMessage());
         }
       }
-      Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
+      final Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
           .takeScreenshot(driver);
 
       final File targetFile = new File(
               previewsDir + previewID + "." + PreviewController.IMAGE_FORMAT
       );
       if (!targetFile.getParentFile().exists()) {
-        boolean result = targetFile.getParentFile().mkdirs();
+        final boolean result = targetFile.getParentFile().mkdirs();
         if (!result) {
           LOG.warning("Failed to make dirs for preview directory");
         }
       }
       if (!targetFile.exists()) {
-        boolean result = targetFile.createNewFile();
+        final boolean result = targetFile.createNewFile();
         if (!result) {
           LOG.warning("Failed to create new file for preview");
         }

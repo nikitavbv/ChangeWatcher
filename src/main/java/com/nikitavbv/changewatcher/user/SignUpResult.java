@@ -12,7 +12,7 @@ public class SignUpResult {
   private final long userID;
 
   /** Creates SignUpResult. */
-  SignUpResult(long userID) {
+  SignUpResult(final long userID) {
     this.userID = userID;
   }
 

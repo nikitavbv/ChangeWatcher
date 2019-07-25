@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
    *
    * @param userRepository user data repository
    */
-  public UserDetailsServiceImpl(ApplicationUserRepository userRepository) {
+  public UserDetailsServiceImpl(final ApplicationUserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
@@ -38,8 +38,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
    * @throws UsernameNotFoundException if user with such username is not found
    */
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    ApplicationUser applicationUser = userRepository.findByUsername(username);
+  public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+    final ApplicationUser applicationUser = userRepository.findByUsername(username);
     if (applicationUser == null) {
       throw new UsernameNotFoundException(username);
     }

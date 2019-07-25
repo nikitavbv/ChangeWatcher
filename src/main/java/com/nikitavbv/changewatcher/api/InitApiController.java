@@ -27,7 +27,7 @@ public class InitApiController {
    *
    * @param userRepository repository with user data
    */
-  public InitApiController(ApplicationUserRepository userRepository) {
+  public InitApiController(final ApplicationUserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
@@ -39,12 +39,12 @@ public class InitApiController {
    * @return basic user data
    */
   @GetMapping
-  public InitApiResponse doInit(HttpServletRequest request) {
+  public InitApiResponse doInit(final HttpServletRequest request) {
     if (!checkIfSetupIsDone()) {
       throw new SetupRequiredException();
     }
 
-    ApplicationUser user = userRepository.findByUsername(request.getRemoteUser());
+    final ApplicationUser user = userRepository.findByUsername(request.getRemoteUser());
     if (user == null) {
       throw new AuthRequiredException();
     }

@@ -15,7 +15,7 @@ public class PreviewNotFoundException extends RuntimeException {
     super(DESCRIPTION);
   }
 
-  PreviewNotFoundException(Throwable cause) {
+  PreviewNotFoundException(final Throwable cause) {
     super(DESCRIPTION, cause);
   }
 }

@@ -44,7 +44,7 @@ public class PreviewController {
    *
    * @param properties application properties
    */
-  public PreviewController(ApplicationProperties properties) {
+  public PreviewController(final ApplicationProperties properties) {
     this.properties = properties;
   }
 
@@ -52,7 +52,7 @@ public class PreviewController {
    * Enqueues preview generation job.
    */
   @PostMapping
-  public WebpagePreviewResponse makePreviewFor(@RequestBody WebpagePreviewRequest req) {
+  public WebpagePreviewResponse makePreviewFor(@RequestBody final WebpagePreviewRequest req) {
     final String screenshotID = UUID.randomUUID().toString();
     final GeneratePreviewThread thread = new GeneratePreviewThread(
             req.getUrl(),
@@ -67,7 +67,7 @@ public class PreviewController {
    * Returns generated preview by ID.
    */
   @GetMapping(value = "/{previewID}", produces = MediaType.IMAGE_PNG_VALUE)
-  public @ResponseBody byte[] getPreview(@PathVariable String previewID) {
+  public @ResponseBody byte[] getPreview(@PathVariable final String previewID) {
     final File previewFile = new File(
             getPreviewsDirPath() + previewID + "." + IMAGE_FORMAT
     );

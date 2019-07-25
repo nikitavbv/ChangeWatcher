@@ -32,14 +32,14 @@ public class IndexController implements ErrorController {
    * index.html instead of 404 error.</p>
    */
   @RequestMapping(ERROR_PATH)
-  public Object error(HttpServletRequest req) {
-    int errorStatusCode = ((Integer) req.getAttribute(ERROR_STATUS_CODE));
+  public Object error(final HttpServletRequest req) {
+    final int errorStatusCode = ((Integer) req.getAttribute(ERROR_STATUS_CODE));
 
     if (errorStatusCode == HttpStatus.NOT_FOUND.value()) {
       return new ModelAndView("index.html");
     }
 
-    String errorMessage = ((String) req.getAttribute(ERROR_MESSAGE));
+    final String errorMessage = ((String) req.getAttribute(ERROR_MESSAGE));
     return ResponseEntity.status(errorStatusCode).body(new ErrorResponse("error", errorMessage));
   }
 

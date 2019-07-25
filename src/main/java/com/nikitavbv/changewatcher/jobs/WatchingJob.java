@@ -65,7 +65,7 @@ public class WatchingJob {
   private ApplicationUser user;
 
   /** Make new thread to run this watching job. */
-  /* default */ Thread makeRunThread(WatchingJobRepository repository, String screenshotsDir) {
+  /* default */ Thread makeRunThread(final WatchingJobRepository repository, final String screenshotsDir) {
     return new WatchingJobThread(repository,this, screenshotsDir);
   }
 
@@ -75,7 +75,7 @@ public class WatchingJob {
    * @param screenshotsDir directory where screenshots are stored
    * @return file where screenshot is saved to.
    */
-  /* default */ File getWebsiteScreenshotFile(String screenshotsDir) {
+  /* default */ File getWebsiteScreenshotFile(final String screenshotsDir) {
     return new File(screenshotsDir + "/" + getID() + "." + SCREENSHOT_FORMAT);
   }
 
@@ -85,13 +85,13 @@ public class WatchingJob {
    * @param screenshotsDir directory where screenshots are stored
    * @return file where previous screenshot was saved to.
    */
-  /* default */ File getPrevWebsiteScreenshotFile(String screenshotsDir) {
+  /* default */ File getPrevWebsiteScreenshotFile(final String screenshotsDir) {
     return new File(screenshotsDir + "/" + getID() + "_prev1" + "." + SCREENSHOT_FORMAT);
   }
 
   /* default */ void runWebhook() throws IOException {
-    CloseableHttpClient httpClient = HttpClients.createMinimal();
-    HttpGet httpGet = new HttpGet(webhook);
+    final CloseableHttpClient httpClient = HttpClients.createMinimal();
+    final HttpGet httpGet = new HttpGet(webhook);
     httpClient.execute(httpGet);
     httpClient.close();
   }
@@ -112,7 +112,7 @@ public class WatchingJob {
    * Set user who owns this job.
    * @param user who owns this job
    */
-  public void setUser(ApplicationUser user) {
+  public void setUser(final ApplicationUser user) {
     this.user = user;
   }
 
@@ -127,7 +127,7 @@ public class WatchingJob {
   /**
    * Set watching job title.
    */
-  public void setTitle(String title) {
+  public void setTitle(final String title) {
     this.title = title;
   }
 
@@ -143,7 +143,7 @@ public class WatchingJob {
    * Set URL which is being monitored.
    * @param url url to set
    */
-  public void setUrl(String url) {
+  public void setUrl(final String url) {
     this.url = url;
   }
 
@@ -156,7 +156,7 @@ public class WatchingJob {
   }
 
   /** Set job notification webhook url. */
-  public void setWebhook(String webhook) {
+  public void setWebhook(final String webhook) {
     this.webhook = webhook;
   }
 
@@ -174,7 +174,7 @@ public class WatchingJob {
    *
    * @param watchingInterval milliseconds between page checks
    */
-  public void setWatchingInterval(long watchingInterval) {
+  public void setWatchingInterval(final long watchingInterval) {
     this.watchingInterval = watchingInterval;
   }
 
@@ -196,7 +196,7 @@ public class WatchingJob {
   }
 
   /** Set timestamp of last check. */
-  public void setLastCheckTime(long lastCheckTime) {
+  public void setLastCheckTime(final long lastCheckTime) {
     this.lastCheckTime = lastCheckTime;
   }
 
@@ -214,7 +214,7 @@ public class WatchingJob {
    *
    * @param differentPixels total different pixels
    */
-  public void setLastRunDifference(long differentPixels) {
+  public void setLastRunDifference(final long differentPixels) {
     this.lastRunDifference = differentPixels;
   }
 
@@ -232,7 +232,7 @@ public class WatchingJob {
    *
    * @param pixelThreshold number of pixels to trigger notification
    */
-  public void setPixelThreshold(long pixelThreshold) {
+  public void setPixelThreshold(final long pixelThreshold) {
     this.pixelThreshold = pixelThreshold;
   }
 
@@ -249,7 +249,7 @@ public class WatchingJob {
    *
    * @param selectionX x coordinate of top left corner
    */
-  public void setSelectionX(int selectionX) {
+  public void setSelectionX(final int selectionX) {
     this.selectionX = selectionX;
   }
 
@@ -266,7 +266,7 @@ public class WatchingJob {
    *
    * @param selectionY y coordinate of top left corner
    */
-  public void setSelectionY(int selectionY) {
+  public void setSelectionY(final int selectionY) {
     this.selectionY = selectionY;
   }
 
@@ -284,7 +284,7 @@ public class WatchingJob {
    *
    * @param selectionWidth width of selected region for tracking
    */
-  public void setSelectionWidth(int selectionWidth) {
+  public void setSelectionWidth(final int selectionWidth) {
     this.selectionWidth = selectionWidth;
   }
 
@@ -302,7 +302,7 @@ public class WatchingJob {
    *
    * @param selectionHeight returns height of selected region for tracking
    */
-  public void setSelectionHeight(int selectionHeight) {
+  public void setSelectionHeight(final int selectionHeight) {
     this.selectionHeight = selectionHeight;
   }
 }

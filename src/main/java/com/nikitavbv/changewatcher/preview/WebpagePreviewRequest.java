@@ -24,7 +24,7 @@ public class WebpagePreviewRequest {
    *
    * @param url webpage url
    */
-  public void setUrl(String url) {
+  public void setUrl(final String url) {
     this.url = url;
   }
 }

@@ -15,7 +15,7 @@ public class AddWatchingJobResponse {
   private final long newJobID;
 
   /** Construct add watching job response. */
-  public AddWatchingJobResponse(long newJobID, List<WatchingJob> jobs) {
+  public AddWatchingJobResponse(final long newJobID, final List<WatchingJob> jobs) {
     this.jobs = jobs;
     this.newJobID = newJobID;
   }

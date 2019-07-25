@@ -36,9 +36,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
    * @param security security configuration loaded from
    *                           application.properties.
    */
-  public WebSecurity(UserDetailsServiceImpl userDetails,
-                     BCryptPasswordEncoder passwordEncoder,
-                     SecurityProperties security) {
+  public WebSecurity(final UserDetailsServiceImpl userDetails,
+                     final BCryptPasswordEncoder passwordEncoder,
+                     final SecurityProperties security) {
     this.userDetails = userDetails;
     this.passwordEncoder = passwordEncoder;
     this.security = security;
@@ -46,7 +46,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   /** Configure security for api routes. */
   @Override
-  protected void configure(HttpSecurity http) throws Exception {
+  protected void configure(final HttpSecurity http) throws Exception {
     http.csrf().disable().authorizeRequests()
           .antMatchers(HttpMethod.GET, RouteConstants.INIT_API).permitAll()
           .antMatchers(RouteConstants.USERS_API).permitAll()
@@ -62,7 +62,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   /** Sets auth configuration. */
   @Override
-  public void configure(AuthenticationManagerBuilder auth) throws Exception {
+  public void configure(final AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder);
   }
 
