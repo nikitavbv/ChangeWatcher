@@ -22,7 +22,7 @@ public class SecurityProperties {
    * @return generated token.
    */
   public String generateSecret() {
-    SecureRandom random = new SecureRandom();
+    final SecureRandom random = new SecureRandom();
     final byte[] randomBytes = new byte[SECRET_SIZE];
     random.nextBytes(randomBytes);
     return Base64.getEncoder().encodeToString(randomBytes);
