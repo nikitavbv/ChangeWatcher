@@ -130,7 +130,8 @@ public class WatchingJobController {
    * @throws PermissionDeniedException if user cannot access this job
    */
   @DeleteMapping("/{jobID}")
-  public StatusOkResponse deleteWatchingJob(final HttpServletRequest req, @PathVariable final long jobID) {
+  public StatusOkResponse deleteWatchingJob(final HttpServletRequest req,
+                                            @PathVariable final long jobID) {
     final ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
     final WatchingJob job = jobRepository
             .findById(jobID)
@@ -152,7 +153,8 @@ public class WatchingJobController {
    *     by this job yet
    */
   @GetMapping("/{jobID}/screenshot")
-  public @ResponseBody byte[] getScreenshot(final HttpServletRequest req, @PathVariable final long jobID) {
+  public @ResponseBody byte[] getScreenshot(final HttpServletRequest req,
+                                            @PathVariable final long jobID) {
     final ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
     final WatchingJob job = jobRepository
             .findById(jobID)

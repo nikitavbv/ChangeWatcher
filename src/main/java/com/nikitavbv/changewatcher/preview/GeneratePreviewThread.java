@@ -92,8 +92,9 @@ public class GeneratePreviewThread extends Thread {
           LOG.warning("Exception while getting page: " + e.getMessage());
         }
       }
-      final Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
-          .takeScreenshot(driver);
+      final Screenshot screenshot = new AShot()
+              .shootingStrategy(ShootingStrategies.viewportPasting(1000))
+              .takeScreenshot(driver);
 
       final File targetFile = new File(
               previewsDir + previewID + "." + PreviewController.IMAGE_FORMAT

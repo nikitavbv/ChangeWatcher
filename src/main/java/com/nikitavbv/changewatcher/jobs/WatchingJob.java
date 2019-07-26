@@ -65,7 +65,8 @@ public class WatchingJob {
   private ApplicationUser user;
 
   /** Make new thread to run this watching job. */
-  /* default */ Thread makeRunThread(final WatchingJobRepository repository, final String screenshotsDir) {
+  /* default */ Thread makeRunThread(final WatchingJobRepository repository,
+                                     final String screenshotsDir) {
     return new WatchingJobThread(repository,this, screenshotsDir);
   }
 
