@@ -29,7 +29,7 @@ public class ApplicationUser {
   /** User password (hashed). */
   private String password;
   /** Indicates if user is admin. */
-  private boolean admin = false;
+  private boolean admin;
 
   /** Watching jobs created by this user. */
   @OneToMany
