@@ -68,7 +68,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
               new ArrayList<>())
       );
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new FailedToReadCredentialsException("Failed to read creds", e);
     }
   }
 

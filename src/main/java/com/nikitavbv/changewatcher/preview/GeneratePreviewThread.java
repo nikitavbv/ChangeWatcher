@@ -1,11 +1,11 @@
 package com.nikitavbv.changewatcher.preview;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.openqa.selenium.Dimension;
@@ -73,56 +73,61 @@ public class GeneratePreviewThread extends Thread {
    * Run preview generation.
    */
   public void run() {
+    final Process xvfbProcess;
     try {
-      final Process xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);
-      final Map<String, String> environment = new HashMap<>();
-      environment.put("DISPLAY", ":" + DISPLAY_NUMBER + ".0");
-      System.setProperty("webdriver.gecko.driver", GECKO_DRIVER_PATH);
-      final GeckoDriverService service = new GeckoDriverService.Builder()
-          .usingAnyFreePort()
-          .withEnvironment(environment)
-          .build();
-      final WebDriver driver = new FirefoxDriver(service);
-      driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-      driver.manage().window().setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-      try {
-        driver.get(url);
-      } catch (Exception e) {
-        if (LOG.isLoggable(Level.WARNING)) {
-          LOG.warning("Exception while getting page: " + e.getMessage());
-        }
-      }
-      final Screenshot screenshot = new AShot()
-              .shootingStrategy(ShootingStrategies.viewportPasting(1000))
-              .takeScreenshot(driver);
+      xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);
+    } catch (IOException e) {
+      LOG.warning("Failed to run xvfb process: " + e.getMessage());
+      e.printStackTrace();
+      return;
+    }
+    final Map<String, String> environment = new HashMap<>();
+    environment.put("DISPLAY", ":" + DISPLAY_NUMBER + ".0");
+    System.setProperty("webdriver.gecko.driver", GECKO_DRIVER_PATH);
+    final GeckoDriverService service = new GeckoDriverService.Builder()
+      .usingAnyFreePort()
+      .withEnvironment(environment)
+      .build();
+    final WebDriver driver = new FirefoxDriver(service);
+    driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+    driver.manage().window().setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+    driver.get(url);
+    final Screenshot screenshot = new AShot()
+      .shootingStrategy(ShootingStrategies.viewportPasting(1000))
+      .takeScreenshot(driver);
 
-      final File targetFile = new File(
-              previewsDir + previewID + "." + PreviewController.IMAGE_FORMAT
-      );
-      if (!targetFile.getParentFile().exists()) {
-        final boolean result = targetFile.getParentFile().mkdirs();
-        if (!result) {
-          LOG.warning("Failed to make dirs for preview directory");
-        }
+    final File targetFile = new File(
+    previewsDir + previewID + "." + PreviewController.IMAGE_FORMAT
+    );
+    if (!targetFile.getParentFile().exists()) {
+      final boolean result = targetFile.getParentFile().mkdirs();
+      if (!result) {
+        LOG.warning("Failed to make dirs for preview directory");
       }
-      if (!targetFile.exists()) {
+    }
+    if (!targetFile.exists()) {
+      try {
         final boolean result = targetFile.createNewFile();
         if (!result) {
           LOG.warning("Failed to create new file for preview");
         }
-      }
-
-      ImageIO.write(
-              screenshot.getImage(),
-              PreviewController.IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
-              targetFile
-      );
-      driver.close();
-      xvfbProcess.destroy();
-    } catch (Exception e) {
-      if (LOG.isLoggable(Level.WARNING)) {
-        LOG.warning("Failed to generate url preview: " + e.getMessage());
+      } catch(IOException e) {
+        LOG.warning("Failed to create new file for preview: " + e.getMessage());
+        e.printStackTrace();
       }
     }
+
+    try {
+      ImageIO.write(
+        screenshot.getImage(),
+        PreviewController.IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
+        targetFile
+      );
+    } catch (IOException e) {
+      LOG.warning("Failed to write screenshot to file: " + e.getMessage());
+      e.printStackTrace();
+    }
+    driver.close();
+    xvfbProcess.destroy();
   }
 }

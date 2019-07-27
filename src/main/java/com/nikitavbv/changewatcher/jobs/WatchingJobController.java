@@ -74,13 +74,8 @@ public class WatchingJobController {
   private void runJobs() {
     jobRepository.findAll().stream()
         .filter(WatchingJob::isTimeToRun)
-        .forEach(job -> {
-          try {
-            executorService.submit(job.makeRunThread(jobRepository, getScreenshotsDir()));
-          } catch (Exception e) {
-            LOG.log(Level.SEVERE, "Failed to submit job to executorService", e);
-          }
-        });
+        .forEach(job -> executorService.submit(
+                job.makeRunThread(jobRepository, getScreenshotsDir())));
   }
 
   /**

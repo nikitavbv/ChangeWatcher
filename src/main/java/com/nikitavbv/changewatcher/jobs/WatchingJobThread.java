@@ -142,13 +142,7 @@ public class WatchingJobThread extends Thread {
     final WebDriver driver = new FirefoxDriver(service);
     driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
     driver.manage().window().setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-    try {
-      driver.get(job.getUrl());
-    } catch (Exception e) {
-      if (LOG.isLoggable(Level.WARNING)) {
-        LOG.warning("Exception while getting url: " + e.getMessage());
-      }
-    }
+    driver.get(job.getUrl());
     final Screenshot screenshot = new AShot()
             .shootingStrategy(ShootingStrategies.viewportPasting(1000))
             .takeScreenshot(driver);
