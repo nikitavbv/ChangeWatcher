@@ -6,7 +6,7 @@ import org.springframework.security.core.AuthenticationException;
 public class FailedToReadCredentialsException extends AuthenticationException {
 
     /** Constructs FailedToReadCredentialsException. */
-    public FailedToReadCredentialsException(String message, Throwable throwable) {
+    public FailedToReadCredentialsException(final String message, final Throwable throwable) {
         super(message, throwable);
     }
 }
