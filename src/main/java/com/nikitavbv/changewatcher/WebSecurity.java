@@ -46,7 +46,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   /** Configure security for api routes. */
   @Override
-  @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
+  @SuppressWarnings("PMD.SignatureDeclareThrowsException")
   protected void configure(final HttpSecurity http) throws Exception {
     http.csrf().disable().authorizeRequests()
           .antMatchers(HttpMethod.GET, RouteConstants.INIT_API).permitAll()
@@ -63,7 +63,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   /** Sets auth configuration. */
   @Override
-  @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
+  @SuppressWarnings("PMD.SignatureDeclareThrowsException")
   public void configure(final AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder);
   }
