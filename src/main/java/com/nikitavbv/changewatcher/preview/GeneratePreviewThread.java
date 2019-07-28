@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.openqa.selenium.Dimension;
@@ -77,8 +78,9 @@ public class GeneratePreviewThread extends Thread {
     try {
       xvfbProcess = Runtime.getRuntime().exec(XVFB_COMMAND);
     } catch (IOException e) {
-      LOG.warning("Failed to run xvfb process: " + e.getMessage());
-      e.printStackTrace();
+      if (LOG.isLoggable(Level.WARNING)) {
+        LOG.log(Level.WARNING, "Failed to run xvfb process", e);
+      }
       return;
     }
     final Map<String, String> environment = new HashMap<>();
@@ -112,8 +114,9 @@ public class GeneratePreviewThread extends Thread {
           LOG.warning("Failed to create new file for preview");
         }
       } catch(IOException e) {
-        LOG.warning("Failed to create new file for preview: " + e.getMessage());
-        e.printStackTrace();
+        if (LOG.isLoggable(Level.WARNING)) {
+          LOG.log(Level.WARNING, "Failed to create new file for preview", e);
+        }
       }
     }
 
