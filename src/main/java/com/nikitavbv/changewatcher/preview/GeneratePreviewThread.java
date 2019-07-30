@@ -47,7 +47,7 @@ public class GeneratePreviewThread extends AbstractWebdriverThread {
    * Run preview generation.
    */
   public void run() {
-    WebDriver driver = getWebDriver();
+    final WebDriver driver = getWebDriver();
     if (driver == null) {
       return;
     }

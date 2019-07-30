@@ -41,7 +41,9 @@ public abstract class AbstractWebdriverThread extends Thread {
     /** Max number of seconds we wait before page is considered loaded. */
     private static final int PAGE_LOAD_TIMEOUT = 10;
 
+    /** Virtual framebuffer process (used to create virtual display). */
     private Process xvfbProcess;
+    /** WebDriver used to load pages. */
     private WebDriver driver;
 
     /** Creates and sets up WebDriver. */
