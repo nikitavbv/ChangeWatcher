@@ -14,10 +14,10 @@ import org.openqa.selenium.firefox.GeckoDriverService;
 /**
  * Abstract thread for all jobs working with webdriver.
  */
-public abstract class ScreenshotThread extends Thread {
+public abstract class AbstractWebdriverThread extends Thread {
 
     /** Logger for this class. */
-    private static final Logger LOG = Logger.getLogger(ScreenshotThread.class.getName());
+    private static final Logger LOG = Logger.getLogger(AbstractWebdriverThread.class.getName());
 
     /** Browser window width when taking screenshot. */
     private static final int WINDOW_WIDTH = 1366;

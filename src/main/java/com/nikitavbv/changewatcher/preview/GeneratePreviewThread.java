@@ -1,6 +1,6 @@
 package com.nikitavbv.changewatcher.preview;
 
-import com.nikitavbv.changewatcher.ScreenshotThread;
+import com.nikitavbv.changewatcher.AbstractWebdriverThread;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -17,7 +17,7 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
  *
  * @author Nikita Volobuev
  */
-public class GeneratePreviewThread extends ScreenshotThread {
+public class GeneratePreviewThread extends AbstractWebdriverThread {
 
   /** Logger for this class. */
   private static final Logger LOG = Logger.getLogger(GeneratePreviewThread.class.getName());
