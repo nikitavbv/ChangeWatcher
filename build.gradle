@@ -113,7 +113,7 @@ pmd {
             "java-strictexception",
             "java-strings",
             "java-typeresolution",
-            /*"java-unnecessary",
-            "java-unusedcode"*/
+            "java-unnecessary",
+            /*"java-unusedcode"*/
     ]
 }
