@@ -195,8 +195,10 @@ public class WatchingJobThread extends Thread {
   private long compareImages(final BufferedImage first,
                              final BufferedImage second) {
     long differentPixels = 0;
-    final int startX = Math.min(job.getSelectionX(), Math.min(first.getWidth(), second.getWidth()));
-    final int startY = Math.min(job.getSelectionY(), Math.min(first.getHeight(), second.getHeight()));
+    final int startX = Math.min(job.getSelectionX(),
+            Math.min(first.getWidth(), second.getWidth()));
+    final int startY = Math.min(job.getSelectionY(),
+            Math.min(first.getHeight(), second.getHeight()));
     final int width = Math.min(
             Math.min(first.getWidth(), second.getWidth()),
             job.getSelectionX() + job.getSelectionWidth()

@@ -53,14 +53,14 @@ public class GeneratePreviewThread extends AbstractWebdriverThread {
     }
     driver.get(url);
     final Screenshot screenshot = new AShot()
-      .shootingStrategy(ShootingStrategies.viewportPasting(1000))
-      .takeScreenshot(driver);
+        .shootingStrategy(ShootingStrategies.viewportPasting(1000))
+        .takeScreenshot(driver);
 
     try {
       ImageIO.write(
-        screenshot.getImage(),
-        PreviewController.IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
-        getTargetFile()
+          screenshot.getImage(),
+          PreviewController.IMAGE_FORMAT.toUpperCase(Locale.getDefault()),
+          getTargetFile()
       );
     } catch (IOException e) {
       LOG.log(Level.WARNING, "Failed to write screenshot to file", e);
@@ -86,7 +86,7 @@ public class GeneratePreviewThread extends AbstractWebdriverThread {
         if (!result) {
           LOG.warning("Failed to create new file for preview");
         }
-      } catch(IOException e) {
+      } catch (IOException e) {
         if (LOG.isLoggable(Level.WARNING)) {
           LOG.log(Level.WARNING, "Failed to create new file for preview", e);
         }
