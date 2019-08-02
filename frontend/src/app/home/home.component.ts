@@ -2,8 +2,7 @@ import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageTitleService, UserDataService, JobService } from '../_services';
 import { Job } from '../_models';
-
-import { format } from 'timeago.js';
+import { ago } from 'time-ago';
 
 @Component({templateUrl: 'home.component.html', styleUrls: ['home.component.less']})
 export class HomeComponent implements OnInit {
@@ -52,7 +51,7 @@ export class HomeComponent implements OnInit {
 
     formatAgo(timestamp: number) {
         if (!timestamp) return;
-        return format(new Date(timestamp), 'en_US');
+        return ago(new Date(timestamp));
     }
 
 }
