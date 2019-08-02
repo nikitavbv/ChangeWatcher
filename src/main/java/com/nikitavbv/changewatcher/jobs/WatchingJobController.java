@@ -34,6 +34,8 @@ public class WatchingJobController {
 
   /** Rate at which each page is rechecked. */
   private static final int WATCHING_RATE = 1000 * 60 * 10; // every 10 minutes
+  /** Delay after application start before first page check, */
+  private static final int INITIAL_DELAY = 1000 * 60; // 1 minute
   /** Maximum number of threads to run page checks. */
   private static final int MAX_THREADS = 10;
 
@@ -66,7 +68,7 @@ public class WatchingJobController {
   }
 
   @SuppressWarnings("PMD.UnusedPrivateMethod")
-  @Scheduled(fixedRate = WATCHING_RATE)
+  @Scheduled(fixedRate = WATCHING_RATE, initialDelay = INITIAL_DELAY)
   private void runJobs() {
     jobRepository.findAll().stream()
         .filter(WatchingJob::isTimeToRun)
