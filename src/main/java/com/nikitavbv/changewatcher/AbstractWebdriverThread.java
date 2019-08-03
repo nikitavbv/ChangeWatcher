@@ -66,6 +66,8 @@ public abstract class AbstractWebdriverThread extends Thread {
             .build();
     driver = new FirefoxDriver(service);
     driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+    driver.manage().timeouts().setScriptTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
     driver.manage().window().setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
     return driver;
