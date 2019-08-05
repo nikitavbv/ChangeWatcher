@@ -2,11 +2,11 @@ import {Component} from "@angular/core";
 import {JobService} from "../../_services";
 
 @Component({
-  selector: 'no-jobs-yet-notif',
-  templateUrl: 'noJobsYetNotif.component.html',
-  styleUrls: ['noJobsYetNotif.component.less']
+  selector: 'create-first-job-message',
+  templateUrl: 'createFirstJobMessage.component.html',
+  styleUrls: ['createFirstJobMessage.component.less']
 })
-export class NoJobsYetNotifComponent {
+export class CreateFirstJobMessageComponent {
 
   constructor(private jobService: JobService) {}
 

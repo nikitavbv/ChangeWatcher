@@ -1,4 +1,4 @@
 export * from './createJob';
 export * from './viewJob';
-export * from './noJobsYetNotif';
+export * from './createFirstJobMessage';
 export * from './home.component';
