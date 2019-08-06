@@ -5,7 +5,13 @@ import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './_shared';
-import {HomeComponent, CreateJobComponent, ViewJobComponent, CreateFirstJobMessageComponent} from './home';
+import {
+  HomeComponent,
+  CreateJobComponent,
+  ViewJobComponent,
+  CreateFirstJobMessageComponent,
+  NoJobsInListYetMessageComponent
+} from './home';
 import { SettingsComponent } from './settings';
 import { LoginComponent } from './login';
 import { SetupComponent } from './setup';
@@ -25,6 +31,7 @@ import { JwtInterceptor } from './_helpers';
     CreateJobComponent,
     ViewJobComponent,
     CreateFirstJobMessageComponent,
+    NoJobsInListYetMessageComponent,
     
     SettingsComponent,
     SetupComponent,
