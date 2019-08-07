@@ -13,5 +13,5 @@
 <div class="job-view">
     <create-job *ngIf="addingJob"></create-job>
     <view-job *ngIf="!addingJob && getSelectedJob()" [job]="getSelectedJob()"></view-job>
-    <no-jobs-yet-notif *ngIf="!addingJob && userData.jobs.length == 0"></no-jobs-yet-notif>
+    <create-first-job-message *ngIf="!addingJob && userData.jobs.length == 0"></create-first-job-message>
 </div>
