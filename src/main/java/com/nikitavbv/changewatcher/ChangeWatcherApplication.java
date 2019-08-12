@@ -1,5 +1,8 @@
 package com.nikitavbv.changewatcher;
 
+import com.nikitavbv.changewatcher.config.ApplicationProperties;
+import com.nikitavbv.changewatcher.config.SecurityProperties;
+import com.nikitavbv.changewatcher.config.WatchingJobProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,7 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * Main Application class.
  */
 @SpringBootApplication
-@EnableConfigurationProperties({SecurityProperties.class, ApplicationProperties.class})
+@EnableConfigurationProperties({
+    SecurityProperties.class,
+    ApplicationProperties.class,
+    WatchingJobProperties.class
+})
 @EnableScheduling
 @SuppressWarnings("PMD.UseUtilityClass")
 public class ChangeWatcherApplication {
