@@ -1,4 +1,4 @@
-package com.nikitavbv.changewatcher;
+package com.nikitavbv.changewatcher.config;
 
 import static com.nikitavbv.changewatcher.security.SecurityConstants.SECRET_SIZE;
 
@@ -14,7 +14,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("app.security")
 public class SecurityProperties {
   /** Secret token. */
-  private String secret;
+  private final String secret;
+
+  /** Creates SecurityProperties. */
+  SecurityProperties(String secret) {
+    this.secret = secret;
+  }
 
   /**
    * Generates secret token.
@@ -32,10 +37,4 @@ public class SecurityProperties {
   public String getSecret() {
     return secret;
   }
-
-  /** Set secret token. */
-  public void setSecret(final String secret) {
-    this.secret = secret;
-  }
-
 }

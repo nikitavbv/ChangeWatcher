@@ -3,7 +3,7 @@ package com.nikitavbv.changewatcher.security;
 import static com.nikitavbv.changewatcher.security.SecurityConstants.HEADER_STRING;
 import static com.nikitavbv.changewatcher.security.SecurityConstants.TOKEN_PREFIX;
 
-import com.nikitavbv.changewatcher.SecurityProperties;
+import com.nikitavbv.changewatcher.config.SecurityProperties;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.SignatureException;
 import java.io.IOException;

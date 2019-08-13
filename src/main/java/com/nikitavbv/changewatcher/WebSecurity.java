@@ -1,5 +1,6 @@
 package com.nikitavbv.changewatcher;
 
+import com.nikitavbv.changewatcher.config.SecurityProperties;
 import com.nikitavbv.changewatcher.security.JwtAuthenticationFilter;
 import com.nikitavbv.changewatcher.security.JwtAuthorizationFilter;
 import com.nikitavbv.changewatcher.security.UserDetailsServiceImpl;

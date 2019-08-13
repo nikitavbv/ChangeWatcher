@@ -1,6 +1,6 @@
 package com.nikitavbv.changewatcher.preview;
 
-import com.nikitavbv.changewatcher.ApplicationProperties;
+import com.nikitavbv.changewatcher.config.ApplicationProperties;
 import com.nikitavbv.changewatcher.RouteConstants;
 import java.io.File;
 import java.io.FileInputStream;

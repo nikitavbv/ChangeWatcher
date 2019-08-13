@@ -6,7 +6,7 @@ import static com.nikitavbv.changewatcher.security.SecurityConstants.TOKEN_PREFI
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nikitavbv.changewatcher.RouteConstants;
-import com.nikitavbv.changewatcher.SecurityProperties;
+import com.nikitavbv.changewatcher.config.SecurityProperties;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
