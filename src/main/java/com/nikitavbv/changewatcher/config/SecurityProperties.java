@@ -14,12 +14,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("app.security")
 public class SecurityProperties {
   /** Secret token. */
-  private final String secret;
-
-  /** Creates SecurityProperties. */
-  SecurityProperties(String secret) {
-    this.secret = secret;
-  }
+  private String secret;
 
   /**
    * Generates secret token.
@@ -36,5 +31,10 @@ public class SecurityProperties {
   /** Returns secret token. */
   public String getSecret() {
     return secret;
+  }
+
+  /** Set secret token. */
+  public void setSecret(String secret) {
+    this.secret = secret;
   }
 }
