@@ -1,8 +1,9 @@
 package com.nikitavbv.changewatcher.jobs;
 
-import com.nikitavbv.changewatcher.ApplicationProperties;
+import com.nikitavbv.changewatcher.config.ApplicationProperties;
 import com.nikitavbv.changewatcher.RouteConstants;
 import com.nikitavbv.changewatcher.api.StatusOkResponse;
+import com.nikitavbv.changewatcher.config.WatchingJobProperties;
 import com.nikitavbv.changewatcher.security.PermissionDeniedException;
 import com.nikitavbv.changewatcher.user.ApplicationUser;
 import com.nikitavbv.changewatcher.user.ApplicationUserRepository;
@@ -13,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,13 +34,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(RouteConstants.JOBS_API)
 public class WatchingJobController {
 
-  /** Rate at which each page is rechecked. */
-  private static final int WATCHING_RATE = 1000 * 60 * 10; // every 10 minutes
-  /** Delay after application start before first page check, */
-  private static final int INITIAL_DELAY = 1000 * 60; // 1 minute
-  /** Maximum number of threads to run page checks. */
-  private static final int MAX_THREADS = 10;
-
   /** Directory to save screenshots to. */
   private static final String SCREENSHOTS_DIR = "screenshots/";
 
@@ -47,29 +42,33 @@ public class WatchingJobController {
   /** Job repository is required to manage jobs. */
   private final WatchingJobRepository jobRepository;
   /** Application properties are required to get application data/screenshots dir.*/
-  private final ApplicationProperties properties;
-
+  private final ApplicationProperties applicationProperties;
   /** Executor service to run jobs. */
-  private final ExecutorService executorService = Executors.newFixedThreadPool(MAX_THREADS);
+  private final ExecutorService executorService;
 
   /**
    * Creates controller for WatchingJob.
    *
    * @param userRepository repository with user details
    * @param jobRepository repository with watching job details
-   * @param properties general application configuration
    */
   public WatchingJobController(final ApplicationUserRepository userRepository,
                                final WatchingJobRepository jobRepository,
-                               final ApplicationProperties properties) {
+                               final ApplicationProperties applicationProperties,
+                               final WatchingJobProperties watchingJobProperties) {
     this.userRepository = userRepository;
     this.jobRepository = jobRepository;
-    this.properties = properties;
+    this.applicationProperties = applicationProperties;
+    this.executorService = Executors.newFixedThreadPool(watchingJobProperties.getThreads());
   }
 
   @SuppressWarnings("PMD.UnusedPrivateMethod")
-  @Scheduled(fixedRate = WATCHING_RATE, initialDelay = INITIAL_DELAY)
+  @Scheduled(
+      fixedRateString = "${jobs.check.rate:600000}",
+      initialDelayString = "${jobs.check.initial_delay:60000}"
+  )
   private void runJobs() {
+    System.out.println("RUNNING JOBS");
     jobRepository.findAll().stream()
         .filter(WatchingJob::isTimeToRun)
         .forEach(job -> executorService.submit(
@@ -169,7 +168,7 @@ public class WatchingJobController {
   }
 
   private String getScreenshotsDir() {
-    return properties.getDataDir() + SCREENSHOTS_DIR;
+    return applicationProperties.getDataDir() + SCREENSHOTS_DIR;
   }
 
 }
