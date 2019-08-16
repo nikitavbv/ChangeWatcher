@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -64,8 +65,8 @@ public class WatchingJobController {
 
   @SuppressWarnings("PMD.UnusedPrivateMethod")
   @Scheduled(
-      fixedRateString = "${jobs.check.rate:600000}",
-      initialDelayString = "${jobs.check.initial_delay:60000}"
+      fixedRateString = "${app.jobs.check.rate:600000}",
+      initialDelayString = "${app.jobs.check.initial_delay:60000}"
   )
   private void runJobs() {
     System.out.println("RUNNING JOBS");
