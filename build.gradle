@@ -37,15 +37,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'org.postgresql:postgresql'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation 'com.h2database:h2'
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+    runtimeOnly('org.postgresql:postgresql')
 
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('javax.xml.bind:jaxb-api:2.3.0')
     implementation('org.springframework.boot:spring-boot-starter-security')
     implementation('io.jsonwebtoken:jjwt-api:0.10.5')
@@ -54,6 +51,12 @@ dependencies {
     implementation('org.seleniumhq.selenium:selenium-java:2.41.0')
     implementation('org.seleniumhq.selenium:selenium-firefox-driver:3.141.59')
     implementation('ru.yandex.qatools.ashot:ashot:1.5.3')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'com.h2database:h2'
+    testImplementation 'org.assertj:assertj-core:3.13.2'
+    testImplementation 'org.awaitility:awaitility:4.0.0-rc1'
 }
 
 jacocoTestReport {
