@@ -52,6 +52,10 @@ public class WatchingJobController {
    *
    * @param userRepository repository with user details
    * @param jobRepository repository with watching job details
+   * @param applicationProperties general application properties (required to get application data/
+   *                              screenshots dir.)
+   * @param watchingJobProperties watching job properties (required to get number of threads
+   *                              for an executor)
    */
   public WatchingJobController(final ApplicationUserRepository userRepository,
                                final WatchingJobRepository jobRepository,
@@ -63,13 +67,31 @@ public class WatchingJobController {
     this.executorService = Executors.newFixedThreadPool(watchingJobProperties.getThreads());
   }
 
+  /**
+   * Creates controller for WatchingJob.
+   *
+   * @param userRepository repository with user details
+   * @param jobRepository repository with watching job details
+   * @param applicationProperties general application properties (required to get application data/
+   *                              screenshots dir.)
+   * @param executorService executor service to use for watching jobs running
+   */
+  public WatchingJobController(final ApplicationUserRepository userRepository,
+                               final WatchingJobRepository jobRepository,
+                               final ApplicationProperties applicationProperties,
+                               final ExecutorService executorService) {
+    this.userRepository = userRepository;
+    this.jobRepository = jobRepository;
+    this.applicationProperties = applicationProperties;
+    this.executorService = executorService;
+  }
+
   @SuppressWarnings("PMD.UnusedPrivateMethod")
   @Scheduled(
       fixedRateString = "${app.jobs.check.rate:600000}",
       initialDelayString = "${app.jobs.check.initial_delay:60000}"
   )
-  private void runJobs() {
-    System.out.println("RUNNING JOBS");
+  void runJobs() {
     jobRepository.findAll().stream()
         .filter(WatchingJob::isTimeToRun)
         .forEach(job -> executorService.submit(
