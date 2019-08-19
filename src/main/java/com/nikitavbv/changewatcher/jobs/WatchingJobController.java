@@ -194,4 +194,8 @@ public class WatchingJobController {
     return applicationProperties.getDataDir() + SCREENSHOTS_DIR;
   }
 
+  /** Returns executor service used to run jobs. */
+  ExecutorService getExecutorService() {
+    return executorService;
+  }
 }
