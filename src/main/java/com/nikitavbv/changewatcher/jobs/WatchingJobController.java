@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +56,7 @@ public class WatchingJobController {
    * @param watchingJobProperties watching job properties (required to get number of threads
    *                              for an executor)
    */
+  @Autowired
   public WatchingJobController(final ApplicationUserRepository userRepository,
                                final WatchingJobRepository jobRepository,
                                final ApplicationProperties applicationProperties,
