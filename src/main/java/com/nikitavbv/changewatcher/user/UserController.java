@@ -2,6 +2,7 @@ package com.nikitavbv.changewatcher.user;
 
 import com.nikitavbv.changewatcher.RouteConstants;
 import com.nikitavbv.changewatcher.security.PermissionDeniedException;
+import java.util.function.Predicate;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,11 +55,16 @@ public class UserController {
       throw new PermissionDeniedException("Auth required for creating users");
     }
     final ApplicationUser requestUser = userRepository.findByUsername(request.getRemoteUser());
-    if (requestUser != null && !requestUser.isAdmin() && requestUser.isAdmin()) {
-      throw new PermissionDeniedException("Non-admin users are not allowed to create admin users");
+    if (requestUser != null) {
+      final boolean excessPermissions = user.getAuthorities().stream()
+          .anyMatch(Predicate.not(requestUser.getAuthorities()::contains));
+      if (excessPermissions) {
+        throw new PermissionDeniedException(
+            "Cannot create user with permissions exceeding requesting user permissions"
+        );
+      }
     }
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
     userRepository.save(user);
-    return new SignUpResult(user.getUserID());
+    return new SignUpResult();
   }
 }

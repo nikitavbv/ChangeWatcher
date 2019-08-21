@@ -2,7 +2,9 @@ package com.nikitavbv.changewatcher.user;
 
 import com.nikitavbv.changewatcher.jobs.WatchingJob;
 
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.security.auth.Subject;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
 /**
  * Entity representing application user.
@@ -18,18 +23,7 @@ import javax.persistence.OneToMany;
  * @author Nikita Volobuev
  */
 @Entity
-public class ApplicationUser {
-
-  /** User userID. */
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long userID;
-  /** User name. */
-  private String username;
-  /** User password (hashed). */
-  private String password;
-  /** Indicates if user is admin. */
-  private boolean admin;
+public class ApplicationUser extends User {
 
   /** Watching jobs created by this user. */
   @OneToMany
@@ -40,6 +34,14 @@ public class ApplicationUser {
   )
   private final List<WatchingJob> jobs = new ArrayList<>();
 
+  public ApplicationUser(
+      String username,
+      String password,
+      Collection<? extends GrantedAuthority> authorities
+  ) {
+    super(username, password, authorities);
+  }
+
   /** Add a new watching job to this user. */
   public void addJob(final WatchingJob job) {
     this.jobs.add(job);
@@ -48,41 +50,6 @@ public class ApplicationUser {
   /** Remove watching job from this user. */
   public void removeJob(final WatchingJob job) {
     this.jobs.remove(job);
-  }
-
-  /** Get user userID. */
-  public long getUserID() {
-    return userID;
-  }
-
-  /** Get user name. */
-  public String getUsername() {
-    return username;
-  }
-
-  /** Set user name. */
-  public void setUsername(final String username) {
-    this.username = username;
-  }
-
-  /** Get user password. */
-  public String getPassword() {
-    return password;
-  }
-
-  /** Set user password. */
-  public void setPassword(final String password) {
-    this.password = password;
-  }
-
-  /** Return if this user is admin. */
-  public boolean isAdmin() {
-    return admin;
-  }
-
-  /** Set admin status of this user. */
-  public void setIsAdmin(final boolean isAdmin) {
-    this.admin = isAdmin;
   }
 
   /** Get list of jobs belonging to this user. */

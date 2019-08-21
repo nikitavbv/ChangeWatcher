@@ -106,9 +106,10 @@ public class WatchingJobController {
   @PostMapping
   public AddWatchingJobResponse addWatchingJob(
           final HttpServletRequest req,
-          @RequestBody final WatchingJob job
+          @RequestBody final WatchingJob job,
+          final ApplicationUser user
   ) {
-    final ApplicationUser user = userRepository.findByUsername(req.getRemoteUser());
+    System.out.println("User is" + user);
     job.setUser(user);
     jobRepository.save(job);
     return new AddWatchingJobResponse(job.getID(), user.getJobs());
@@ -127,7 +128,7 @@ public class WatchingJobController {
     final WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
-    if (job.getUser().getUserID() != user.getUserID()) {
+    if (job.getUser().equals(user)) {
       throw new PermissionDeniedException("Cannot edit jobs owned by other users");
     }
     job.setTitle(newJob.getTitle());
