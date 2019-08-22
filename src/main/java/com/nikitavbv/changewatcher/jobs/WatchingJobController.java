@@ -152,7 +152,7 @@ public class WatchingJobController {
     final WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
-    if (job.getUser().getUserID() != user.getUserID()) {
+    if (!job.getUser().equals(user)) {
       throw new PermissionDeniedException("Cannot delete jobs owned by other users");
     }
     user.removeJob(job);
@@ -175,7 +175,7 @@ public class WatchingJobController {
     final WatchingJob job = jobRepository
             .findById(jobID)
             .orElseThrow(WatchingJobNotFoundException::new);
-    if (job.getUser().getUserID() != user.getUserID()) {
+    if (!job.getUser().equals(user)) {
       throw new PermissionDeniedException("Cannot get screenshot of jobs owned by other users");
     }
 
