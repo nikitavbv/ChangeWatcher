@@ -6,7 +6,7 @@ RUN mkdir /app
 WORKDIR /app
 EXPOSE 80
 
-RUN apk --update add bash curl unzip zip openjdk8 nodejs nodejs-npm xvfb firefox-esr ttf-dejavu ttf-liberation font-noto
+RUN apk --update add bash curl unzip zip openjdk11 nodejs nodejs-npm xvfb firefox-esr ttf-dejavu ttf-liberation font-noto
 
 RUN mkdir /geckodriver && \
     cd /geckodriver && \
