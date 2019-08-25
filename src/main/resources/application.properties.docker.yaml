@@ -1,0 +1,19 @@
+app:
+  general:
+    data-dir: /app/data
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+      url: ${DB_URL}
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_OAUTH_CLIENT_ID}
+            client-secret: ${GOOGLE_OAUTH_CLIENT_SECRET}

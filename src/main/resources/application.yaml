@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: false
+      path: /h2
+  datasource:
+    url: jdbc:postgresql://localhost:5432/changewatcher
+    username: devuser
+    password: devpassword
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 964568848708-pifcgqqjrqufvpigqsokme94t0r12p63.apps.googleusercontent.com
+            client-secret: Ox9NxpoYHXWDpxVSVpbdHgZk
