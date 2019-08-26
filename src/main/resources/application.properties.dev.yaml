@@ -15,6 +15,6 @@ spring:
       client:
         registration:
           google:
-            client-id:
-            client-secret:
-            redirectUriTemplate:
+            client-id: ${GOOGLE_OAUTH_CLIENT_ID}
+            client-secret: ${GOOGLE_OAUTH_CLIENT_SECRET}
+            redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
