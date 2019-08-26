@@ -15,5 +15,5 @@ spring:
       client:
         registration:
           google:
-            client-id:
-            client-secret:
+            client-id: ${GOOGLE_OAUTH_CLIENT_ID}
+            client-secret: ${GOOGLE_OAUTH_CLIENT_SECRET}
