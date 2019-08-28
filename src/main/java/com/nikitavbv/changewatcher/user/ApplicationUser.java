@@ -2,18 +2,16 @@ package com.nikitavbv.changewatcher.user;
 
 import com.nikitavbv.changewatcher.jobs.WatchingJob;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.security.auth.Subject;
+import javax.validation.constraints.Email;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -25,13 +23,27 @@ import org.springframework.security.core.userdetails.User;
 @Entity
 public class ApplicationUser extends User {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(nullable = false)
+  private String name;
+
+  @Email
+  @Column(nullable = false)
+  private String email;
+
+  @JsonIgnore
+  private String password;
+
   /** Watching jobs created by this user. */
-  @OneToMany
+  /* @OneToMany
   @JoinTable(
       name = "user_jobs",
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "job_id")
-  )
+  )*/
   private final List<WatchingJob> jobs = new ArrayList<>();
 
   public ApplicationUser(
