@@ -3,7 +3,6 @@ package com.nikitavbv.changewatcher.user;
 import com.nikitavbv.changewatcher.jobs.WatchingJob;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 /**
@@ -34,9 +31,6 @@ public class ApplicationUser extends User {
   @Column(nullable = false)
   private String email;
 
-  @JsonIgnore
-  private String password;
-
   /** Watching jobs created by this user. */
   /* @OneToMany
   @JoinTable(
@@ -45,14 +39,6 @@ public class ApplicationUser extends User {
       inverseJoinColumns = @JoinColumn(name = "job_id")
   )*/
   private final List<WatchingJob> jobs = new ArrayList<>();
-
-  public ApplicationUser(
-      String username,
-      String password,
-      Collection<? extends GrantedAuthority> authorities
-  ) {
-    super(username, password, authorities);
-  }
 
   /** Add a new watching job to this user. */
   public void addJob(final WatchingJob job) {
