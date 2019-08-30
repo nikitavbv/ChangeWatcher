@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
-import org.springframework.security.core.userdetails.User;
 
 /**
  * Entity representing application user.
@@ -18,7 +17,7 @@ import org.springframework.security.core.userdetails.User;
  * @author Nikita Volobuev
  */
 @Entity
-public class ApplicationUser extends User {
+public class ApplicationUser {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
