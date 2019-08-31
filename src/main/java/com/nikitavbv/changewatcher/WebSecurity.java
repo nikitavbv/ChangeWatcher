@@ -1,16 +1,16 @@
 package com.nikitavbv.changewatcher;
 
-import com.nikitavbv.changewatcher.config.SecurityProperties;
-import com.nikitavbv.changewatcher.security.JwtAuthenticationFilter;
-import com.nikitavbv.changewatcher.security.JwtAuthorizationFilter;
-import com.nikitavbv.changewatcher.security.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -20,53 +20,75 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(
+    securedEnabled = true,
+    jsr250Enabled = true,
+    prePostEnabled = true
+)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-  /** Service which provides user data. */
-  private final UserDetailsServiceImpl userDetails;
-  /** Service to hash passwords. */
-  private final BCryptPasswordEncoder passwordEncoder;
-  /** Security configuration. */
-  private final SecurityProperties security;
+  @Autowired
+  private ApplicationUserDetailsService applicationUserDetailsService;
 
-  /**
-   * Creates WebSecurity.
-   *
-   * @param userDetails required to set password encoder
-   * @param passwordEncoder password encoder to use for user passwords
-   * @param security security configuration loaded from
-   *                           application.properties.
-   */
-  public WebSecurity(final UserDetailsServiceImpl userDetails,
-                     final BCryptPasswordEncoder passwordEncoder,
-                     final SecurityProperties security) {
-    this.userDetails = userDetails;
-    this.passwordEncoder = passwordEncoder;
-    this.security = security;
+  @Autowired
+  private ApplicationUserOAuth2Service oAuth2Service;
+
+  @Autowired
+  private OAuth2AuthenticationSuccessHandler successHandler;
+
+  @Autowired
+  private OAuth2AuthenticationFailureHandler failureHandler;
+
+  @Autowired
+  private HttpCookieOAuth2AuthorizationRequestRepository authorizationRequestRepository;
+
+  @Bean
+  public TokenAuthenticationFilter tokenAuthenticationFilter() {
+    return new TokenAuthenticationFilter();
+  }
+
+  @Bean
+  public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+    return new HttpCookieOAuth2AuthorizationRequestRepository();
+  }
+
+  @Bean(BeanIds.AUTHENTICATION_MANAGER)
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
+
+  @Override
+  public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) {
+    authenticationManagerBuilder.userDetailsService(applicationUserDetailsService);
   }
 
   /** Configure security for api routes. */
   @Override
   @SuppressWarnings("PMD.SignatureDeclareThrowsException")
   protected void configure(final HttpSecurity http) throws Exception {
-    http.csrf().disable().authorizeRequests()
-          .antMatchers(HttpMethod.GET, RouteConstants.INIT_API).permitAll()
-          .antMatchers(RouteConstants.USERS_API).permitAll()
-          .antMatchers(RouteConstants.LOGIN_API).permitAll()
-          .antMatchers(RouteConstants.PREVIEW_API).permitAll()
-          .antMatchers(RouteConstants.JOBS_API).permitAll()
-          .antMatchers(RouteConstants.API_PATH_PATTERN).authenticated()
+    http.cors()
+        .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and().formLogin().disable()
+        .httpBasic().disable()
+        .authorizeRequests()
+          .antMatchers(RouteConstants.OAUTH_PATTERN).permitAll()
+          .anyRequest().authenticated()
           .and()
-          .addFilter(new JwtAuthorizationFilter(authenticationManager(), security))
-          .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(), security),
-              UsernamePasswordAuthenticationFilter.class);
-  }
+        .oauth2Login()
+          .authorizationEndpoint()
+            .baseUri(RouteConstants.OAUTH_PREFIX + "authorize")
+            .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+            .and()
+          .redirectionEndpoint()
+            .baseUri(RouteConstants.OAUTH_PREFIX + "callback")
+            .and()
+          .userInfoEndpoint()
+            .userService(applicationUserDetailsService)
+            .and()
+          .successHandler(successHandler)
+          .failureHandler(failureHandler);
 
-  /** Sets auth configuration. */
-  @Override
-  @SuppressWarnings("PMD.SignatureDeclareThrowsException")
-  public void configure(final AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder);
+    http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
-
 }
