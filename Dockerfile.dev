@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.10.2
 
 LABEL maintainer="nikitavbv@gmail.com"
 
@@ -6,7 +6,7 @@ RUN mkdir /app
 WORKDIR /app
 EXPOSE 80
 
-RUN apk --update add bash curl unzip zip openjdk8 nodejs nodejs-npm xvfb firefox-esr ttf-dejavu ttf-liberation font-noto
+RUN apk --update add bash curl unzip zip openjdk11 nodejs nodejs-npm xvfb firefox-esr ttf-dejavu ttf-liberation font-noto
 
 RUN mkdir /geckodriver && \
     cd /geckodriver && \
@@ -20,7 +20,7 @@ RUN curl -s "https://get.sdkman.io" | bash \
 ADD build.gradle /app/build.gradle
 ADD frontend/ /app/frontend
 ADD src /app/src
-ADD src/main/resources/application.properties.docker /app/src/main/resources/application.properties
+ADD src/main/resources/application.properties.docker.yaml /app/src/main/resources/application.properties
 
 RUN bash -c "source \"/root/.sdkman/bin/sdkman-init.sh\" && gradle assemble"
 
