@@ -56,13 +56,13 @@ public class UserController {
     }
     final ApplicationUser requestUser = userRepository.findByUsername(request.getRemoteUser());
     if (requestUser != null) {
-      final boolean excessPermissions = user.getAuthorities().stream()
+      /*final boolean excessPermissions = user.getAuthorities().stream()
           .anyMatch(Predicate.not(requestUser.getAuthorities()::contains));
       if (excessPermissions) {
         throw new PermissionDeniedException(
             "Cannot create user with permissions exceeding requesting user permissions"
         );
-      }
+      }*/
     }
     userRepository.save(user);
     return new SignUpResult();
