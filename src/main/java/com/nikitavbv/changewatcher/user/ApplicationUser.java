@@ -37,20 +37,20 @@ public class ApplicationUser {
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "job_id")
   )*/
-  private final List<WatchingJob> jobs = new ArrayList<>();
+  //.private final List<WatchingJob> jobs = new ArrayList<>();
 
   /** Add a new watching job to this user. */
-  public void addJob(final WatchingJob job) {
+  /*public void addJob(final WatchingJob job) {
     this.jobs.add(job);
-  }
+  }*/
 
   /** Remove watching job from this user. */
-  public void removeJob(final WatchingJob job) {
+  /*public void removeJob(final WatchingJob job) {
     this.jobs.remove(job);
-  }
+  }*
 
   /** Get list of jobs belonging to this user. */
-  public List<WatchingJob> getJobs() {
+  /*public List<WatchingJob> getJobs() {
     return this.jobs;
-  }
+  }*/
 }
