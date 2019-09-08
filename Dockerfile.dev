@@ -20,7 +20,8 @@ RUN curl -s "https://get.sdkman.io" | bash \
 ADD build.gradle /app/build.gradle
 ADD frontend/ /app/frontend
 ADD src /app/src
-ADD src/main/resources/application.properties.docker.yaml /app/src/main/resources/application.properties
+RUN rm /app/src/main/resources/*.yaml
+ADD src/main/resources/application.properties.docker.yaml /app/src/main/resources/application.yaml
 
 RUN bash -c "source \"/root/.sdkman/bin/sdkman-init.sh\" && gradle assemble"
 
