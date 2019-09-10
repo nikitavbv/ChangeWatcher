@@ -35,7 +35,7 @@ public class UserController {
   /** Get currently authenticated user information. */
   @GetMapping
   public ApplicationUser getUserInfo(final HttpServletRequest httpRequest) {
-    return userRepository.findByUsername(httpRequest.getRemoteUser());
+    return userRepository.findByEmail(httpRequest.getRemoteUser());
   }
 
   /**
@@ -54,7 +54,7 @@ public class UserController {
     if (request.getRemoteUser() == null && userRepository.count() != 0L) {
       throw new PermissionDeniedException("Auth required for creating users");
     }
-    final ApplicationUser requestUser = userRepository.findByUsername(request.getRemoteUser());
+    final ApplicationUser requestUser = userRepository.findByEmail(request.getRemoteUser());
     if (requestUser != null) {
       /*final boolean excessPermissions = user.getAuthorities().stream()
           .anyMatch(Predicate.not(requestUser.getAuthorities()::contains));

@@ -44,7 +44,7 @@ public class InitApiController {
       throw new SetupRequiredException();
     }
 
-    final ApplicationUser user = userRepository.findByUsername(request.getRemoteUser());
+    final ApplicationUser user = userRepository.findByEmail(request.getRemoteUser());
     if (user == null) {
       throw new AuthRequiredException();
     }
