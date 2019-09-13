@@ -7,13 +7,23 @@ spring:
       enabled: false
       path: /h2
   datasource:
-    url: jdbc:postgresql://localhost:5432/changewatcher
+    url: jdbc:postgresql://not_localhost:5432/changewatcher
     username: devuser
     password: devpassword
   security:
     oauth2:
       client:
-        registration:
-          google:
-            client-id: ${GOOGLE_OAUTH_CLIENT_ID}
-            client-secret: ${GOOGLE_OAUTH_CLIENT_SECRET}
+        clientId: ${GOOGLE_OAUTH_CLIENT_ID}
+        clientSecret: ${GOOGLE_OAUTH_CLIENT_SECRET}
+        accessTokenUri: https://www.googleapis.com/oauth2/v3/token
+        userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+        tokenName: oauth_token
+        authenticationScheme: query
+        clientAuthenticationScheme: form
+        scope = profile email
+      resource:
+          userInfoUri: https://www.googleapis.com/userinfo/v2/me
+          preferTokenInfo: false
+
+app:
+  url: ${APPLICATION_URL} # needed to be set to allow origin for CORS
